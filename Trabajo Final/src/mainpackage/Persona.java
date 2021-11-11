@@ -1,14 +1,14 @@
 package mainpackage;
 
-public class Persona {
+public abstract class Persona {
 	int dni;
 	String nombre;
-	
-	public Persona(int dn, String nom) {
-		dni = dn;
-		nombre = nom;
+
+	public Persona(int dni, String nombre) {
+		this.dni = dni;
+		this.nombre = nombre;
 	}
-	
+
 	public int getDni() {
 		return dni;
 	}

@@ -1,9 +1,9 @@
 package mainpackage;
 
 public class PuestoJerarquico extends Puesto {
-	
-	public PuestoJerarquico(int cod, String nom, String are) {
-		super(cod, nom, are);
+
+	public PuestoJerarquico(int codigo, String nombre, String area) {
+		super(codigo, nombre, area);
 	}
-	
+
 }
