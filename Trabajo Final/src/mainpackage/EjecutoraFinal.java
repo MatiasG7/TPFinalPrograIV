@@ -20,7 +20,7 @@ public class EjecutoraFinal {
 			System.out.println("3)Agregar una convocatoria");
 			System.out.println("4)Agregar una inscripcion");
 			System.out.println("5)Agregar una especializacion");
-			System.out.println("6)Informar algo");
+			System.out.println("6)Informar algo de algo");
 			opcion = input.nextByte();
 			
 			switch(opcion){
