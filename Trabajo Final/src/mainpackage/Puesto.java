@@ -15,4 +15,7 @@ public abstract class Puesto {
 		return codigo;
 	}
 
+	public int getMinimoAños() {
+		return 0;
+	}
 }
