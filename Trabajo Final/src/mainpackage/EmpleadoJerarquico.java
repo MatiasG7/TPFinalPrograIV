@@ -1,10 +1,10 @@
 package mainpackage;
 
 public class EmpleadoJerarquico extends Empleado {
-	private Fecha fechaIngresoPuestoFecha;
 	private static int minimoCambioJerarquico;
+	private Fecha fechaIngresoPuestoFecha;
 
-	public EmpleadoJerarquico(int dni, String nombre, Puesto puesto, Fecha fecha) {
-		super(dni, nombre, puesto, fecha);
+	public EmpleadoJerarquico(int dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fecha) {
+		super(dni, nombre, fechaNac, cuil, puesto, fecha);
 	}
 }

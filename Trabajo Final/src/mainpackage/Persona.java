@@ -1,12 +1,16 @@
 package mainpackage;
 
 public abstract class Persona {
-	int dni;
-	String nombre;
+	private int dni;
+	private String nombre;
+	private Fecha fechaNacimiento;
+	private String cuil;
 
-	public Persona(int dni, String nombre) {
+	public Persona(int dni, String nombre, Fecha fechaNac, String cuil) {
 		this.dni = dni;
 		this.nombre = nombre;
+		this.fechaNacimiento = fechaNac;
+		this.cuil = cuil;
 	}
 
 	public int getDni() {

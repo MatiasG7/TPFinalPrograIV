@@ -27,4 +27,8 @@ public class PuestoJerarquico extends Puesto {
 
 		return MinimoAñosEmpresa;
 	}
+
+	public boolean isCompatible(int op) {
+		return op == 1;
+	}
 }

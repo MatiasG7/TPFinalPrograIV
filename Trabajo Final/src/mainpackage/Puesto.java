@@ -18,4 +18,6 @@ public abstract class Puesto {
 	public int getMinimoAños() {
 		return 0;
 	}
+
+	public abstract boolean isCompatible(int op);
 }

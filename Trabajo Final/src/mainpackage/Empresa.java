@@ -1,7 +1,6 @@
 package mainpackage;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Empresa {
@@ -27,121 +26,50 @@ public class Empresa {
 		Empleado nuevoEmpleado = verificarDni(dni);
 
 		if (nuevoEmpleado != null) {
-
 			System.out.print("\nYa existe un empleado con ese dni. ");
-
 		} else {
 
 			System.out.print("\nIngrese nombre: ");
 			String nombre = s.next();
 
+			System.out.print("\nIngrese fecha de nacimiento: ");
+			Fecha fechaNac = Fecha.nuevaFecha();
+
+			System.out.print("\nIngrese cuil: ");
+			String cuil = s.next();
+
 			System.out.print("\nIngrese codigo de puesto: ");
 			int codPuesto = s.nextInt();
 
 			Puesto puesto = verificarPuesto(codPuesto);
-			String nombrePuesto = null;
-			String areaPuesto = null;
-
-			// Si no encuentra ningun puesto pide mas datos pa crearlo
-			if (puesto == null) {
-				System.out.print("\nIngrese nombre de puesto: ");
-				nombrePuesto = s.next();
-
-				System.out.print("\nIngrese area de puesto: ");
-				areaPuesto = s.next();
-			}
-
-			System.out.print("\nIngrese fecha de ingreso a la empresa: ");
-			Fecha fechaIngresoEmpresa = Fecha.nuevaFecha();
-
-			System.out.print("\nEs un empleado jerarquico?");
-			System.out.print("\nSI | NO");
-			String tieneguita = s.next();
-
-			// un quilombito aca, si encontramos el puesto pero por ejemplo el puesto es
-			// jerarquico pero el flaco pone que el empleado NO es JERARQUICO,
-			// osea comun, tenemos una contradiccion y hay que arreglarlo.
-			// Lo que me acabo de dar cuenta despues de hacer todo esto es que podes mandar
-			// que si lo encuentra le sacamos la opcion de poner
-			// que tipo de empleado es y que se joda el usuario. Si encuentra el puesto que
-			// pone y es jerarquico PUMBA automaticamente el
-			// empleado es jerarquico y que la chupe.
-
 			if (puesto != null) {
-				if (Objects.deepEquals(tieneguita, "SI") || Objects.deepEquals(tieneguita, "si")
-						|| !Objects.deepEquals(puesto.getClass().getSimpleName(), "PuestoJerarquico")) {
+				System.out.println("Ingrese fecha de ingreso a la empresa: ");
+				Fecha fechaIngreso = Fecha.nuevaFecha();
 
-					System.out.print(
-							"\nA seleccionado un puesto no jerarquico pero a indicado que el empleado es jerarquico.");
-					System.out.print(
-							"\nQuiere cambiar el empleado a no jerarquico o quiere cambiar el puesto a jerarquico?");
-					System.out.print("\nA - Cambiar empleado | B - Cambiar puesto");
-					String queHacemo = s.next();
+				System.out.println("Es un empleado jerarquico?");
+				System.out.println("1- SI");
+				System.out.println("2- NO");
+				int op = s.nextInt();
 
-					if (Objects.deepEquals(queHacemo, "A")) {
-						tieneguita = "NO";
+				if (puesto.isCompatible(op)) {
+					if (op == 1) {
+						nuevoEmpleado = new EmpleadoJerarquico(dni, nombre, fechaNac, cuil, puesto, fechaIngreso);
 					} else {
-						// cambiamos el puesto a jerarquico, un quilombo que hare mas adelante lpm
-					}
-				} else if (Objects.deepEquals(tieneguita, "NO") || Objects.deepEquals(tieneguita, "no")
-						|| !Objects.deepEquals(puesto.getClass().getSimpleName(), "PuestoComun")) {
-
-					System.out.print(
-							"\nA seleccionado un puesto jerarquico pero a indicado que el empleado es no jerarquico.");
-					System.out.print(
-							"\nQuiere cambiar el empleado a jerarquico o quiere cambiar el puesto a no jerarquico?");
-					System.out.print("\nA - Cambiar empleado | B - Cambiar puesto");
-					String queHacemo = s.next();
-					if (Objects.deepEquals(queHacemo, "A")) {
-						tieneguita = "SI";
-					} else {
-						// cambiamos el puesto a no jerarquico, un quilombo que hare mas adelante lpm
+						nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso);
 					}
 				}
 
-			}
+				empleados.add(nuevoEmpleado);
 
-			if (Objects.deepEquals(tieneguita, "SI") || Objects.deepEquals(tieneguita, "si")) {
-
-				System.out.print("\nIngrese fecha de ingreso al puesto: ");
-				Fecha fechaIngresoPuesto = Fecha.nuevaFecha();
-
-				if (puesto == null) {
-					puesto = new PuestoJerarquico(codPuesto, nombrePuesto, areaPuesto);
-				}
-
-				nuevoEmpleado = new EmpleadoJerarquico(dni, nombre, puesto, fechaIngresoEmpresa);
-
+				// TO DO:
+				// Crear un metodo privado que arme un HashTable para poder reutilizarlo aca y
+				// en crear convocatoria.
+				// do {
+				// Listar la especializacion y que elija con un numero cual quiere sumarle.
+				// } while ();
 			} else {
-
-				if (puesto == null) {
-					puesto = new PuestoComun(codPuesto, nombrePuesto, areaPuesto);
-
-				}
-				nuevoEmpleado = new EmpleadoComun(dni, nombre, puesto, fechaIngresoEmpresa);
+				System.out.println("El puesto ingresado no existe.");
 			}
-
-			puestos.add(puesto);
-			empleados.add(nuevoEmpleado);
-
-			// Hay que hacer la verificacion de esto y agregarlo a el array
-			// ++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-			do {
-
-				System.out.print("\nIngrese especializacion: ");
-				String especializacion = s.next();
-
-				System.out.print("\nIngrese años de experiencia: ");
-				int añosEspe = s.nextInt();
-
-				nuevoEmpleado.agregarExperiencia(especializacion, añosEspe);
-
-				System.out.print("\nAgregar mas experiencia a este empleado?");
-				System.out.print("\nSI | NO");
-
-			} while (Objects.deepEquals(tieneguita, "SI") || Objects.deepEquals(tieneguita, "si"));
-
 		}
 
 	}
