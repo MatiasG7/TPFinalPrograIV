@@ -17,4 +17,16 @@ public class Convocatoria {
 		inscripciones = new ArrayList<Inscripcion>();
 	}
 	
+	public void cargarExperiencia(String exp, int anios) {
+		
+	}
+	
+	public void agregarInscripcion(Inscripcion ins) {
+		inscripciones.add(ins);
+	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+	
 }
