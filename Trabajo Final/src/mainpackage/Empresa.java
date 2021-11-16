@@ -129,5 +129,38 @@ public class Empresa {
 		else
 			return null;
 	}
+	
+	public void agregarPuesto() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
 
+		System.out.print(" --- INGRESO DE NUEVO PUESTO ---");
+		System.out.print("\nIngrese codigo de puesto: ");
+		int cod = s.nextInt();
+		
+		Puesto pu = verificarPuesto(cod);
+		
+		if(pu != null) {
+			System.out.print("El codigo ingresado ya esta relacionado a un puesto");
+		} else {
+			System.out.print("\nIngrese nombre de puesto: ");
+			String nombre = s.next();
+			
+			System.out.print("\nIngrese area de puesto: ");
+			String area = s.next();
+			
+			System.out.println("\nEs un puesto jerarquico?");
+			System.out.println("\n1- SI");
+			System.out.println("\n2- NO");
+			int op = s.nextInt();			
+			
+			if(op == 1) {
+				pu = new PuestoJerarquico(cod, nombre, area);
+			} else {
+				pu = new PuestoComun(cod, nombre, area);
+			}
+			puestos.add(pu);
+		}
+	}
+	
 }
