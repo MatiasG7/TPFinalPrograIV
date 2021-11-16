@@ -163,4 +163,46 @@ public class Empresa {
 		}
 	}
 	
+	public void agregarConvocatoria() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+		
+		System.out.print(" --- INGRESO DE NUEVA CONVOCATORIA ---");
+		System.out.print("\nIngrese codigo de convocatoria: ");
+		int cod = s.nextInt();
+		
+		Convocatoria con = verificarConvocatoria(cod);
+		
+		if(con == null) {
+			
+			System.out.print("El codigo ingresado ya esta relacionado a una convocatoria");
+			
+		} else {
+			System.out.print("\nIngrese codigo de puesto para la convocatoria: ");
+			int codPuesto = s.nextInt();
+			
+
+			Puesto pu = verificarPuesto(cod);
+			
+			if(pu == null) {
+				System.out.print("El codigo ingresado no esta relacionado a un puesto");
+			} else {
+				pu.mostrarse();
+				
+				// Hacer el hashtable, con el metodo privado que no se como es la idea para armarlo
+			}
+		}
+	}
+	
+	public Convocatoria verificarConvocatoria(int cod) {
+		int i = 0;
+		while( i < convocatorias.size() && convocatorias.get(i).getCodigo() != cod) {
+			i++;
+		}
+		if( i < convocatorias.size()) 
+			return convocatorias.get(i);
+		else
+			return null;		
+	}
+	
 }
