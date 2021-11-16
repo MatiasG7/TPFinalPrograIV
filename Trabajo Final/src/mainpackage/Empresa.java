@@ -1,6 +1,7 @@
 package mainpackage;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 public class Empresa {
@@ -24,7 +25,7 @@ public class Empresa {
 		System.out.print("\nIngrese dni: ");
 		int dni = s.nextInt();
 		Empleado nuevoEmpleado = verificarDni(dni);
-				
+
 		if (nuevoEmpleado != null) {
 			System.out.print("\nYa existe un empleado con ese dni. ");
 		} else {
@@ -59,51 +60,56 @@ public class Empresa {
 					}
 				}
 
+				nuevoEmpleado.setExperiencia(this.crearExperiencia());
 				empleados.add(nuevoEmpleado);
-
-				// TO DO:
-				// Crear un metodo privado que arme un HashTable para poder reutilizarlo aca y
-				// en crear convocatoria.
-				// do {
-				// Listar la especializacion y que elija con un numero cual quiere sumarle.
-				// } while ();
-				
-				System.out.println("\nAgregar especializaciones");
-				System.out.println("\n1- SI");
-				System.out.println("\n2- NO");
-				op = s.nextInt();
-				
-				if (op == 1) {
-					
-					do {
-						System.out.println("\n++Listado de especializaciones++");
-						for(int i = 0; i < especializaciones.size(); i++) {							
-							System.out.println("\n" + i++ + " - " + especializaciones.get(i));							
-						}
-						
-						System.out.println("\nElija especializacion a agregar: ");
-						int esp = s.nextInt();
-						
-						System.out.println("\nAños de experiencia: ");
-						int anios = s.nextInt();
-						
-						nuevoEmpleado.agregarExperiencia(especializaciones.get(esp-1), anios);
-						
-						System.out.println("\nAgregar mas especializaciones?");
-						System.out.println("\n1- SI");
-						System.out.println("\n2- NO");
-						op = s.nextInt();
-					} while (op == 1);
-				}
-				
-				
 			} else {
 				System.out.println("El puesto ingresado no existe.");
 			}
 		}
 
+		s.close();
 	}
-	
+
+	private Hashtable<String, Integer> crearExperiencia() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
+		Hashtable<String, Integer> ht = new Hashtable<String, Integer>();
+
+		System.out.println("\nAgregar especializaciones");
+		System.out.println("\n1- Si");
+		System.out.println("\n2- No");
+		s.useDelimiter(System.getProperty("line.separator"));
+		System.out.println("\n0- En cualquier momento para salir.");
+		int op = s.nextInt();
+
+		if (op == 1) {
+			do {
+				System.out.println("\n++Listado de especializaciones++");
+				for (int i = 1; i <= especializaciones.size(); i++) {
+					System.out.println("\n" + i++ + " - " + especializaciones.get(i));
+				}
+
+				System.out.println("\nElija especialización a agregar: ");
+				int esp = s.nextInt();
+
+				System.out.println("\nIngrese años de experiencia para la especialización: ");
+				int anios = s.nextInt();
+
+				ht.put(especializaciones.get(esp - 1), anios);
+
+				System.out.println("\nAgregar mas especializaciones?");
+				System.out.println("\n1- SI");
+				System.out.println("\n2- NO");
+				op = s.nextInt();
+			} while (op != 0);
+		}
+
+		s.close();
+
+		return ht;
+	}
+
 	public Empleado verificarDni(int dni) {
 		int i = 0;
 
@@ -129,7 +135,7 @@ public class Empresa {
 		else
 			return null;
 	}
-	
+
 	public void agregarPuesto() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
@@ -137,24 +143,24 @@ public class Empresa {
 		System.out.print(" --- INGRESO DE NUEVO PUESTO ---");
 		System.out.print("\nIngrese codigo de puesto: ");
 		int cod = s.nextInt();
-		
+
 		Puesto pu = verificarPuesto(cod);
-		
-		if(pu != null) {
+
+		if (pu != null) {
 			System.out.print("El codigo ingresado ya esta relacionado a un puesto");
 		} else {
 			System.out.print("\nIngrese nombre de puesto: ");
 			String nombre = s.next();
-			
+
 			System.out.print("\nIngrese area de puesto: ");
 			String area = s.next();
-			
+
 			System.out.println("\nEs un puesto jerarquico?");
 			System.out.println("\n1- SI");
 			System.out.println("\n2- NO");
-			int op = s.nextInt();			
-			
-			if(op == 1) {
+			int op = s.nextInt();
+
+			if (op == 1) {
 				pu = new PuestoJerarquico(cod, nombre, area);
 			} else {
 				pu = new PuestoComun(cod, nombre, area);
@@ -162,47 +168,47 @@ public class Empresa {
 			puestos.add(pu);
 		}
 	}
-	
+
 	public void agregarConvocatoria() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
-		
+
 		System.out.print(" --- INGRESO DE NUEVA CONVOCATORIA ---");
 		System.out.print("\nIngrese codigo de convocatoria: ");
 		int cod = s.nextInt();
-		
+
 		Convocatoria con = verificarConvocatoria(cod);
-		
-		if(con == null) {
-			
+
+		if (con == null) {
+
 			System.out.print("El codigo ingresado ya esta relacionado a una convocatoria");
-			
+
 		} else {
 			System.out.print("\nIngrese codigo de puesto para la convocatoria: ");
 			int codPuesto = s.nextInt();
-			
 
 			Puesto pu = verificarPuesto(cod);
-			
-			if(pu == null) {
+
+			if (pu == null) {
 				System.out.print("El codigo ingresado no esta relacionado a un puesto");
 			} else {
 				pu.mostrarse();
-				
-				// Hacer el hashtable, con el metodo privado que no se como es la idea para armarlo
+
+				// Hacer el hashtable, con el metodo privado que no se como es la idea para
+				// armarlo
 			}
 		}
 	}
-	
+
 	public Convocatoria verificarConvocatoria(int cod) {
 		int i = 0;
-		while( i < convocatorias.size() && convocatorias.get(i).getCodigo() != cod) {
+		while (i < convocatorias.size() && convocatorias.get(i).getCodigo() != cod) {
 			i++;
 		}
-		if( i < convocatorias.size()) 
+		if (i < convocatorias.size())
 			return convocatorias.get(i);
 		else
-			return null;		
+			return null;
 	}
-	
+
 }

@@ -19,4 +19,8 @@ public abstract class Empleado extends Persona {
 	public void agregarExperiencia(String nombre, Integer years) {
 		experiencia.put(nombre, years);
 	}
+
+	public void setExperiencia(Hashtable<String, Integer> exp) {
+		this.experiencia = exp;
+	}
 }
