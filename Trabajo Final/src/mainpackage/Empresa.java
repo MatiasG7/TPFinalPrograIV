@@ -24,7 +24,7 @@ public class Empresa {
 		System.out.print("\nIngrese dni: ");
 		int dni = s.nextInt();
 		Empleado nuevoEmpleado = verificarDni(dni);
-
+				
 		if (nuevoEmpleado != null) {
 			System.out.print("\nYa existe un empleado con ese dni. ");
 		} else {
@@ -43,12 +43,12 @@ public class Empresa {
 
 			Puesto puesto = verificarPuesto(codPuesto);
 			if (puesto != null) {
-				System.out.println("Ingrese fecha de ingreso a la empresa: ");
+				System.out.println("\nIngrese fecha de ingreso a la empresa: ");
 				Fecha fechaIngreso = Fecha.nuevaFecha();
 
-				System.out.println("Es un empleado jerarquico?");
-				System.out.println("1- SI");
-				System.out.println("2- NO");
+				System.out.println("\nEs un empleado jerarquico?");
+				System.out.println("\n1- SI");
+				System.out.println("\n2- NO");
 				int op = s.nextInt();
 
 				if (puesto.isCompatible(op)) {
@@ -67,13 +67,43 @@ public class Empresa {
 				// do {
 				// Listar la especializacion y que elija con un numero cual quiere sumarle.
 				// } while ();
+				
+				System.out.println("\nAgregar especializaciones");
+				System.out.println("\n1- SI");
+				System.out.println("\n2- NO");
+				op = s.nextInt();
+				
+				if (op == 1) {
+					
+					do {
+						System.out.println("\n++Listado de especializaciones++");
+						for(int i = 0; i < especializaciones.size(); i++) {							
+							System.out.println("\n" + i++ + " - " + especializaciones.get(i));							
+						}
+						
+						System.out.println("\nElija especializacion a agregar: ");
+						int esp = s.nextInt();
+						
+						System.out.println("\nAños de experiencia: ");
+						int anios = s.nextInt();
+						
+						nuevoEmpleado.agregarExperiencia(especializaciones.get(esp-1), anios);
+						
+						System.out.println("\nAgregar mas especializaciones?");
+						System.out.println("\n1- SI");
+						System.out.println("\n2- NO");
+						op = s.nextInt();
+					} while (op == 1);
+				}
+				
+				
 			} else {
 				System.out.println("El puesto ingresado no existe.");
 			}
 		}
 
 	}
-
+	
 	public Empleado verificarDni(int dni) {
 		int i = 0;
 
