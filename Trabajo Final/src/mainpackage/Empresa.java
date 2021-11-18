@@ -193,9 +193,10 @@ public class Empresa {
 				System.out.print("El codigo ingresado no esta relacionado a un puesto");
 			} else {
 				pu.mostrarse();
-
-				// Hacer el hashtable, con el metodo privado que no se como es la idea para
-				// armarlo
+				
+				con = new Convocatoria(codPuesto, pu);
+				con.setExperienciaReq(this.crearExperiencia());
+				
 			}
 		}
 	}

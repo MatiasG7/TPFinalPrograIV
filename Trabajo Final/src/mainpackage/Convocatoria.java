@@ -17,8 +17,8 @@ public class Convocatoria {
 		inscripciones = new ArrayList<Inscripcion>();
 	}
 	
-	public void cargarExperiencia(String exp, int anios) {
-		
+	public void setExperienciaReq(Hashtable<String, Integer> exp) {
+		this.experienciaReq = exp;
 	}
 	
 	public void agregarInscripcion(Inscripcion ins) {
