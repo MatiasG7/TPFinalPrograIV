@@ -206,7 +206,30 @@ public class Empresa {
 			}
 		}
 	}
+	
+	public void agregarEspecializacion() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
 
+		System.out.print(" --- INGRESO DE ESPECIALIZACIONES ---");
+		
+		System.out.println("\nAgregar especializacion?");
+		System.out.println("\n1- Si");
+		System.out.println("\n2- No");
+		int op = s.nextInt();		
+		while(op != 2) {
+			System.out.print("\nIngrese nombre de especializacion: ");
+			String esp = s.next();
+			
+			especializaciones.add(esp);
+			
+			System.out.println("\nAgregar otra especializacion?");
+			System.out.println("\n1- Si");
+			System.out.println("\n2- No");
+			op = s.nextInt();
+		}
+	}
+	
 	public Convocatoria verificarConvocatoria(int cod) {
 		int i = 0;
 		while (i < convocatorias.size() && convocatorias.get(i).getCodigo() != cod) {
