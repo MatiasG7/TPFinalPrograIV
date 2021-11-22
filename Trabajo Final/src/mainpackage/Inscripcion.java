@@ -11,5 +11,17 @@ public class Inscripcion {
 		empleado = emp;
 		convocatoria = conv;
 	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public Convocatoria getConvocatoria() {
+		return convocatoria;
+	}
 	
 }

@@ -35,4 +35,20 @@ public class Convocatoria {
 		puesto.mostrarse();
 	}
 	
+	public void addInscripcion(Inscripcion ins) {
+		inscripciones.add(ins);
+	}
+	
+	public Inscripcion verificarInscripcion(Empleado emp) {
+		int i = 0;
+		while( i < inscripciones.size() && emp.getDni()!=inscripciones.get(i).getEmpleado().getDni()) {
+			i++;
+		}
+		if ( i < inscripciones.size() ) {
+			return inscripciones.get(i);
+		} else {
+			return null;
+		}
+	}	
+	
 }

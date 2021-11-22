@@ -259,4 +259,47 @@ public class Empresa {
 			return null;
 	}
 	
+	public void agregarInscripcion() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
+		System.out.print(" --- INGRESO DE NUEVA INSCRIPCION ---");
+		
+		System.out.print("\nIngrese dni empleado a inscribirse: ");
+		int dni = s.nextInt();
+		
+		Empleado empleado = verificarDni(dni);
+		
+		if (empleado == null) {
+			System.out.print("\nEmpleado no existe.");
+		} else {		
+			System.out.print("\nEMPLEADO");
+			
+			empleado.mostrarse();
+			
+			System.out.print("\nIngrese codigo de convocatoria: ");
+			int codConvocatoria = s.nextInt();
+			
+			Convocatoria convocatoria = verificarConvocatoria(codConvocatoria);			
+			
+			if (convocatoria == null) {
+				System.out.print("\nNo existe convocatoria con ese codigo.");
+			} else {
+				convocatoria.mostrarse();
+				
+				Inscripcion inscri = convocatoria.verificarInscripcion(empleado);
+				
+				if(inscri == null) {
+					inscri = new Inscripcion(codConvocatoria, empleado, convocatoria);
+					convocatoria.addInscripcion(inscri);					
+				} else {
+					System.out.print("\nEste empleado ya esta inscripto en esta convocatoria.");
+				}
+				
+			}
+			
+		}		
+		
+	}
+	
 }
