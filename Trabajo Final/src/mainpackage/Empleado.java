@@ -23,4 +23,12 @@ public abstract class Empleado extends Persona {
 	public void setExperiencia(Hashtable<String, Integer> exp) {
 		this.experiencia = exp;
 	}
+	
+	public void mostrarse() {
+		super.mostrarse();
+		System.out.print("\nPuesto actual: ");
+		puesto.mostrarse();
+		System.out.print("\nFecha de ingreso: ");
+		fechaDeIngreso.mostrarFecha(fechaDeIngreso);
+	}
 }

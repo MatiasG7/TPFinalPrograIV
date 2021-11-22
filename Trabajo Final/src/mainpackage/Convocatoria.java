@@ -29,4 +29,10 @@ public class Convocatoria {
 		return codigo;
 	}
 	
+	public void mostrarse() {
+		System.out.print("\nCodigo convocatoria: " + codigo);
+		System.out.print("\nPuesto: ");
+		puesto.mostrarse();
+	}
+	
 }
