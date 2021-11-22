@@ -2,6 +2,7 @@ package mainpackage;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Empresa {
@@ -221,13 +222,30 @@ public class Empresa {
 			System.out.print("\nIngrese nombre de especializacion: ");
 			String esp = s.next();
 			
-			especializaciones.add(esp);
+			String espe = verificarEspecializacion(esp);
+			
+			if(espe == null) {
+				especializaciones.add(esp);
+			} else {
+				System.out.print("\nYa existe esa especializacion.");
+			}
 			
 			System.out.println("\nAgregar otra especializacion?");
 			System.out.println("\n1- Si");
 			System.out.println("\n2- No");
 			op = s.nextInt();
 		}
+	}
+	
+	public String verificarEspecializacion(String e) {
+		int i = 0;
+		while (i < especializaciones.size() && !Objects.equals(especializaciones.get(i), e)) {
+			i++;
+		}
+		if (i < especializaciones.size())
+			return especializaciones.get(i);
+		else
+			return null;
 	}
 	
 	public Convocatoria verificarConvocatoria(int cod) {
@@ -240,5 +258,5 @@ public class Empresa {
 		else
 			return null;
 	}
-
+	
 }
