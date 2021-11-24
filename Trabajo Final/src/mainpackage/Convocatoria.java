@@ -20,10 +20,6 @@ public class Convocatoria {
 	public void setExperienciaReq(Hashtable<String, Integer> exp) {
 		this.experienciaReq = exp;
 	}
-	
-	public void agregarInscripcion(Inscripcion ins) {
-		inscripciones.add(ins);
-	}
 
 	public int getCodigo() {
 		return codigo;
