@@ -91,10 +91,10 @@ public class Empresa {
 					System.out.println("\n" + i++ + " - " + especializaciones.get(i));
 				}
 
-				System.out.println("\nElija especialización a agregar: ");
+				System.out.println("\nElija especializaciÃ³n a agregar: ");
 				int esp = s.nextInt();
 
-				System.out.println("\nIngrese años de experiencia para la especialización: ");
+				System.out.println("\nIngrese aÃ±os de experiencia para la especializaciÃ³n: ");
 				int anios = s.nextInt();
 
 				ht.put(especializaciones.get(esp - 1), anios);
@@ -102,6 +102,7 @@ public class Empresa {
 				System.out.println("\nAgregar mas especializaciones?");
 				System.out.println("\n1- SI");
 				System.out.println("\n2- NO");
+				System.out.println("\n0- En cualquier momento para salir.");
 				op = s.nextInt();
 			} while (op != 0);
 		}
