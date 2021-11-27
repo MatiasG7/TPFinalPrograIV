@@ -194,15 +194,13 @@ public class Empresa {
 			if (pu == null) {
 				System.out.print("El codigo ingresado no esta relacionado a un puesto");
 			} else {
-				
-				
 				con = new Convocatoria(codPuesto, pu);
 				con.setExperienciaReq(this.crearExperiencia());
 				
 				System.out.print("\nCONVOCATORIA CREADA");
-				System.out.print("\nPUESTO");
-				pu.mostrarse();
 				System.out.print("\nCODIGO" + cod);
+				System.out.print("\nPUESTO");
+				pu.mostrarse();				
 				
 				convocatorias.add(con);
 			}
