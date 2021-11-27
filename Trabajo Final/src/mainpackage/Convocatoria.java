@@ -37,7 +37,7 @@ public class Convocatoria {
 	
 	public Inscripcion verificarInscripcion(Empleado emp) {
 		int i = 0;
-		while( i < inscripciones.size() && emp.getDni()!=inscripciones.get(i).getEmpleado().getDni()) {
+		while( i < inscripciones.size() && emp.getDni()!=inscripciones.get(i).getDniEmpleado()) {
 			i++;
 		}
 		if ( i < inscripciones.size() ) {

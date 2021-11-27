@@ -16,8 +16,8 @@ public class Inscripcion {
 		return codigo;
 	}
 
-	public Empleado getEmpleado() {
-		return empleado;
+	public int getDniEmpleado() {
+		return empleado.getDni();
 	}
 
 	public Convocatoria getConvocatoria() {
