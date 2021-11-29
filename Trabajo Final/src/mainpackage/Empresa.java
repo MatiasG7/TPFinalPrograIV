@@ -24,7 +24,7 @@ public class Empresa {
 		System.out.println(" --- INGRESO DE NUEVO EMPLEADO ---");
 		System.out.println("Ingrese dni: ");
 		int dni = s.nextInt();
-		Empleado nuevoEmpleado = verificarDni(dni);
+		Empleado nuevoEmpleado = buscarDni(dni);
 
 		if (nuevoEmpleado != null) {
 			System.out.println("Ya existe un empleado con ese dni. ");
@@ -42,7 +42,7 @@ public class Empresa {
 			System.out.println("Ingrese codigo de puesto: ");
 			int codPuesto = s.nextInt();
 
-			Puesto puesto = verificarPuesto(codPuesto);
+			Puesto puesto = buscarPuesto(codPuesto);
 			if (puesto != null) {
 				System.out.println("Ingrese fecha de ingreso a la empresa: ");
 				Fecha fechaIngreso = Fecha.nuevaFecha();
@@ -113,7 +113,7 @@ public class Empresa {
 		return ht;
 	}
 
-	public Empleado verificarDni(int dni) {
+	public Empleado buscarDni(int dni) {
 		int i = 0;
 
 		while (i < empleados.size() && empleados.get(i).getDni() != dni)
@@ -126,7 +126,7 @@ public class Empresa {
 			return null;
 	}
 
-	public Puesto verificarPuesto(int cod) {
+	public Puesto buscarPuesto(int cod) {
 		int i = 0;
 
 		while (i < puestos.size() && puestos.get(i).getCodigo() != cod)
@@ -147,7 +147,7 @@ public class Empresa {
 		System.out.println("Ingrese codigo de puesto: ");
 		int cod = s.nextInt();
 
-		Puesto pu = verificarPuesto(cod);
+		Puesto pu = buscarPuesto(cod);
 
 		if (pu != null) {
 			System.out.println("El codigo ingresado ya esta relacionado a un puesto");
@@ -182,7 +182,7 @@ public class Empresa {
 		System.out.println("Ingrese codigo de convocatoria: ");
 		int cod = s.nextInt();
 
-		Convocatoria con = verificarConvocatoria(cod);
+		Convocatoria con = buscarConvocatoria(cod);
 
 		if (con == null) {
 
@@ -192,7 +192,7 @@ public class Empresa {
 			System.out.println("Ingrese codigo de puesto para la convocatoria: ");
 			int codPuesto = s.nextInt();
 
-			Puesto pu = verificarPuesto(cod);
+			Puesto pu = buscarPuesto(cod);
 
 			if (pu == null) {
 				System.out.println("El codigo ingresado no esta relacionado a un puesto");
@@ -222,7 +222,7 @@ public class Empresa {
 			System.out.println("Ingrese nombre de especializacion: ");
 			String esp = s.next();
 
-			String espe = verificarEspecializacion(esp);
+			String espe = buscarEspecializacion(esp);
 
 			if (espe == null) {
 				especializaciones.add(esp);
@@ -239,7 +239,7 @@ public class Empresa {
 		s.close();
 	}
 
-	public String verificarEspecializacion(String e) {
+	public String buscarEspecializacion(String e) {
 		int i = 0;
 		while (i < especializaciones.size() && e.compareToIgnoreCase(especializaciones.get(i)) != 0) {
 			i++;
@@ -250,7 +250,7 @@ public class Empresa {
 			return null;
 	}
 
-	public Convocatoria verificarConvocatoria(int cod) {
+	public Convocatoria buscarConvocatoria(int cod) {
 		int i = 0;
 		while (i < convocatorias.size() && convocatorias.get(i).getCodigo() != cod) {
 			i++;
@@ -270,7 +270,7 @@ public class Empresa {
 		System.out.println("Ingrese dni empleado a inscribirse: ");
 		int dni = s.nextInt();
 
-		Empleado empleado = verificarDni(dni);
+		Empleado empleado = buscarDni(dni);
 
 		if (empleado == null) {
 			System.out.println("Empleado no existe.");
@@ -282,7 +282,7 @@ public class Empresa {
 			System.out.println("Ingrese codigo de convocatoria: ");
 			int codConvocatoria = s.nextInt();
 
-			Convocatoria convocatoria = verificarConvocatoria(codConvocatoria);
+			Convocatoria convocatoria = buscarConvocatoria(codConvocatoria);
 
 			if (convocatoria == null) {
 				System.out.println("No existe convocatoria con ese codigo.");
