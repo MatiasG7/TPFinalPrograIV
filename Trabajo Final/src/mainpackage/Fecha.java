@@ -33,8 +33,8 @@ public class Fecha {
 			return false;
 	}
 
-	public void mostrarFecha(Fecha fecha) {
-		System.out.print(fecha.getDia() + "/" + fecha.getMes() + "/" + fecha.getAño());
+	public void mostrarse() {
+		System.out.print(this.dia + "/" + this.mes + "/" + this.año);
 	}
 
 	public Fecha() {

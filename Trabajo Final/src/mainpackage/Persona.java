@@ -16,4 +16,12 @@ public abstract class Persona {
 	public int getDni() {
 		return dni;
 	}
+
+	public void mostrarse() {
+		System.out.println("Dni: " + dni);
+		System.out.println("Nombre: " + nombre);
+		System.out.println("Cuil: " + cuil);
+		System.out.println("Fecha de nacimiento: ");
+		fechaNacimiento.mostrarse();
+	}
 }

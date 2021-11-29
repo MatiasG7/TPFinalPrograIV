@@ -11,5 +11,17 @@ public class Inscripcion {
 		empleado = emp;
 		convocatoria = conv;
 	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public int getDniEmpleado() {
+		return empleado.getDni();
+	}
+
+	public Convocatoria getConvocatoria() {
+		return convocatoria;
+	}
 	
 }
