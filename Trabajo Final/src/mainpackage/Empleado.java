@@ -16,6 +16,14 @@ public abstract class Empleado extends Persona {
 		this.fechaDeIngreso = fechaIngreso;
 	}
 
+	public Empleado(int dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fechaIngreso,
+			Hashtable<String, Integer> exp) {
+		super(dni, nombre, fechaNac, cuil);
+		this.experiencia = exp;
+		this.puesto = puesto;
+		this.fechaDeIngreso = fechaIngreso;
+	}
+
 	public void agregarExperiencia(String nombre, Integer years) {
 		experiencia.put(nombre, years);
 	}
@@ -23,12 +31,12 @@ public abstract class Empleado extends Persona {
 	public void setExperiencia(Hashtable<String, Integer> exp) {
 		this.experiencia = exp;
 	}
-	
+
 	public void mostrarse() {
 		super.mostrarse();
-		System.out.print("\nPuesto actual: ");
+		System.out.println("Puesto actual: ");
 		puesto.mostrarse();
-		System.out.print("\nFecha de ingreso: ");
-		fechaDeIngreso.mostrarFecha(fechaDeIngreso);
+		System.out.println("Fecha de ingreso: ");
+		fechaDeIngreso.mostrarse();
 	}
 }

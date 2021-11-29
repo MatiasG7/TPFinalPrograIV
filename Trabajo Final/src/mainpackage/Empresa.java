@@ -2,7 +2,6 @@ package mainpackage;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Empresa {
@@ -22,42 +21,44 @@ public class Empresa {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
-		System.out.print(" --- INGRESO DE NUEVO EMPLEADO ---");
-		System.out.print("\nIngrese dni: ");
+		System.out.println(" --- INGRESO DE NUEVO EMPLEADO ---");
+		System.out.println("Ingrese dni: ");
 		int dni = s.nextInt();
 		Empleado nuevoEmpleado = verificarDni(dni);
 
 		if (nuevoEmpleado != null) {
-			System.out.print("\nYa existe un empleado con ese dni. ");
+			System.out.println("Ya existe un empleado con ese dni. ");
 		} else {
 
-			System.out.print("\nIngrese nombre: ");
+			System.out.println("Ingrese nombre: ");
 			String nombre = s.next();
 
-			System.out.print("\nIngrese fecha de nacimiento: ");
+			System.out.println("Ingrese fecha de nacimiento: ");
 			Fecha fechaNac = Fecha.nuevaFecha();
 
-			System.out.print("\nIngrese cuil: ");
+			System.out.println("Ingrese cuil: ");
 			String cuil = s.next();
 
-			System.out.print("\nIngrese codigo de puesto: ");
+			System.out.println("Ingrese codigo de puesto: ");
 			int codPuesto = s.nextInt();
 
 			Puesto puesto = verificarPuesto(codPuesto);
 			if (puesto != null) {
-				System.out.println("\nIngrese fecha de ingreso a la empresa: ");
+				System.out.println("Ingrese fecha de ingreso a la empresa: ");
 				Fecha fechaIngreso = Fecha.nuevaFecha();
 
-				System.out.println("\nEs un empleado jerarquico?");
-				System.out.println("\n1- SI");
-				System.out.println("\n2- NO");
+				System.out.println("Es un empleado jerarquico?");
+				System.out.println("1- SI");
+				System.out.println("2- NO");
 				int op = s.nextInt();
 
 				if (puesto.isCompatible(op)) {
 					if (op == 1) {
-						nuevoEmpleado = new EmpleadoJerarquico(dni, nombre, fechaNac, cuil, puesto, fechaIngreso);
+						nuevoEmpleado = new EmpleadoJerarquico(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
+								this.crearExperiencia());
 					} else {
-						nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso);
+						nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
+								this.crearExperiencia());
 					}
 				}
 
@@ -77,32 +78,32 @@ public class Empresa {
 
 		Hashtable<String, Integer> ht = new Hashtable<String, Integer>();
 
-		System.out.println("\nAgregar especializaciones");
-		System.out.println("\n1- Si");
-		System.out.println("\n2- No");
+		System.out.println("Agregar especializaciones");
+		System.out.println("1- Si");
+		System.out.println("2- No");
 		s.useDelimiter(System.getProperty("line.separator"));
-		System.out.println("\n0- En cualquier momento para salir.");
+		System.out.println("0- En cualquier momento para salir.");
 		int op = s.nextInt();
 
 		if (op == 1) {
 			do {
-				System.out.println("\n++Listado de especializaciones++");
+				System.out.println("++Listado de especializaciones++");
 				for (int i = 1; i <= especializaciones.size(); i++) {
-					System.out.println("\n" + i++ + " - " + especializaciones.get(i));
+					System.out.println("" + i++ + " - " + especializaciones.get(i));
 				}
 
-				System.out.println("\nElija especialización a agregar: ");
+				System.out.println("Elija especialización a agregar: ");
 				int esp = s.nextInt();
 
-				System.out.println("\nIngrese años de experiencia para la especialización: ");
+				System.out.println("Ingrese años de experiencia para la especialización: ");
 				int anios = s.nextInt();
 
 				ht.put(especializaciones.get(esp - 1), anios);
 
-				System.out.println("\nAgregar mas especializaciones?");
-				System.out.println("\n1- SI");
-				System.out.println("\n2- NO");
-				System.out.println("\n0- En cualquier momento para salir.");
+				System.out.println("Agregar mas especializaciones?");
+				System.out.println("1- SI");
+				System.out.println("2- NO");
+				System.out.println("0- En cualquier momento para salir.");
 				op = s.nextInt();
 			} while (op != 0);
 		}
@@ -142,24 +143,24 @@ public class Empresa {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
-		System.out.print(" --- INGRESO DE NUEVO PUESTO ---");
-		System.out.print("\nIngrese codigo de puesto: ");
+		System.out.println(" --- INGRESO DE NUEVO PUESTO ---");
+		System.out.println("Ingrese codigo de puesto: ");
 		int cod = s.nextInt();
 
 		Puesto pu = verificarPuesto(cod);
 
 		if (pu != null) {
-			System.out.print("El codigo ingresado ya esta relacionado a un puesto");
+			System.out.println("El codigo ingresado ya esta relacionado a un puesto");
 		} else {
-			System.out.print("\nIngrese nombre de puesto: ");
+			System.out.println("Ingrese nombre de puesto: ");
 			String nombre = s.next();
 
-			System.out.print("\nIngrese area de puesto: ");
+			System.out.println("Ingrese area de puesto: ");
 			String area = s.next();
 
-			System.out.println("\nEs un puesto jerarquico?");
-			System.out.println("\n1- SI");
-			System.out.println("\n2- NO");
+			System.out.println("Es un puesto jerarquico?");
+			System.out.println("1- SI");
+			System.out.println("2- NO");
 			int op = s.nextInt();
 
 			if (op == 1) {
@@ -169,76 +170,78 @@ public class Empresa {
 			}
 			puestos.add(pu);
 		}
+
+		s.close();
 	}
 
 	public void agregarConvocatoria() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
-		System.out.print(" --- INGRESO DE NUEVA CONVOCATORIA ---");
-		System.out.print("\nIngrese codigo de convocatoria: ");
+		System.out.println(" --- INGRESO DE NUEVA CONVOCATORIA ---");
+		System.out.println("Ingrese codigo de convocatoria: ");
 		int cod = s.nextInt();
 
 		Convocatoria con = verificarConvocatoria(cod);
 
 		if (con == null) {
 
-			System.out.print("El codigo ingresado ya esta relacionado a una convocatoria");
+			System.out.println("El codigo ingresado ya esta relacionado a una convocatoria");
 
 		} else {
-			System.out.print("\nIngrese codigo de puesto para la convocatoria: ");
+			System.out.println("Ingrese codigo de puesto para la convocatoria: ");
 			int codPuesto = s.nextInt();
 
 			Puesto pu = verificarPuesto(cod);
 
 			if (pu == null) {
-				System.out.print("El codigo ingresado no esta relacionado a un puesto");
+				System.out.println("El codigo ingresado no esta relacionado a un puesto");
 			} else {
-				con = new Convocatoria(codPuesto, pu);
-				con.setExperienciaReq(this.crearExperiencia());
-				
-				System.out.print("\nCONVOCATORIA CREADA");
-				System.out.print("\nCODIGO" + cod);
-				System.out.print("\nPUESTO");
-				pu.mostrarse();				
-				
+				con = new Convocatoria(codPuesto, pu, this.crearExperiencia());
+
+				con.mostrarse();
+
 				convocatorias.add(con);
 			}
 		}
+
+		s.close();
 	}
-	
+
 	public void agregarEspecializacion() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
-		System.out.print(" --- INGRESO DE ESPECIALIZACIONES ---");
-		
-		System.out.println("\nAgregar especializacion?");
-		System.out.println("\n1- Si");
-		System.out.println("\n2- No");
-		int op = s.nextInt();		
-		while(op != 2) {
-			System.out.print("\nIngrese nombre de especializacion: ");
+		System.out.println(" --- INGRESO DE ESPECIALIZACIONES ---");
+
+		System.out.println("Agregar especializacion?");
+		System.out.println("1- Si");
+		System.out.println("2- No");
+		int op = s.nextInt();
+		while (op != 2) {
+			System.out.println("Ingrese nombre de especializacion: ");
 			String esp = s.next();
-			
+
 			String espe = verificarEspecializacion(esp);
-			
-			if(espe == null) {
+
+			if (espe == null) {
 				especializaciones.add(esp);
 			} else {
-				System.out.print("\nYa existe esa especializacion.");
+				System.out.println("Ya existe esa especializacion.");
 			}
-			
-			System.out.println("\nAgregar otra especializacion?");
-			System.out.println("\n1- Si");
-			System.out.println("\n2- No");
+
+			System.out.println("Agregar otra especializacion?");
+			System.out.println("1- Si");
+			System.out.println("2- No");
 			op = s.nextInt();
 		}
+
+		s.close();
 	}
-	
+
 	public String verificarEspecializacion(String e) {
 		int i = 0;
-		while (i < especializaciones.size() && !Objects.equals(especializaciones.get(i), e)) {
+		while (i < especializaciones.size() && e.compareToIgnoreCase(especializaciones.get(i)) != 0) {
 			i++;
 		}
 		if (i < especializaciones.size())
@@ -246,7 +249,7 @@ public class Empresa {
 		else
 			return null;
 	}
-	
+
 	public Convocatoria verificarConvocatoria(int cod) {
 		int i = 0;
 		while (i < convocatorias.size() && convocatorias.get(i).getCodigo() != cod) {
@@ -257,48 +260,49 @@ public class Empresa {
 		else
 			return null;
 	}
-	
+
 	public void agregarInscripcion() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
-		System.out.print(" --- INGRESO DE NUEVA INSCRIPCION ---");
-		
-		System.out.print("\nIngrese dni empleado a inscribirse: ");
+		System.out.println(" --- INGRESO DE NUEVA INSCRIPCION ---");
+
+		System.out.println("Ingrese dni empleado a inscribirse: ");
 		int dni = s.nextInt();
-		
+
 		Empleado empleado = verificarDni(dni);
-		
+
 		if (empleado == null) {
-			System.out.print("\nEmpleado no existe.");
-		} else {		
-			System.out.print("\nEMPLEADO");
-			
+			System.out.println("Empleado no existe.");
+		} else {
+			System.out.println("EMPLEADO");
+
 			empleado.mostrarse();
-			
-			System.out.print("\nIngrese codigo de convocatoria: ");
+
+			System.out.println("Ingrese codigo de convocatoria: ");
 			int codConvocatoria = s.nextInt();
-			
-			Convocatoria convocatoria = verificarConvocatoria(codConvocatoria);			
-			
+
+			Convocatoria convocatoria = verificarConvocatoria(codConvocatoria);
+
 			if (convocatoria == null) {
-				System.out.print("\nNo existe convocatoria con ese codigo.");
+				System.out.println("No existe convocatoria con ese codigo.");
 			} else {
 				convocatoria.mostrarse();
-				
+
 				Inscripcion inscri = convocatoria.verificarInscripcion(empleado);
-				
-				if(inscri == null) {
+
+				if (inscri == null) {
 					inscri = new Inscripcion(codConvocatoria, empleado, convocatoria);
-					convocatoria.addInscripcion(inscri);					
+					convocatoria.addInscripcion(inscri);
 				} else {
-					System.out.print("\nEste empleado ya esta inscripto en esta convocatoria.");
+					System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
 				}
-				
+
 			}
-			
-		}		
-		
+
+		}
+
+		s.close();
 	}
-	
+
 }

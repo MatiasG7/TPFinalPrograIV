@@ -4,19 +4,26 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Convocatoria {
-	
+
 	private int codigo;
-	private Hashtable<String, Integer>experienciaReq;
+	private Hashtable<String, Integer> experienciaReq;
 	private Puesto puesto;
-	private ArrayList<Inscripcion>inscripciones;
-	
+	private ArrayList<Inscripcion> inscripciones;
+
 	public Convocatoria(int cod, Puesto pues) {
 		codigo = cod;
 		puesto = pues;
 		experienciaReq = new Hashtable<String, Integer>();
 		inscripciones = new ArrayList<Inscripcion>();
 	}
-	
+
+	public Convocatoria(int cod, Puesto pues, Hashtable<String, Integer> exp) {
+		codigo = cod;
+		puesto = pues;
+		experienciaReq = exp;
+		inscripciones = new ArrayList<Inscripcion>();
+	}
+
 	public void setExperienciaReq(Hashtable<String, Integer> exp) {
 		this.experienciaReq = exp;
 	}
@@ -24,27 +31,27 @@ public class Convocatoria {
 	public int getCodigo() {
 		return codigo;
 	}
-	
+
 	public void mostrarse() {
-		System.out.print("\nCodigo convocatoria: " + codigo);
-		System.out.print("\nPuesto: ");
+		System.out.println("Codigo convocatoria: " + codigo);
+		System.out.println("Puesto: ");
 		puesto.mostrarse();
 	}
-	
+
 	public void addInscripcion(Inscripcion ins) {
 		inscripciones.add(ins);
 	}
-	
+
 	public Inscripcion verificarInscripcion(Empleado emp) {
 		int i = 0;
-		while( i < inscripciones.size() && emp.getDni()!=inscripciones.get(i).getDniEmpleado()) {
+		while (i < inscripciones.size() && emp.getDni() != inscripciones.get(i).getDniEmpleado()) {
 			i++;
 		}
-		if ( i < inscripciones.size() ) {
+		if (i < inscripciones.size()) {
 			return inscripciones.get(i);
 		} else {
 			return null;
 		}
-	}	
-	
+	}
+
 }

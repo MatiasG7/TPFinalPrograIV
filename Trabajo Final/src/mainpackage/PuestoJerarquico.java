@@ -10,7 +10,7 @@ public class PuestoJerarquico extends Puesto {
 	}
 
 	public int getMinimoAños() {
-		return this.getMinimoAñosEmpresa();
+		return PuestoJerarquico.getMinimoAñosEmpresa();
 	}
 
 	public static void setMinimoAñosEmpresa(int ae) {
@@ -20,9 +20,12 @@ public class PuestoJerarquico extends Puesto {
 	private static int getMinimoAñosEmpresa() {
 		if (MinimoAñosEmpresa == 0) {
 			Scanner s = new Scanner(System.in);
+
 			System.out.println("La cantidad minima de años en la empresa todavía no fue seteada, ingrese un valor: ");
 			int ae = s.nextInt();
 			PuestoJerarquico.setMinimoAñosEmpresa(ae);
+
+			s.close();
 		}
 
 		return MinimoAñosEmpresa;

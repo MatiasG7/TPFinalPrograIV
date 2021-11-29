@@ -20,10 +20,10 @@ public abstract class Puesto {
 	}
 
 	public abstract boolean isCompatible(int op);
-	
+
 	public void mostrarse() {
-		System.out.print("\nCodigo: " + codigo);
-		System.out.print("\nNombre: " + nombre);
-		System.out.print("\nArea: " + area);
+		System.out.println("Codigo: " + codigo);
+		System.out.println("Nombre: " + nombre);
+		System.out.println("Area: " + area);
 	}
 }
