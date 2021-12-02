@@ -2,6 +2,7 @@ package mainpackage;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Enumeration;
 
 public abstract class Empleado extends Persona {
 	private Hashtable<String, Integer> experiencia;
@@ -38,5 +39,18 @@ public abstract class Empleado extends Persona {
 		puesto.mostrarse();
 		System.out.println("Fecha de ingreso: ");
 		fechaDeIngreso.mostrarse();
+	}
+
+	public boolean isAptoPuesto(Hashtable<String, Integer> expReq) {
+		expReq.forEach((key,value)->
+				
+					
+				
+				);
+
+	}
+
+	public boolean verificarExperiencia() {
+
 	}
 }

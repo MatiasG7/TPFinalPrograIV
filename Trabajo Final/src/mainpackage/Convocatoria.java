@@ -9,6 +9,7 @@ public class Convocatoria {
 	private Hashtable<String, Integer> experienciaReq;
 	private Puesto puesto;
 	private ArrayList<Inscripcion> inscripciones;
+	Empleado ganador;
 
 	public Convocatoria(int cod, Puesto pues) {
 		codigo = cod;
@@ -52,6 +53,20 @@ public class Convocatoria {
 		} else {
 			return null;
 		}
+	}
+
+	public void elegirGanador() {
+		int i = 0;
+		ArrayList<Inscripcion> inscripcionesAprobadas = new ArrayList<Inscripcion>();
+		for (Inscripcion inscripcion : inscripciones) {
+			if (verificarPostulante(inscripcion)) {
+				inscripcionesAprobadas.add(inscripcion);
+			}
+		}
+	}
+
+	public boolean verificarPostulante(Inscripcion ins) {
+		ins.isApto();
 	}
 
 }

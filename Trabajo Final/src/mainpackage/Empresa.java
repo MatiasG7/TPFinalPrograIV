@@ -305,4 +305,22 @@ public class Empresa {
 		s.close();
 	}
 
+	public void asignarGanadorConvocatoria() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
+		System.out.println(" --- ASIGNADOR GANADOR CONVOCATORIA ---");
+
+		System.out.println("Ingrese codigo de convocatoria a asignar: ");
+		int codConvocatoria = s.nextInt();
+
+		Convocatoria convocatoria = buscarConvocatoria(codConvocatoria);
+
+		if (convocatoria == null) {
+			System.out.println("No existe convocatoria con ese codigo.");
+		} else {
+
+		}
+	}
+
 }
