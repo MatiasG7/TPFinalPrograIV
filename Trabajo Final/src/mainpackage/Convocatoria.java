@@ -75,7 +75,7 @@ public class Convocatoria {
 		}
 
 		if (i == 0) {
-			System.out.println("Ninguna de los inscriptones tiene la experiencia requerida.");
+			System.out.println("Ninguna de los inscripciones tiene la experiencia requerida.");
 		} else {
 			System.out.println("Elija ganador: ");
 			int gan = s.nextInt();

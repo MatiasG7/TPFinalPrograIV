@@ -43,6 +43,11 @@ public abstract class Empleado extends Persona {
 
 	public boolean isAptoPuesto(Convocatoria convocatoria) {
 
+		return verificarExperiencia(convocatoria);
+
+	}
+
+	public boolean verificarExperiencia(Convocatoria convocatoria) {
 		Hashtable expReq = convocatoria.getExpReq();
 
 		Enumeration<String> enumExpReq = expReq.keys();
@@ -81,6 +86,5 @@ public abstract class Empleado extends Persona {
 		} else {
 			return false;
 		}
-
 	}
 }
