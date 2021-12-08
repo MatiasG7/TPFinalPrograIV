@@ -69,4 +69,8 @@ public class Convocatoria {
 		ins.isApto();
 	}
 
+	public Hashtable<String, Integer> getExpReq() {
+		return experienciaReq;
+	}
+
 }
