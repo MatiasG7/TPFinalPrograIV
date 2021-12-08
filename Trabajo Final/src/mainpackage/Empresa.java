@@ -88,8 +88,9 @@ public class Empresa {
 		if (op == 1) {
 			do {
 				System.out.println("++Listado de especializaciones++");
-				for (int i = 1; i <= especializaciones.size(); i++) {
-					System.out.println("" + i++ + " - " + especializaciones.get(i));
+				for (int i = 0; i <= especializaciones.size(); i++) {
+					System.out.println("" + i + 1 + " - " + especializaciones.get(i));
+					i++;
 				}
 
 				System.out.println("Elija especialización a agregar: ");
