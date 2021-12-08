@@ -66,7 +66,7 @@ public class Convocatoria {
 	}
 
 	public boolean verificarPostulante(Inscripcion ins) {
-		ins.isApto();
+		return ins.isApto();
 	}
 
 	public Hashtable<String, Integer> getExpReq() {
