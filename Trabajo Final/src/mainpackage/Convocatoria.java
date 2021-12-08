@@ -2,6 +2,7 @@ package mainpackage;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 public class Convocatoria {
 
@@ -9,7 +10,7 @@ public class Convocatoria {
 	private Hashtable<String, Integer> experienciaReq;
 	private Puesto puesto;
 	private ArrayList<Inscripcion> inscripciones;
-	Empleado ganador;
+	Inscripcion ganadora;
 
 	public Convocatoria(int cod, Puesto pues) {
 		codigo = cod;
@@ -56,6 +57,9 @@ public class Convocatoria {
 	}
 
 	public void elegirGanador() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
 		int i = 0;
 		ArrayList<Inscripcion> inscripcionesAprobadas = new ArrayList<Inscripcion>();
 		for (Inscripcion inscripcion : inscripciones) {
@@ -63,6 +67,23 @@ public class Convocatoria {
 				inscripcionesAprobadas.add(inscripcion);
 			}
 		}
+
+		System.out.println("++Listado de inscripciones aprobadas++");
+		for (i = 0; i <= inscripciones.size(); i++) {
+			System.out.println(" - " + i + 1 + " - ");
+			inscripciones.get(i).mostrarEmpleado();
+		}
+
+		if (i == 0) {
+			System.out.println("Ninguna de los inscriptones tiene la experiencia requerida.");
+		} else {
+			System.out.println("Elija ganador: ");
+			int gan = s.nextInt();
+
+			this.ganadora = inscripcionesAprobadas.get(i);
+			ganadora.mostrarEmpleado();
+		}
+
 	}
 
 	public boolean verificarPostulante(Inscripcion ins) {

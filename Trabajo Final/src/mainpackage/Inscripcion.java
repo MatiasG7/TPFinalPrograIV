@@ -20,6 +20,10 @@ public class Inscripcion {
 		return empleado.getDni();
 	}
 
+	public void mostrarEmpleado() {
+		empleado.mostrarse();
+	}
+
 	public Convocatoria getConvocatoria() {
 		return convocatoria;
 	}
