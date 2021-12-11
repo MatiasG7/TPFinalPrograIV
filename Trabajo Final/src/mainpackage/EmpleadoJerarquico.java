@@ -1,27 +1,55 @@
 package mainpackage;
 
 import java.util.Hashtable;
+import java.util.Scanner;
 
 public class EmpleadoJerarquico extends Empleado {
 	private static int minimoCambioJerarquico;
-	private Fecha fechaIngresoPuestoFecha;
+	private Fecha fechaIngresoPuesto;
 
 	public EmpleadoJerarquico(int dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fecha,
-			Hashtable<String, Integer> exp) {
+			Fecha fechaIngresoPues, Hashtable<String, Integer> exp) {
 		super(dni, nombre, fechaNac, cuil, puesto, fecha, exp);
+		fechaIngresoPuesto = fechaIngresoPues;
 	}
 
 	public boolean isAptoPuesto(Convocatoria convocatoria) {
-		boolean aniosPuesto = verificarAniosPuesto();
-		boolean experiencia = verificarExperiencia(convocatoria);
+		if (verificarAniosPuesto()) {
+			if (verificarExperiencia(convocatoria)) {
+				if (convocatoria.esPuestoJerarquico()) {
+					return convocatoria.verificarAniosEnEmpresaPostulante(getFechaDeIngreso());
+				} else {
+					return true;
+				}
+			}
+		}
 
-		if (aniosPuesto && experiencia)
-			return true;
-		else
-			return false;
+		return false;
 	}
 
 	public boolean verificarAniosPuesto() {
+		return !fechaIngresoPuesto.entre(Fecha.hoy().restarAños(getMinimoCambio()), Fecha.hoy());
+	}
 
+	public int getMinimoCambio() {
+		return EmpleadoJerarquico.getMinimoCambioJerarquico();
+	}
+
+	public static void setMinimoCambioJerarquico(int ae) {
+		minimoCambioJerarquico = ae;
+	}
+
+	private static int getMinimoCambioJerarquico() {
+		if (minimoCambioJerarquico == 0) {
+			Scanner s = new Scanner(System.in);
+
+			System.out.println("La cantidad minima de años en el puesto todavía no fue seteada, ingrese un valor: ");
+			int ae = s.nextInt();
+			PuestoJerarquico.setMinimoAñosEmpresa(ae);
+
+			s.close();
+		}
+
+		return minimoCambioJerarquico;
 	}
 }

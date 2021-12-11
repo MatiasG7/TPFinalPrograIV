@@ -43,12 +43,19 @@ public abstract class Empleado extends Persona {
 
 	public boolean isAptoPuesto(Convocatoria convocatoria) {
 
-		return verificarExperiencia(convocatoria);
+		if (verificarExperiencia(convocatoria)) {
+			if (convocatoria.esPuestoJerarquico()) {
+				return convocatoria.verificarAniosEnEmpresaPostulante(fechaDeIngreso);
+			} else {
+				return true;
+			}
+		}
 
+		return false;
 	}
 
 	public boolean verificarExperiencia(Convocatoria convocatoria) {
-		Hashtable expReq = convocatoria.getExpReq();
+		Hashtable<String, Integer> expReq = convocatoria.getExpReq();
 
 		Enumeration<String> enumExpReq = expReq.keys();
 
@@ -62,12 +69,12 @@ public abstract class Empleado extends Persona {
 		while (enumExpReq.hasMoreElements() && aux == true) {
 
 			keyReq = enumExpReq.nextElement();
-			aniosReq = (Integer) expReq.get(keyReq);
+			aniosReq = expReq.get(keyReq);
 
 			while (enumExpEmp.hasMoreElements() && keyReq.compareToIgnoreCase(keyEmp) != 0) {
 
 				keyEmp = enumExpEmp.nextElement();
-				aniosEmp = (Integer) experiencia.get(keyEmp);
+				aniosEmp = experiencia.get(keyEmp);
 
 			}
 
@@ -87,4 +94,9 @@ public abstract class Empleado extends Persona {
 			return false;
 		}
 	}
+
+	public Fecha getFechaDeIngreso() {
+		return fechaDeIngreso;
+	}
+
 }

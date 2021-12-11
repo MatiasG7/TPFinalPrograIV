@@ -94,4 +94,12 @@ public class Convocatoria {
 		return experienciaReq;
 	}
 
+	public boolean esPuestoJerarquico() {
+		return puesto.esJerarquico();
+	}
+
+	public boolean verificarAniosEnEmpresaPostulante(Fecha fechaDeIngreso) {
+		return !fechaDeIngreso.entre(Fecha.hoy().restarAños(puesto.getMinimoAños()), Fecha.hoy());
+	}
+
 }
