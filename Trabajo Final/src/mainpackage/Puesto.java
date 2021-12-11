@@ -26,4 +26,8 @@ public abstract class Puesto {
 		System.out.println("Nombre: " + nombre);
 		System.out.println("Area: " + area);
 	}
+
+	public boolean esJerarquico() {
+		return false;
+	}
 }
