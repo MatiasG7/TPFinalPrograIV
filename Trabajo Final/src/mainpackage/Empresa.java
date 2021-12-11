@@ -54,8 +54,11 @@ public class Empresa {
 
 				if (puesto.isCompatible(op)) {
 					if (op == 1) {
+						System.out.println("Ingrese fecha de ingreso en puesto");
+						Fecha fechaIngresoPuesto = Fecha.nuevaFecha();
+
 						nuevoEmpleado = new EmpleadoJerarquico(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
-								this.crearExperiencia());
+								fechaIngresoPuesto, this.crearExperiencia());
 					} else {
 						nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
 								this.crearExperiencia());
