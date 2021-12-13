@@ -30,24 +30,24 @@ public abstract class Empleado extends Persona {
 	}
 
 	private boolean verificarAniosEnEmpresaPostulante() {
-		return !fechaDeIngreso.entre(Fecha.hoy().restarA�os(puesto.getMinimoA�os()), Fecha.hoy());
+		return !fechaDeIngreso.entre(Fecha.hoy().restarAnios(puesto.getMinimoAnios()), Fecha.hoy());
 	}
-	
+
 	// sumarExperiencia suma la cantidad de a�os que se pasen por parametro a la
 	// especializacion dada.
-	private void sumarExperiencia(String esp, Integer a�os) {
-		Integer a�osActuales = experiencia.get(esp);
-		experiencia.put(esp, a�os + a�osActuales);
+	private void sumarExperiencia(String esp, Integer anios) {
+		Integer aniosActuales = experiencia.get(esp);
+		experiencia.put(esp, anios + aniosActuales);
 	}
 
 	// agregarExperiencia suma la cantidad de a�os que se pasan por parametro a la
 	// especializacion dada, si la especializacion no existe como experiencia, se
 	// crea.
-	public void agregarExperiencia(String esp, Integer a�os) {
+	public void agregarExperiencia(String esp, Integer anios) {
 		if (existEspExperiencia(esp)) {
-			this.sumarExperiencia(esp, a�os);
+			this.sumarExperiencia(esp, anios);
 		} else {
-			experiencia.put(esp, a�os);
+			experiencia.put(esp, anios);
 		}
 	}
 
