@@ -345,8 +345,8 @@ public class Empresa {
 			s.useDelimiter(System.getProperty("line.separator"));
 
 			System.out.println("ESPECIALIZACIONES");
-			for (int i = 1; i <= especializaciones.size(); i++) {
-				System.out.println("" + i++ + " - " + especializaciones.get(i));
+			for (int i = 0; i <= especializaciones.size(); i++) {
+				System.out.println("" + i + 1 + " - " + especializaciones.get(i));
 			}
 			System.out.println("0- Para salir.");
 
