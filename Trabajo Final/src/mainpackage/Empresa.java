@@ -17,6 +17,10 @@ public class Empresa {
 		this.especializaciones = new ArrayList<String>();
 	}
 
+	public void PRUEBAS() {
+
+	}
+
 	public void agregarEmpleado() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
@@ -98,7 +102,7 @@ public class Empresa {
 				System.out.println("Elija especializacion a agregar: ");
 				int esp = s.nextInt();
 
-				System.out.println("Ingrese a�os de experiencia para la especializacion: ");
+				System.out.println("Ingrese anios de experiencia para la especializacion: ");
 				int anios = s.nextInt();
 
 				ht.put(especializaciones.get(esp - 1), anios);
@@ -352,12 +356,12 @@ public class Empresa {
 				System.out.println("Elija especializacion a agregar: ");
 				int esp = s.nextInt();
 
-				System.out.println("Ingrese a�os de experiencia para la especializacion: ");
-				int a�os = s.nextInt();
+				System.out.println("Ingrese anios de experiencia para la especializacion: ");
+				int anios = s.nextInt();
 
 				String especializacion = especializaciones.get(esp - 1);
 
-				e.agregarExperiencia(especializacion, a�os);
+				e.agregarExperiencia(especializacion, anios);
 
 				System.out.println("Desea agregar mas experiencia? ");
 				System.out.println("1- SI");

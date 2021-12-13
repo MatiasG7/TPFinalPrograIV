@@ -11,6 +11,10 @@ public class Ejecutora {
 
 		int op;
 
+		// Bloque de prueba
+		e.PRUEBAS();
+		//
+
 		do {
 			// ARREGLAR NRS
 			System.out.println("TP FINAL");

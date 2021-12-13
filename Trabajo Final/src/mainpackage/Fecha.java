@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Fecha {
 	private int dia;
 	private int mes;
-	private int año;
+	private int anios;
 
 	public static Fecha hoy() {
 		Fecha f = new Fecha();
@@ -34,11 +34,11 @@ public class Fecha {
 	}
 
 	public void mostrarse() {
-		System.out.print(this.dia + "/" + this.mes + "/" + this.año);
+		System.out.print(this.dia + "/" + this.mes + "/" + this.anios);
 	}
 
 	public Fecha() {
-		dia = mes = año = 0;
+		dia = mes = anios = 0;
 	}
 
 	public Fecha(int d, int m, int a) {
@@ -53,13 +53,13 @@ public class Fecha {
 			if (d >= 1 && d <= fin) {
 				dia = d;
 				mes = m;
-				año = a;
+				anios = a;
 			}
 		}
 	}
 
 	public boolean equals(Fecha f) {
-		return año == f.getAño() && mes == f.getMes() && dia == f.getDia();
+		return anios == f.getAño() && mes == f.getMes() && dia == f.getDia();
 	}
 
 	public static Fecha nuevaFecha() {
@@ -80,7 +80,7 @@ public class Fecha {
 				m = entrada.nextInt();
 			} while (m < 1 || m > 12);
 			do {
-				System.out.print("Ingrese año: ");
+				System.out.print("Ingrese anios: ");
 				a = entrada.nextInt();
 			} while (a < 1442 || a > 9999);
 
@@ -131,13 +131,13 @@ public class Fecha {
 		// < 0 fecha receptor anterior a f
 		// == 0 fecha receptor igual a f
 		// >0 fecha receptor posterior a f
-		int f1 = año * 10000 + mes * 100 + dia;
+		int f1 = anios * 10000 + mes * 100 + dia;
 		int f2 = f.getAño() * 10000 + f.getMes() * 100 + f.getDia();
 		return f1 - f2;
 	}
 
 	public boolean bisiesto() {
-		return Fecha.bisiesto(año);
+		return Fecha.bisiesto(anios);
 	}
 
 	public Fecha sumarDias(int d) {
@@ -146,7 +146,7 @@ public class Fecha {
 		int d2, m2, a2;
 		d2 = dia;
 		m2 = mes;
-		a2 = año;
+		a2 = anios;
 		int fin, restan;
 		do {
 
@@ -178,7 +178,7 @@ public class Fecha {
 		int d2, m2, a2;
 		d2 = dia;
 		m2 = mes;
-		a2 = año;
+		a2 = anios;
 		int restan;
 		do {
 			restan = 12 - m2;
@@ -201,7 +201,7 @@ public class Fecha {
 		Fecha f = new Fecha();
 		f.setDia(dia);
 		f.setMes(mes);
-		f.setAño(año + a);
+		f.setAño(anios + a);
 		return f;
 	}
 
@@ -211,7 +211,7 @@ public class Fecha {
 		int d2, m2, a2;
 		d2 = dia;
 		m2 = mes;
-		a2 = año;
+		a2 = anios;
 		int fin;
 		do {
 			if (d2 > d) {
@@ -244,7 +244,7 @@ public class Fecha {
 		int d2, m2, a2;
 		d2 = dia;
 		m2 = mes;
-		a2 = año;
+		a2 = anios;
 		do {
 			if (m2 > m) {
 				m2 -= m;
@@ -265,7 +265,7 @@ public class Fecha {
 		Fecha f = new Fecha();
 		f.setDia(dia);
 		f.setMes(mes);
-		f.setAño(año - a);
+		f.setAño(anios - a);
 		return f;
 	}
 
@@ -274,7 +274,7 @@ public class Fecha {
 	}
 
 	public String toString() {
-		return dia + "/" + mes + "/" + año;
+		return dia + "/" + mes + "/" + anios;
 	}
 
 	public int getDia() {
@@ -293,11 +293,11 @@ public class Fecha {
 		return mes;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAño(int anios) {
+		this.anios = anios;
 	}
 
 	public int getAño() {
-		return año;
+		return anios;
 	}
 }

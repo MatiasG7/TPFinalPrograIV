@@ -37,7 +37,7 @@ public class EmpleadoJerarquico extends Empleado {
 		if (minimoCambioJerarquico == 0) {
 			Scanner s = new Scanner(System.in);
 
-			System.out.println("La cantidad minima de años en el puesto todavía no fue seteada, ingrese un valor: ");
+			System.out.println("La cantidad minima de anios en el puesto todavía no fue seteada, ingrese un valor: ");
 			int ae = s.nextInt();
 			PuestoJerarquico.setMinimoAñosEmpresa(ae);
 

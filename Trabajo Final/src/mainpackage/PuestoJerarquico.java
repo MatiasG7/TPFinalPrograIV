@@ -3,32 +3,32 @@ package mainpackage;
 import java.util.Scanner;
 
 public class PuestoJerarquico extends Puesto {
-	private static int minimoAñosEmpresa;
+	private static int minimoAniosEmpresa;
 
 	public PuestoJerarquico(int codigo, String nombre, String area) {
 		super(codigo, nombre, area);
 	}
 
-	public int getMinimoAños() {
+	public int getMinimoAnios() {
 		return PuestoJerarquico.getMinimoAñosEmpresa();
 	}
 
-	public static void setMinimoAñosEmpresa(int ae) {
-		minimoAñosEmpresa = ae;
+	public static void setMinimoAniosEmpresa(int ae) {
+		minimoAniosEmpresa = ae;
 	}
 
 	private static int getMinimoAñosEmpresa() {
-		if (minimoAñosEmpresa == 0) {
+		if (minimoAniosEmpresa == 0) {
 			Scanner s = new Scanner(System.in);
 
-			System.out.println("La cantidad minima de años en la empresa todavía no fue seteada, ingrese un valor: ");
+			System.out.println("La cantidad minima de anios en la empresa todavía no fue seteada, ingrese un valor: ");
 			int ae = s.nextInt();
-			PuestoJerarquico.setMinimoAñosEmpresa(ae);
+			PuestoJerarquico.setMinimoAniosEmpresa(ae);
 
 			s.close();
 		}
 
-		return minimoAñosEmpresa;
+		return minimoAniosEmpresa;
 	}
 
 	public boolean isCompatible(int op) {
