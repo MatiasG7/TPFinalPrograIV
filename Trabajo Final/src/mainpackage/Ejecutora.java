@@ -55,7 +55,7 @@ public class Ejecutora {
 			}
 				break;
 			case 6: {
-				// e.informar();
+				e.agregarExperienciaEmpleado();
 			}
 				break;
 			case 8: {

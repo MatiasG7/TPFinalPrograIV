@@ -25,16 +25,36 @@ public abstract class Empleado extends Persona {
 		this.fechaDeIngreso = fechaIngreso;
 	}
 
-	public void agregarExperiencia(String nombre, Integer years) {
-		experiencia.put(nombre, years);
-	}
-
 	public void setExperiencia(Hashtable<String, Integer> exp) {
 		this.experiencia = exp;
 	}
 
 	private boolean verificarAniosEnEmpresaPostulante() {
-		return !fechaDeIngreso.entre(Fecha.hoy().restarAños(puesto.getMinimoAños()), Fecha.hoy());
+		return !fechaDeIngreso.entre(Fecha.hoy().restarAï¿½os(puesto.getMinimoAï¿½os()), Fecha.hoy());
+	}
+	
+	// sumarExperiencia suma la cantidad de aï¿½os que se pasen por parametro a la
+	// especializacion dada.
+	private void sumarExperiencia(String esp, Integer aï¿½os) {
+		Integer aï¿½osActuales = experiencia.get(esp);
+		experiencia.put(esp, aï¿½os + aï¿½osActuales);
+	}
+
+	// agregarExperiencia suma la cantidad de aï¿½os que se pasan por parametro a la
+	// especializacion dada, si la especializacion no existe como experiencia, se
+	// crea.
+	public void agregarExperiencia(String esp, Integer aï¿½os) {
+		if (existEspExperiencia(esp)) {
+			this.sumarExperiencia(esp, aï¿½os);
+		} else {
+			experiencia.put(esp, aï¿½os);
+		}
+	}
+
+	// existEspExperiencia es para saber si el empleado tiene la especializacion
+	// dada como experiencia. Es decir, si la key esta en el hashtable.
+	private boolean existEspExperiencia(String esp) {
+		return experiencia.containsKey(esp);
 	}
 
 	public void mostrarse() {
@@ -43,6 +63,16 @@ public abstract class Empleado extends Persona {
 		puesto.mostrarse();
 		System.out.println("Fecha de ingreso: ");
 		fechaDeIngreso.mostrarse();
+		this.mostrarExperiencia();
+	}
+
+	public void mostrarExperiencia() {
+		System.out.println("++Listado de experiencia++");
+		Enumeration<String> listaExp = experiencia.keys();
+		while (listaExp.hasMoreElements()) {
+			String esp = listaExp.nextElement();
+			System.out.println(esp + experiencia.get(esp));
+		}
 	}
 
 	public boolean isAptoPuesto(Convocatoria convocatoria) {
