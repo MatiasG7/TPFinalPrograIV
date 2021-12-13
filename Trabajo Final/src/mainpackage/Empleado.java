@@ -30,7 +30,7 @@ public abstract class Empleado extends Persona {
 	}
 
 	private boolean verificarAniosEnEmpresaPostulante() {
-		return !fechaDeIngreso.entre(Fecha.hoy().restarAnios(puesto.getMinimoAnios()), Fecha.hoy());
+		return !fechaDeIngreso.entre(Fecha.hoy().restarAños(puesto.getMinimoAnios()), Fecha.hoy());
 	}
 
 	// sumarExperiencia suma la cantidad de aï¿½os que se pasen por parametro a la
