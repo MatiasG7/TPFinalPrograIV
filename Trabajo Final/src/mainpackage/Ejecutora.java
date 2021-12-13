@@ -12,6 +12,7 @@ public class Ejecutora {
 		int op;
 
 		do {
+			// ARREGLAR NRS
 			System.out.println("TP FINAL");
 			System.out.println("1- Agregar un empleado.");
 			System.out.println("2- Agregar un puesto.");
@@ -19,7 +20,6 @@ public class Ejecutora {
 			System.out.println("4- Agregar una inscripcion.");
 			System.out.println("5- Agregar una especializacion.");
 			System.out.println("6- Agregar experiencia a un empleado.");
-			System.out.println("7- Agregar empleados inscriptos.");
 			System.out.println("8- Cerrar una convocatoria.");
 			System.out.println("9- Informar convocatorias.");
 			System.out.println("10- Informar puestos.");
@@ -30,6 +30,7 @@ public class Ejecutora {
 			System.out.println("15- Informar puestos postulados por un empleado.");
 			System.out.println("16- Informar empleado con mas inscripciones.");
 			System.out.println("17- Informar postulantes aprobados.");
+			// ARREGLAR NRS
 
 			op = s.nextInt();
 			switch (op) {
@@ -46,17 +47,32 @@ public class Ejecutora {
 			}
 				break;
 			case 4: {
-				// e.agregarInscripcion();
+				e.agregarInscripcion();
 			}
 				break;
 			case 5: {
-				// e.agregarEspecializacion();
+				e.agregarEspecializacion();
 			}
 				break;
 			case 6: {
 				// e.informar();
 			}
 				break;
+			case 8: {
+				e.cerrarConvocatoria();
+			}
+			case 9: {
+				// e.informarConvocatorias();
+			}
+			case 10: {
+				// e.informar();
+			}
+			case 11: {
+				// e.informar();
+			}
+			case 12: {
+				// e.informar();
+			}
 			}
 		} while (op != 0);
 

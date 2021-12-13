@@ -292,17 +292,15 @@ public class Empresa {
 			} else {
 				convocatoria.mostrarse();
 
-				Inscripcion inscri = convocatoria.verificarInscripcion(empleado);
+				Inscripcion ins = convocatoria.verificarInscripcion(empleado);
 
-				if (inscri == null) {
-					inscri = new Inscripcion(codConvocatoria, empleado, convocatoria);
-					convocatoria.addInscripcion(inscri);
+				if (ins == null) {
+					ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
+					convocatoria.addInscripcion(ins);
 				} else {
 					System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
 				}
-
 			}
-
 		}
 
 		s.close();

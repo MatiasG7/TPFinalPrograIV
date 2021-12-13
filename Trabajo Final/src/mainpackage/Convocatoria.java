@@ -5,32 +5,34 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 public class Convocatoria {
-
 	private int codigo;
 	private Hashtable<String, Integer> experienciaReq;
 	private Puesto puesto;
 	private ArrayList<Inscripcion> inscripciones;
-	private Inscripcion ganadora;
+	private Inscripcion ganador;
 	private String estado;
-
-	enum Estado {
-		ABIERTO, CERRADO;
-	}
-
-	public Convocatoria(int cod, Puesto pues) {
-		codigo = cod;
-		puesto = pues;
-		experienciaReq = new Hashtable<String, Integer>();
-		inscripciones = new ArrayList<Inscripcion>();
-		estado = "abierto";
-		ganadora = null;
-	}
 
 	public Convocatoria(int cod, Puesto pues, Hashtable<String, Integer> exp) {
 		codigo = cod;
 		puesto = pues;
 		experienciaReq = exp;
 		inscripciones = new ArrayList<Inscripcion>();
+		estado = Estado.ABIERTO.toString();
+		ganador = null;
+	}
+
+	private enum Estado {
+		ABIERTO {
+			public String toString() {
+				return "this is one";
+			}
+		},
+
+		CERRADO {
+			public String toString() {
+				return "this is two";
+			}
+		}
 	}
 
 	public void setExperienciaReq(Hashtable<String, Integer> exp) {
@@ -87,8 +89,8 @@ public class Convocatoria {
 			System.out.println("Elija ganador: ");
 			int gan = s.nextInt();
 
-			this.ganadora = inscripcionesAprobadas.get(gan - 1);
-			ganadora.mostrarEmpleado();
+			this.ganador = inscripcionesAprobadas.get(gan - 1);
+			ganador.mostrarEmpleado();
 		}
 	}
 
@@ -106,10 +108,9 @@ public class Convocatoria {
 			this.elegirGanador();
 		}
 
-		if (op != 0) {
-			this.estado = "CERRADO";
+		if (op == 1 || op == 2) {
+			this.estado = Estado.CERRADO.toString();
 		}
-
 	}
 
 	public boolean verificarPostulante(Inscripcion ins) {
