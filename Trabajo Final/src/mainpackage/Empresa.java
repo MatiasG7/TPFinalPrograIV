@@ -54,8 +54,11 @@ public class Empresa {
 
 				if (puesto.isCompatible(op)) {
 					if (op == 1) {
+						System.out.println("Ingrese fecha de ingreso en puesto");
+						Fecha fechaIngresoPuesto = Fecha.nuevaFecha();
+
 						nuevoEmpleado = new EmpleadoJerarquico(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
-								this.crearExperiencia());
+								fechaIngresoPuesto, this.crearExperiencia());
 					} else {
 						nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
 								this.crearExperiencia());
@@ -88,8 +91,8 @@ public class Empresa {
 		if (op == 1) {
 			do {
 				System.out.println("++Listado de especializaciones++");
-				for (int i = 1; i <= especializaciones.size(); i++) {
-					System.out.println("" + i++ + " - " + especializaciones.get(i));
+				for (int i = 0; i < especializaciones.size(); i++) {
+					System.out.println("" + i + 1 + " - " + especializaciones.get(i));
 				}
 
 				System.out.println("Elija especialización a agregar: ");
@@ -289,20 +292,36 @@ public class Empresa {
 			} else {
 				convocatoria.mostrarse();
 
-				Inscripcion inscri = convocatoria.verificarInscripcion(empleado);
+				Inscripcion ins = convocatoria.verificarInscripcion(empleado);
 
-				if (inscri == null) {
-					inscri = new Inscripcion(codConvocatoria, empleado, convocatoria);
-					convocatoria.addInscripcion(inscri);
+				if (ins == null) {
+					ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
+					convocatoria.addInscripcion(ins);
 				} else {
 					System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
 				}
-
 			}
-
 		}
 
 		s.close();
 	}
 
+	public void cerrarConvocatoria() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
+		System.out.println(" --- CERRAR CONVOCATORIA ---");
+
+		System.out.println("Ingrese codigo de convocatoria a asignar: ");
+		int codConvocatoria = s.nextInt();
+
+		Convocatoria convocatoria = buscarConvocatoria(codConvocatoria);
+
+		if (convocatoria == null) {
+			System.out.println("No existe convocatoria con ese codigo.");
+		} else {
+
+			convocatoria.cerrar();
+		}
+	}
 }
