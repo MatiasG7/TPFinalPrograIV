@@ -11,12 +11,15 @@ public class Convocatoria {
 	private Puesto puesto;
 	private ArrayList<Inscripcion> inscripciones;
 	private Inscripcion ganadora;
+	private String estado;
 
 	public Convocatoria(int cod, Puesto pues) {
 		codigo = cod;
 		puesto = pues;
 		experienciaReq = new Hashtable<String, Integer>();
 		inscripciones = new ArrayList<Inscripcion>();
+		estado = "abierto";
+		ganadora = null;
 	}
 
 	public Convocatoria(int cod, Puesto pues, Hashtable<String, Integer> exp) {
