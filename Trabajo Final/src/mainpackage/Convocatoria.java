@@ -13,6 +13,10 @@ public class Convocatoria {
 	private Inscripcion ganadora;
 	private String estado;
 
+	enum Estado {
+		ABIERTO, CERRADO;
+	}
+
 	public Convocatoria(int cod, Puesto pues) {
 		codigo = cod;
 		puesto = pues;
