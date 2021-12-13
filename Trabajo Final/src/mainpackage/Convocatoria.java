@@ -24,13 +24,13 @@ public class Convocatoria {
 	private enum Estado {
 		ABIERTO {
 			public String toString() {
-				return "this is one";
+				return "ABIERTO";
 			}
 		},
 
 		CERRADO {
 			public String toString() {
-				return "this is two";
+				return "CERRADO";
 			}
 		}
 	}

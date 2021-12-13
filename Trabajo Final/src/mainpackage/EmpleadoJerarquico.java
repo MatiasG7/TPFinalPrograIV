@@ -39,7 +39,7 @@ public class EmpleadoJerarquico extends Empleado {
 
 			System.out.println("La cantidad minima de anios en el puesto todavía no fue seteada, ingrese un valor: ");
 			int ae = s.nextInt();
-			PuestoJerarquico.setMinimoAñosEmpresa(ae);
+			PuestoJerarquico.setMinimoAniosEmpresa(ae);
 
 			s.close();
 		}
