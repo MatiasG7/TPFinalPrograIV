@@ -10,7 +10,7 @@ public class Convocatoria {
 	private Hashtable<String, Integer> experienciaReq;
 	private Puesto puesto;
 	private ArrayList<Inscripcion> inscripciones;
-	Inscripcion ganadora;
+	private Inscripcion ganadora;
 
 	public Convocatoria(int cod, Puesto pues) {
 		codigo = cod;
