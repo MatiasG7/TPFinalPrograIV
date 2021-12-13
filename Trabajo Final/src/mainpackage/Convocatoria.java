@@ -83,8 +83,27 @@ public class Convocatoria {
 			System.out.println("Elija ganador: ");
 			int gan = s.nextInt();
 
-			this.ganadora = inscripcionesAprobadas.get(i);
+			this.ganadora = inscripcionesAprobadas.get(gan - 1);
 			ganadora.mostrarEmpleado();
+		}
+	}
+
+	public void cerrar() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
+		System.out.println("Desea elegir un ganador ?");
+		System.out.println("1- SI");
+		System.out.println("2- NO");
+		System.out.println("0- Cancelar");
+		int op = s.nextInt();
+
+		if (op == 1) {
+			this.elegirGanador();
+		}
+
+		if (op != 0) {
+			this.estado = "CERRADO";
 		}
 
 	}
@@ -100,9 +119,4 @@ public class Convocatoria {
 	public boolean esPuestoJerarquico() {
 		return puesto.esJerarquico();
 	}
-
-	public boolean verificarAniosEnEmpresaPostulante(Fecha fechaDeIngreso) {
-		return !fechaDeIngreso.entre(Fecha.hoy().restarAños(puesto.getMinimoAños()), Fecha.hoy());
-	}
-
 }

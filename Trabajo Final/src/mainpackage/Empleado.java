@@ -33,6 +33,10 @@ public abstract class Empleado extends Persona {
 		this.experiencia = exp;
 	}
 
+	private boolean verificarAniosEnEmpresaPostulante() {
+		return !fechaDeIngreso.entre(Fecha.hoy().restarAños(puesto.getMinimoAños()), Fecha.hoy());
+	}
+
 	public void mostrarse() {
 		super.mostrarse();
 		System.out.println("Puesto actual: ");
@@ -45,7 +49,7 @@ public abstract class Empleado extends Persona {
 
 		if (verificarExperiencia(convocatoria)) {
 			if (convocatoria.esPuestoJerarquico()) {
-				return convocatoria.verificarAniosEnEmpresaPostulante(fechaDeIngreso);
+				return verificarAniosEnEmpresaPostulante();
 			} else {
 				return true;
 			}
@@ -98,5 +102,4 @@ public abstract class Empleado extends Persona {
 	public Fecha getFechaDeIngreso() {
 		return fechaDeIngreso;
 	}
-
 }

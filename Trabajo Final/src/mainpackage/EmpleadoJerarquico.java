@@ -14,14 +14,8 @@ public class EmpleadoJerarquico extends Empleado {
 	}
 
 	public boolean isAptoPuesto(Convocatoria convocatoria) {
-		if (verificarAniosPuesto()) {
-			if (verificarExperiencia(convocatoria)) {
-				if (convocatoria.esPuestoJerarquico()) {
-					return convocatoria.verificarAniosEnEmpresaPostulante(getFechaDeIngreso());
-				} else {
-					return true;
-				}
-			}
+		if (verificarAniosPuesto() && super.isAptoPuesto(convocatoria)) {
+			return true;
 		}
 
 		return false;

@@ -308,11 +308,11 @@ public class Empresa {
 		s.close();
 	}
 
-	public void asignarGanadorConvocatoria() {
+	public void cerrarConvocatoria() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
-		System.out.println(" --- ASIGNADOR GANADOR CONVOCATORIA ---");
+		System.out.println(" --- CERRAR CONVOCATORIA ---");
 
 		System.out.println("Ingrese codigo de convocatoria a asignar: ");
 		int codConvocatoria = s.nextInt();
@@ -323,7 +323,7 @@ public class Empresa {
 			System.out.println("No existe convocatoria con ese codigo.");
 		} else {
 
+			convocatoria.cerrar();
 		}
 	}
-
 }
