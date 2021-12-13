@@ -82,8 +82,8 @@ public class Empresa {
 		Hashtable<String, Integer> ht = new Hashtable<String, Integer>();
 
 		System.out.println("Agregar especializaciones");
-		System.out.println("1- Si");
-		System.out.println("2- No");
+		System.out.println("1- SI");
+		System.out.println("2- NO");
 		s.useDelimiter(System.getProperty("line.separator"));
 		System.out.println("0- En cualquier momento para salir.");
 		int op = s.nextInt();
@@ -95,15 +95,15 @@ public class Empresa {
 					System.out.println("" + i + 1 + " - " + especializaciones.get(i));
 				}
 
-				System.out.println("Elija especialización a agregar: ");
+				System.out.println("Elija especializacion a agregar: ");
 				int esp = s.nextInt();
 
-				System.out.println("Ingrese años de experiencia para la especialización: ");
+				System.out.println("Ingrese a�os de experiencia para la especializacion: ");
 				int anios = s.nextInt();
 
 				ht.put(especializaciones.get(esp - 1), anios);
 
-				System.out.println("Agregar mas especializaciones?");
+				System.out.println("Desea gregar mas especializaciones? ");
 				System.out.println("1- SI");
 				System.out.println("2- NO");
 				System.out.println("0- En cualquier momento para salir.");
@@ -120,8 +120,7 @@ public class Empresa {
 		int i = 0;
 
 		while (i < empleados.size() && empleados.get(i).getDni() != dni)
-			;
-		i++;
+			i++;
 
 		if (i < empleados.size())
 			return empleados.get(i);
@@ -133,8 +132,7 @@ public class Empresa {
 		int i = 0;
 
 		while (i < puestos.size() && puestos.get(i).getCodigo() != cod)
-			;
-		i++;
+			i++;
 
 		if (i < puestos.size())
 			return puestos.get(i);
@@ -323,5 +321,52 @@ public class Empresa {
 
 			convocatoria.cerrar();
 		}
+	}
+
+	public void agregarExperienciaEmpleado() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
+		System.out.println(" --- AGREGAR EXPERIENCIA A EMPLEADO ---");
+
+		System.out.println("Ingrese dni del empleado: ");
+		int dni = s.nextInt();
+
+		Empleado e = buscarDni(dni);
+		if (e == null) {
+			System.out.println("El empleado no existe.");
+		} else {
+			e.mostrarExperiencia();
+
+			s.useDelimiter(System.getProperty("line.separator"));
+
+			System.out.println("ESPECIALIZACIONES");
+			for (int i = 1; i <= especializaciones.size(); i++) {
+				System.out.println("" + i++ + " - " + especializaciones.get(i));
+			}
+			System.out.println("0- Para salir.");
+
+			int op = s.nextInt();
+
+			do {
+				System.out.println("Elija especializacion a agregar: ");
+				int esp = s.nextInt();
+
+				System.out.println("Ingrese a�os de experiencia para la especializacion: ");
+				int a�os = s.nextInt();
+
+				String especializacion = especializaciones.get(esp - 1);
+
+				e.agregarExperiencia(especializacion, a�os);
+
+				System.out.println("Desea agregar mas experiencia? ");
+				System.out.println("1- SI");
+				System.out.println("2- NO");
+				System.out.println("0- Para salir.");
+				op = s.nextInt();
+			} while (op != 0);
+		}
+
+		s.close();
 	}
 }
