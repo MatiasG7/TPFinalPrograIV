@@ -9,7 +9,7 @@ public class Convocatoria {
 	private Hashtable<String, Integer> experienciaReq;
 	private Puesto puesto;
 	private ArrayList<Inscripcion> inscripciones;
-	private Inscripcion ganador;
+	private Empleado ganador;
 	private String estado;
 
 	public Convocatoria(int cod, Puesto pues, Hashtable<String, Integer> exp) {
@@ -93,8 +93,9 @@ public class Convocatoria {
 			System.out.println("Elija ganador: ");
 			int gan = s.nextInt();
 
-			this.ganador = inscripcionesAprobadas.get(gan - 1);
-			ganador.mostrarEmpleado();
+			this.ganador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
+			this.ganador.actualizarPuesto(puesto);
+			this.ganador.mostrarse();
 		}
 	}
 

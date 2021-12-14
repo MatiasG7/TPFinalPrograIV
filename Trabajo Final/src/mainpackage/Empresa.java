@@ -309,7 +309,7 @@ public class Empresa {
 		}
 	}
 
-	private Empleado buscarDni(String dni) {
+	public Empleado buscarDni(String dni) {
 		int i = 0;
 		while (i < empleados.size() && empleados.get(i).sos(dni))
 			i++;
