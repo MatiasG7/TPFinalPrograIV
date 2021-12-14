@@ -181,27 +181,26 @@ public class Empresa {
 			if (convocatoria == null) {
 				System.out.println("No existe convocatoria con ese codigo.");
 			} else {
+				convocatoria.mostrarse();
 
-				System.out.println("Ingrese codigo de inscripcion: ");
-				int codInscripcion = s.nextInt();
+				Inscripcion ins = convocatoria.verificarInscripcion(empleado);
 
-				Inscripcion ins2 = buscarInscripcion(codInscripcion);
+				if (ins == null) {
 
-				if (ins2 == null) {
+					System.out.println("Ingrese codigo de inscripcion: ");
+					int codInscricion = s.nextInt();
 
-					convocatoria.mostrarse();
-
-					Inscripcion ins = convocatoria.verificarInscripcion(empleado);
+					ins = buscarInscripcion(codInscricion);
 
 					if (ins == null) {
-						ins = new Inscripcion(codInscripcion, empleado, convocatoria);
+						ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
 						convocatoria.addInscripcion(ins);
 					} else {
-						System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
+						System.out.println("Este codigo ya existe en una inscripcion.");
 					}
 
 				} else {
-					System.out.println("Este codigo de inscripcion ya existe.");
+					System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
 				}
 			}
 		}
@@ -309,7 +308,7 @@ public class Empresa {
 		}
 	}
 
-	public Empleado buscarDni(String dni) {
+	private Empleado buscarDni(String dni) {
 		int i = 0;
 		while (i < empleados.size() && empleados.get(i).sos(dni))
 			i++;
