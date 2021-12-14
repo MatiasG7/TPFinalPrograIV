@@ -297,7 +297,7 @@ public class Empresa {
 		}
 	}
 
-	public Empleado buscarDni(String dni) {
+	private Empleado buscarDni(String dni) {
 		int i = 0;
 		while (i < empleados.size() && empleados.get(i).sos(dni))
 			i++;
@@ -307,7 +307,7 @@ public class Empresa {
 			return null;
 	}
 
-	public Puesto buscarPuesto(int cod) {
+	private Puesto buscarPuesto(int cod) {
 		int i = 0;
 		while (i < puestos.size() && puestos.get(i).sos(cod))
 			i++;
@@ -317,7 +317,7 @@ public class Empresa {
 			return null;
 	}
 
-	public String buscarEspecializacion(String e) {
+	private String buscarEspecializacion(String e) {
 		int i = 0;
 		while (i < especializaciones.size() && e.compareToIgnoreCase(especializaciones.get(i)) != 0) {
 			i++;
@@ -328,7 +328,7 @@ public class Empresa {
 			return null;
 	}
 
-	public Convocatoria buscarConvocatoria(int cod) {
+	private Convocatoria buscarConvocatoria(int cod) {
 		int i = 0;
 		while (i < convocatorias.size() && convocatorias.get(i).sos(cod)) {
 			i++;
