@@ -12,7 +12,13 @@ public class Ejecutora {
 		int op;
 
 		// Bloque de prueba
-		// e.PRUEBAS();
+		System.out.println("¿¿ EJECUTAR PRE CARGA DE DATOS ??");
+		System.out.println("1- SI");
+		op = s.nextInt();
+
+		if (op == 1) {
+			e.CARGADATOS();
+		}
 		//
 
 		do {

@@ -570,4 +570,57 @@ public class Empresa {
 		return ht;
 	}
 
+	public void CARGADATOS() {
+		// Carga de especializaciones
+		String e1 = "BASE DE DATOS";
+		String e2 = "JAVA";
+		String e3 = "C#";
+		String e4 = "GIT";
+		String e5 = "C++";
+		especializaciones.add(e1);
+		especializaciones.add(e2);
+		especializaciones.add(e3);
+		especializaciones.add(e4);
+		especializaciones.add(e5);
+
+		// Carga de puestos
+		PuestoComun pc = new PuestoComun(1, "Desarrollador JR", "IT");
+		PuestoComun pc2 = new PuestoComun(2, "Desarrollador SR", "IT");
+		PuestoJerarquico pj = new PuestoJerarquico(3, "Gerente de IT", "Gerencia");
+		PuestoJerarquico pj2 = new PuestoJerarquico(4, "Lider de proyecto", "IT");
+		puestos.add(pc);
+		puestos.add(pc2);
+		puestos.add(pj);
+		puestos.add(pj2);
+
+		// Carga de empleados
+		EmpleadoJerarquico ej = new EmpleadoJerarquico("12345678", "Ignacio Perez", new Fecha(1, 1, 1996),
+				"20123456784", pj, new Fecha(1, 1, 2018), new Fecha(1, 1, 2018),
+				this.CDEXPERIENCIA(e1, e2, e3, e4, 2, 2, 2, 2));
+		// Puede haber entrado en 2018 y ser jerarquico ?
+		EmpleadoJerarquico ej2 = new EmpleadoJerarquico("12345679", "Mario Sal", new Fecha(1, 1, 1990), "20123456794",
+				pj2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2015), this.crearExperiencia());
+		EmpleadoComun ec = new EmpleadoComun("12345680", "Gonzalo Puentes", new Fecha(1, 1, 2000), "20123456804", pc,
+				new Fecha(1, 1, 2020), null);
+		EmpleadoComun ec2 = new EmpleadoComun("12345681", "Lautaro Martinez", new Fecha(1, 1, 1980), "20123456814", pc2,
+				new Fecha(1, 1, 2015), this.crearExperiencia());
+		empleados.add(ec);
+		empleados.add(ec2);
+		empleados.add(ej);
+		empleados.add(ej2);
+
+		// Carga de ..
+	}
+
+	private Hashtable<String, Integer> CDEXPERIENCIA(String e1, String e2, String e3, String e4, int a1, int a2, int a3,
+			int a4) {
+		Hashtable<String, Integer> ht = new Hashtable<String, Integer>();
+
+		ht.put(e1, a1);
+		ht.put(e2, a2);
+		ht.put(e3, a3);
+		ht.put(e4, a4);
+
+		return ht;
+	}
 }
