@@ -129,10 +129,6 @@ public abstract class Empleado extends Persona {
 		}
 	}
 
-	public Fecha getFechaDeIngreso() {
-		return fechaDeIngreso;
-	}
-
 	public void actualizarPuesto(Puesto nuevoPuesto) {
 		this.puesto = nuevoPuesto;
 	}
