@@ -181,15 +181,27 @@ public class Empresa {
 			if (convocatoria == null) {
 				System.out.println("No existe convocatoria con ese codigo.");
 			} else {
-				convocatoria.mostrarse();
 
-				Inscripcion ins = convocatoria.verificarInscripcion(empleado);
+				System.out.println("Ingrese codigo de inscripcion: ");
+				int codInscripcion = s.nextInt();
 
-				if (ins == null) {
-					ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
-					convocatoria.addInscripcion(ins);
+				Inscripcion ins2 = buscarInscripcion(codInscripcion);
+
+				if (ins2 == null) {
+
+					convocatoria.mostrarse();
+
+					Inscripcion ins = convocatoria.verificarInscripcion(empleado);
+
+					if (ins == null) {
+						ins = new Inscripcion(codInscripcion, empleado, convocatoria);
+						convocatoria.addInscripcion(ins);
+					} else {
+						System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
+					}
+
 				} else {
-					System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
+					System.out.println("Este codigo de inscripcion ya existe.");
 				}
 			}
 		}
@@ -339,7 +351,7 @@ public class Empresa {
 			return null;
 	}
 
-	public Inscripcion buscarInscripcion(int cod) {
+	private Inscripcion buscarInscripcion(int cod) {
 		int i = 0;
 		while (i < inscripciones.size() && inscripciones.get(i).sos(cod)) {
 			i++;
@@ -390,4 +402,5 @@ public class Empresa {
 
 		return ht;
 	}
+
 }
