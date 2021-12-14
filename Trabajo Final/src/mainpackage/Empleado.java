@@ -33,14 +33,14 @@ public abstract class Empleado extends Persona {
 		return !fechaDeIngreso.entre(Fecha.hoy().restarAños(puesto.getMinimoAnios()), Fecha.hoy());
 	}
 
-	// sumarExperiencia suma la cantidad de aï¿½os que se pasen por parametro a la
+	// sumarExperiencia suma la cantidad de anios que se pasen por parametro a la
 	// especializacion dada.
 	private void sumarExperiencia(String esp, Integer anios) {
 		Integer aniosActuales = experiencia.get(esp);
 		experiencia.put(esp, anios + aniosActuales);
 	}
 
-	// agregarExperiencia suma la cantidad de aï¿½os que se pasan por parametro a la
+	// agregarExperiencia suma la cantidad de anios que se pasan por parametro a la
 	// especializacion dada, si la especializacion no existe como experiencia, se
 	// crea.
 	public void agregarExperiencia(String esp, Integer anios) {
@@ -135,5 +135,24 @@ public abstract class Empleado extends Persona {
 
 	public void actualizarPuesto(Puesto nuevoPuesto) {
 		this.puesto = nuevoPuesto;
+	}
+
+	public void removerInscripcion(int cod) {
+		Inscripcion ins = this.buscarInscripcion(cod);
+
+		if (ins != null) {
+			this.inscripciones.remove(ins);
+		}
+	}
+
+	private Inscripcion buscarInscripcion(int cod) {
+		int i = 0;
+		while (i < inscripciones.size() && inscripciones.get(i).sos(cod)) {
+			i++;
+		}
+		if (i < inscripciones.size())
+			return inscripciones.get(i);
+		else
+			return null;
 	}
 }

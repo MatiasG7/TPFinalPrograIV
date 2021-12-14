@@ -129,4 +129,10 @@ public class Convocatoria {
 	public boolean esPuestoJerarquico() {
 		return puesto.esJerarquico();
 	}
+
+	public void eliminarInscripcionesDeEmpleados() {
+		for (Inscripcion ins : inscripciones) {
+			ins.eliminarInscripcionDentroDeEmpleado();
+		}
+	}
 }
