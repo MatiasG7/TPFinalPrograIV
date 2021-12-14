@@ -1,6 +1,7 @@
 package mainpackage;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -10,14 +11,14 @@ public class Convocatoria {
 	private Puesto puesto;
 	private ArrayList<Inscripcion> inscripciones;
 	private Empleado ganador;
-	private String estado;
+	private Estado estado;
 
 	public Convocatoria(int cod, Puesto pues, Hashtable<String, Integer> exp) {
 		codigo = cod;
 		puesto = pues;
 		experienciaReq = exp;
 		inscripciones = new ArrayList<Inscripcion>();
-		estado = Estado.ABIERTO.toString();
+		estado = Estado.ABIERTO;
 		ganador = null;
 	}
 
@@ -47,10 +48,36 @@ public class Convocatoria {
 		return codigo;
 	}
 
+	public boolean isAbierta() {
+		return this.estado == Estado.ABIERTO;
+	}
+
 	public void mostrarse() {
-		System.out.println("Codigo convocatoria: " + codigo);
+		this.mostrarCodYPuesto();
+		this.mostrarExpRequerida();
+
+		if (this.isAbierta()) {
+			for (Inscripcion i : this.inscripciones) {
+				i.mostrarse();
+			}
+		} else {
+			ganador.mostrarEmpleado();
+		}
+	}
+
+	public void mostrarCodYPuesto() {
+		System.out.println("Codigo: " + codigo);
 		System.out.println("Puesto: ");
 		puesto.mostrarse();
+	}
+
+	public void mostrarExpRequerida() {
+		System.out.println("++ Listado de experiencia requerida ++");
+		Enumeration<String> listaExp = experienciaReq.keys();
+		while (listaExp.hasMoreElements()) {
+			String esp = listaExp.nextElement();
+			System.out.println(esp + experienciaReq.get(esp));
+		}
 	}
 
 	public void addInscripcion(Inscripcion ins) {
@@ -115,7 +142,7 @@ public class Convocatoria {
 		}
 
 		if (op == 1 || op == 2) {
-			this.estado = Estado.CERRADO.toString();
+			this.estado = Estado.CERRADO;
 		}
 	}
 

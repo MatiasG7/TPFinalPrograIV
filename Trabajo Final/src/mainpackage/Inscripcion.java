@@ -28,10 +28,6 @@ public class Inscripcion {
 		return empleado.getDni();
 	}
 
-	public void mostrarEmpleado() {
-		empleado.mostrarse();
-	}
-
 	public Convocatoria getConvocatoria() {
 		return convocatoria;
 	}
@@ -46,5 +42,23 @@ public class Inscripcion {
 
 	public void eliminarInscripcionDentroDeEmpleado() {
 		this.empleado.removerInscripcion(this.codigo);
+	}
+	
+	public void mostrarse() {
+		System.out.println("Codigo: " + codigo);
+		System.out.println("Empleado: ");
+		this.mostrarEmpleado();
+	}
+
+	public void mostrarCodigo() {
+		System.out.println("Codigo: " + codigo);
+	}
+
+	public void mostrarEmpleado() {
+		empleado.mostrarse();
+	}
+
+	public void mostrarConvocatoria() {
+		this.convocatoria.mostrarCodYPuesto();
 	}
 }

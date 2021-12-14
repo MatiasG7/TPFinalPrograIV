@@ -24,7 +24,7 @@ public class Ejecutora {
 			System.out.println("5- Agregar una especializacion.");
 			System.out.println("6- Agregar experiencia a un empleado.");
 			System.out.println("7- Cerrar una convocatoria.");
-			System.out.println("8- Informar convocatorias.");
+			System.out.println("8- Informar convocatorias abiertas.");
 			System.out.println("9- Informar puestos.");
 			System.out.println("10- Informar empleados.");
 			System.out.println("11- Informar inscripciones.");
@@ -57,20 +57,20 @@ public class Ejecutora {
 				e.cerrarConvocatoria();
 				break;
 			case 8:
-				// e.informarConvocatorias();
-				// break;
+				e.informarConvocatoriasAbiertas();
+				break;
 			case 9:
-				// e.informarPuestos();
-				// break;
+				e.informarPuestos();
+				break;
 			case 10:
-				// e.informarEmpleados();
-				// break;
+				e.informarEmpleados();
+				break;
 			case 11:
-				// e.informarInscripciones();
-				// break;
+				e.informarInscripciones();
+				break;
 			case 12:
-				// e.informarEspecializaciones();
-				// break;
+				e.informarEspecializaciones();
+				break;
 			case 13:
 				// e.informarEmpleadosJerarquicos();
 				// break;
