@@ -186,8 +186,20 @@ public class Empresa {
 				Inscripcion ins = convocatoria.verificarInscripcion(empleado);
 
 				if (ins == null) {
-					ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
-					convocatoria.addInscripcion(ins);
+
+					System.out.println("Ingrese codigo de inscripcion: ");
+					int codInscricion = s.nextInt();
+
+					ins = buscarInscripcion(codInscricion);
+
+					if (ins == null) {
+						ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
+						convocatoria.addInscripcion(ins);
+						inscripciones.add(ins);
+					} else {
+						System.out.println("Este codigo ya existe en una inscripcion.");
+					}
+
 				} else {
 					System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
 				}
@@ -339,7 +351,7 @@ public class Empresa {
 			return null;
 	}
 
-	public Inscripcion buscarInscripcion(int cod) {
+	private Inscripcion buscarInscripcion(int cod) {
 		int i = 0;
 		while (i < inscripciones.size() && inscripciones.get(i).sos(cod)) {
 			i++;
@@ -390,4 +402,5 @@ public class Empresa {
 
 		return ht;
 	}
+
 }
