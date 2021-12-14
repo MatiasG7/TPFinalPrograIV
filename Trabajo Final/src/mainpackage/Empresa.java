@@ -195,6 +195,7 @@ public class Empresa {
 					if (ins == null) {
 						ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
 						convocatoria.addInscripcion(ins);
+						inscripciones.add(ins);
 					} else {
 						System.out.println("Este codigo ya existe en una inscripcion.");
 					}
