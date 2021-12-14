@@ -96,6 +96,7 @@ public class Convocatoria {
 			this.ganador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
 			this.ganador.actualizarPuesto(puesto);
 			this.ganador.mostrarse();
+			eliminarInscripcionesDeEmpleados();
 		}
 	}
 
