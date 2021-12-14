@@ -16,7 +16,6 @@ public class Ejecutora {
 		//
 
 		do {
-			// ARREGLAR NRS
 			System.out.println("TP FINAL");
 			System.out.println("1- Agregar un empleado.");
 			System.out.println("2- Agregar un puesto.");
@@ -24,59 +23,66 @@ public class Ejecutora {
 			System.out.println("4- Agregar una inscripcion.");
 			System.out.println("5- Agregar una especializacion.");
 			System.out.println("6- Agregar experiencia a un empleado.");
-			System.out.println("8- Cerrar una convocatoria.");
-			System.out.println("9- Informar convocatorias.");
-			System.out.println("10- Informar puestos.");
-			System.out.println("11- Informar empleados.");
-			System.out.println("12- Informar inscripciones.");
-			System.out.println("13- Informar especializaciones.");
-			System.out.println("14- Informar empleados jerarquicos.");
-			System.out.println("15- Informar puestos postulados por un empleado.");
-			System.out.println("16- Informar empleado con mas inscripciones.");
-			System.out.println("17- Informar postulantes aprobados.");
-			// ARREGLAR NRS
+			System.out.println("7- Cerrar una convocatoria.");
+			System.out.println("8- Informar convocatorias.");
+			System.out.println("9- Informar puestos.");
+			System.out.println("10- Informar empleados.");
+			System.out.println("11- Informar inscripciones.");
+			System.out.println("12- Informar especializaciones.");
+			System.out.println("13- Informar empleados jerarquicos.");
+			System.out.println("14- Informar puestos postulados por un empleado.");
+			System.out.println("15- Informar empleado con mas inscripciones.");
+			System.out.println("16- Informar postulantes aprobados.");
 
 			op = s.nextInt();
 			switch (op) {
-			case 1: {
+			case 1:
 				e.agregarEmpleado();
-			}
 				break;
-			case 2: {
+			case 2:
 				e.agregarPuesto();
-			}
 				break;
-			case 3: {
+			case 3:
 				e.agregarConvocatoria();
-			}
 				break;
-			case 4: {
+			case 4:
 				e.agregarInscripcion();
-			}
 				break;
-			case 5: {
+			case 5:
 				e.agregarEspecializacion();
-			}
 				break;
-			case 6: {
+			case 6:
 				e.agregarExperienciaEmpleado();
-			}
-				break;
-			case 8: {
+			case 7:
 				e.cerrarConvocatoria();
-			}
-			case 9: {
+				break;
+			case 8:
 				// e.informarConvocatorias();
-			}
-			case 10: {
-				// e.informar();
-			}
-			case 11: {
-				// e.informar();
-			}
-			case 12: {
-				// e.informar();
-			}
+				// break;
+			case 9:
+				// e.informarPuestos();
+				// break;
+			case 10:
+				// e.informarEmpleados();
+				// break;
+			case 11:
+				// e.informarInscripciones();
+				// break;
+			case 12:
+				// e.informarEspecializaciones();
+				// break;
+			case 13:
+				// e.informarEmpleadosJerarquicos();
+				// break;
+			case 14:
+				// e.informarPuestosPostuladosEmpleado();
+				// break;
+			case 15:
+				// e.informarEmpleadoConMasInscripciones();
+				// break;
+			case 16:
+				// e.informarPostulantesAprobados();
+				// break;
 			}
 		} while (op != 0);
 

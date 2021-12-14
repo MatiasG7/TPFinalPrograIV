@@ -35,6 +35,10 @@ public class Convocatoria {
 		}
 	}
 
+	public boolean sos(int cod) {
+		return codigo == cod;
+	}
+
 	public void setExperienciaReq(Hashtable<String, Integer> exp) {
 		this.experienciaReq = exp;
 	}
@@ -55,7 +59,7 @@ public class Convocatoria {
 
 	public Inscripcion verificarInscripcion(Empleado emp) {
 		int i = 0;
-		while (i < inscripciones.size() && emp.getDni() != inscripciones.get(i).getDniEmpleado()) {
+		while (i < inscripciones.size() && inscripciones.get(i).sosInscripto(emp.getDni())) {
 			i++;
 		}
 		if (i < inscripciones.size()) {

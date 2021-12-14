@@ -11,6 +11,10 @@ public abstract class Puesto {
 		this.area = area;
 	}
 
+	public boolean sos(int cod) {
+		return codigo == cod;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

@@ -12,11 +12,19 @@ public class Inscripcion {
 		convocatoria = conv;
 	}
 
+	public boolean sos(int cod) {
+		return codigo == cod;
+	}
+
+	public boolean sosInscripto(String dni) {
+		return (empleado.getDni().compareToIgnoreCase(dni) == 0);
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
 
-	public int getDniEmpleado() {
+	public String getDniEmpleado() {
 		return empleado.getDni();
 	}
 

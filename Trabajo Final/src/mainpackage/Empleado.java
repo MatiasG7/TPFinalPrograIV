@@ -10,14 +10,14 @@ public abstract class Empleado extends Persona {
 	private Fecha fechaDeIngreso;
 	private ArrayList<Inscripcion> inscripciones;
 
-	public Empleado(int dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fechaIngreso) {
+	public Empleado(String dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fechaIngreso) {
 		super(dni, nombre, fechaNac, cuil);
 		this.experiencia = new Hashtable<String, Integer>();
 		this.puesto = puesto;
 		this.fechaDeIngreso = fechaIngreso;
 	}
 
-	public Empleado(int dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fechaIngreso,
+	public Empleado(String dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fechaIngreso,
 			Hashtable<String, Integer> exp) {
 		super(dni, nombre, fechaNac, cuil);
 		this.experiencia = exp;

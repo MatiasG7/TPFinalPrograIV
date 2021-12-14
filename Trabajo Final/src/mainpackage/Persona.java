@@ -1,19 +1,23 @@
 package mainpackage;
 
 public abstract class Persona {
-	private int dni;
+	private String dni;
 	private String nombre;
 	private Fecha fechaNacimiento;
 	private String cuil;
 
-	public Persona(int dni, String nombre, Fecha fechaNac, String cuil) {
+	public Persona(String dni, String nombre, Fecha fechaNac, String cuil) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.fechaNacimiento = fechaNac;
 		this.cuil = cuil;
 	}
 
-	public int getDni() {
+	public boolean sos(String dni) {
+		return (this.dni.compareToIgnoreCase(dni) == 0);
+	}
+
+	public String getDni() {
 		return dni;
 	}
 

@@ -7,7 +7,7 @@ public class EmpleadoJerarquico extends Empleado {
 	private static int minimoCambioJerarquico;
 	private Fecha fechaIngresoPuesto;
 
-	public EmpleadoJerarquico(int dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fecha,
+	public EmpleadoJerarquico(String dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fecha,
 			Fecha fechaIngresoPues, Hashtable<String, Integer> exp) {
 		super(dni, nombre, fechaNac, cuil, puesto, fecha, exp);
 		fechaIngresoPuesto = fechaIngresoPues;
