@@ -158,4 +158,9 @@ public abstract class Empleado extends Persona {
 		else
 			return null;
 	}
+
+	public int getSizeInscripciones() {
+		return inscripciones.size();
+	}
+
 }

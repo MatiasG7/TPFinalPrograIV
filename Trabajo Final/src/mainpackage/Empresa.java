@@ -385,6 +385,32 @@ public class Empresa {
 		}
 	}
 
+	// CU 15
+	public void informarEmpleadoMasInscripciones() {
+
+		System.out.println(" --- INFORMAR EMPLEADO CON MAS INSCRIPCIONES ---");
+
+		Empleado empMas = empleados.get(0);
+		int sizeEmpMas = empleados.get(0).getSizeInscripciones();
+
+		int i = 1;
+		Empleado empI;
+
+		while (i < empleados.size()) {
+			empI = empleados.get(i);
+			if (empI.getSizeInscripciones() > sizeEmpMas) {
+				empMas = empI;
+				sizeEmpMas = empI.getSizeInscripciones();
+			}
+			i++;
+		}
+
+		System.out.println("El empleado con mas inscripciones es: ");
+		empMas.mostrarse();
+		System.out.println("Cuenta con " + sizeEmpMas + " inscripciones.");
+
+	}
+
 	private Empleado buscarEmpleado(String dni) {
 		int i = 0;
 		while (i < empleados.size() && empleados.get(i).sos(dni))
