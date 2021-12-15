@@ -10,14 +10,14 @@ public class PuestoJerarquico extends Puesto {
 	}
 
 	public int getMinimoAnios() {
-		return PuestoJerarquico.getMinimoAñosEmpresa();
+		return PuestoJerarquico.getMinimoAniosEmpresa();
 	}
 
 	public static void setMinimoAniosEmpresa(int ae) {
 		minimoAniosEmpresa = ae;
 	}
 
-	private static int getMinimoAñosEmpresa() {
+	private static int getMinimoAniosEmpresa() {
 		if (minimoAniosEmpresa == 0) {
 			Scanner s = new Scanner(System.in);
 
@@ -37,5 +37,10 @@ public class PuestoJerarquico extends Puesto {
 
 	public boolean esJerarquico() {
 		return true;
+	}
+
+	public void mostrarse() {
+		super.mostrarse();
+		System.out.println("Minimo de anios requeridos en la empresa: " + PuestoJerarquico.getMinimoAniosEmpresa());
 	}
 }

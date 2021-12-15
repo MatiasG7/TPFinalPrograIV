@@ -259,10 +259,7 @@ public class Empresa {
 
 			s.useDelimiter(System.getProperty("line.separator"));
 
-			System.out.println("ESPECIALIZACIONES");
-			for (int i = 0; i <= especializaciones.size(); i++) {
-				System.out.println("" + i + 1 + " - " + especializaciones.get(i));
-			}
+			this.informarEspecializaciones();
 			System.out.println("0- Para salir.");
 
 			int op = s.nextInt();
@@ -306,6 +303,55 @@ public class Empresa {
 		} else {
 
 			convocatoria.cerrar();
+		}
+
+		s.close();
+	}
+
+	// CU 8
+	public void informarConvocatoriasAbiertas() {
+		System.out.println(" --- LISTADO CONVOCATORIAS ABIERTAS ---");
+
+		for (Convocatoria c : convocatorias) {
+			if (c.isAbierta()) {
+				c.mostrarse();
+			}
+		}
+	}
+
+	// CU 9
+	public void informarPuestos() {
+		System.out.println(" --- LISTADO PUESTOS ---");
+
+		for (Puesto p : puestos) {
+			p.mostrarse();
+		}
+	}
+
+	// CU 10
+	public void informarEmpleados() {
+		System.out.println(" --- LISTADO EMPLEADOS ---");
+
+		for (Empleado e : empleados) {
+			e.mostrarse();
+		}
+	}
+
+	// CU 11
+	public void informarInscripciones() {
+		System.out.println(" --- LISTADO INSCRIPCIONES ---");
+
+		for (Inscripcion ins : inscripciones) {
+			ins.mostrarse();
+		}
+	}
+
+	// CU 12
+	public void informarEspecializaciones() {
+		System.out.println(" --- LISTADO ESPECIALIZACIONES ---");
+
+		for (int i = 0; i <= especializaciones.size(); i++) {
+			System.out.println("" + i + 1 + " - " + especializaciones.get(i));
 		}
 	}
 
@@ -376,10 +422,7 @@ public class Empresa {
 		int op = s.nextInt();
 
 		if (op == 1) {
-			System.out.println("++Listado de especializaciones++");
-			for (int i = 0; i < especializaciones.size(); i++) {
-				System.out.println("" + i + 1 + " - " + especializaciones.get(i));
-			}
+			this.informarEspecializaciones();
 
 			do {
 				System.out.println("Elija especializacion a agregar: ");
