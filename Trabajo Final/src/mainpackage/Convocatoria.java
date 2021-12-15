@@ -61,7 +61,7 @@ public class Convocatoria {
 				i.mostrarse();
 			}
 		} else {
-			ganador.mostrarEmpleado();
+			ganador.mostrarse();
 		}
 	}
 
