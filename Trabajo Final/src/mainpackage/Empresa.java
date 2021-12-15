@@ -595,9 +595,8 @@ public class Empresa {
 
 		// Carga de empleados
 		EmpleadoJerarquico ej = new EmpleadoJerarquico("12345678", "Ignacio Perez", new Fecha(1, 1, 1996),
-				"20123456784", pj, new Fecha(1, 1, 2018), new Fecha(1, 1, 2018),
+				"20123456784", pj, new Fecha(1, 1, 2016), new Fecha(1, 1, 2018),
 				this.CDEXPERIENCIA(e1, e2, e3, e4, 2, 2, 2, 2));
-		// Puede haber entrado en 2018 y ser jerarquico ?
 		EmpleadoJerarquico ej2 = new EmpleadoJerarquico("12345679", "Mario Sal", new Fecha(1, 1, 1990), "20123456794",
 				pj2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2015), this.crearExperiencia());
 		EmpleadoComun ec = new EmpleadoComun("12345680", "Gonzalo Puentes", new Fecha(1, 1, 2000), "20123456804", pc,
@@ -609,7 +608,25 @@ public class Empresa {
 		empleados.add(ej);
 		empleados.add(ej2);
 
-		// Carga de ..
+		// Carga de convocatorias
+		Convocatoria c = new Convocatoria(1, pc, null);
+		Convocatoria c2 = new Convocatoria(2, pc, null);
+		Convocatoria c3 = new Convocatoria(3, pc, null);
+		Convocatoria c4 = new Convocatoria(4, pc, null);
+		convocatorias.add(c);
+		convocatorias.add(c2);
+		convocatorias.add(c3);
+		convocatorias.add(c4);
+
+		// Carga de inscripciones
+		Inscripcion ins = new Inscripcion(1, ec2, c);
+		Inscripcion ins2 = new Inscripcion(2, ec2, c);
+		Inscripcion ins3 = new Inscripcion(3, ec2, c);
+		Inscripcion ins4 = new Inscripcion(4, ec2, c);
+		inscripciones.add(ins);
+		inscripciones.add(ins2);
+		inscripciones.add(ins3);
+		inscripciones.add(ins4);
 	}
 
 	private Hashtable<String, Integer> CDEXPERIENCIA(String e1, String e2, String e3, String e4, int a1, int a2, int a3,
