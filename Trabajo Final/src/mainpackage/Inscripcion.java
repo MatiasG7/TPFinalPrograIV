@@ -47,7 +47,6 @@ public class Inscripcion {
 	public void mostrarse() {
 		this.mostrarCodigo();
 		this.mostrarEmpleado();
-		this.mostrarEmpleado();
 	}
 
 	public void mostrarCodigo() {

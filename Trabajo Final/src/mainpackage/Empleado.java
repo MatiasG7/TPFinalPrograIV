@@ -75,6 +75,13 @@ public abstract class Empleado extends Persona {
 		}
 	}
 
+	public void mostrarInscripciones() {
+		for (Inscripcion ins : inscripciones) {
+			ins.mostrarCodigo();
+			ins.mostrarConvocatoria();
+		}
+	}
+
 	public boolean isAptoPuesto(Convocatoria convocatoria) {
 
 		if (verificarExperiencia(convocatoria)) {

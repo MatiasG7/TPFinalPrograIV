@@ -30,7 +30,7 @@ public class Ejecutora {
 			System.out.println("11- Informar inscripciones.");
 			System.out.println("12- Informar especializaciones.");
 			System.out.println("13- Informar empleados jerarquicos.");
-			System.out.println("14- Informar puestos postulados por un empleado.");
+			System.out.println("14- Informar inscripciones por un empleado.");
 			System.out.println("15- Informar empleado con mas inscripciones.");
 			System.out.println("16- Informar postulantes aprobados.");
 
@@ -72,11 +72,11 @@ public class Ejecutora {
 				e.informarEspecializaciones();
 				break;
 			case 13:
-				// e.informarEmpleadosJerarquicos();
-				// break;
+				e.informarEmpleadosJerarquicos();
+				break;
 			case 14:
-				// e.informarPuestosPostuladosEmpleado();
-				// break;
+				e.informarInscripcionesEmpleado();
+				break;
 			case 15:
 				// e.informarEmpleadoConMasInscripciones();
 				// break;

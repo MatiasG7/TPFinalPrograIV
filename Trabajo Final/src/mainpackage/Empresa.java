@@ -31,7 +31,7 @@ public class Empresa {
 		System.out.println(" --- INGRESO DE NUEVO EMPLEADO ---");
 		System.out.println("Ingrese dni: ");
 		String dni = s.next();
-		Empleado nuevoEmpleado = buscarDni(dni);
+		Empleado nuevoEmpleado = buscarEmpleado(dni);
 
 		if (nuevoEmpleado != null) {
 			System.out.println("Ya existe un empleado con ese dni. ");
@@ -165,7 +165,7 @@ public class Empresa {
 		System.out.println("Ingrese dni empleado a inscribirse: ");
 		String dni = s.next();
 
-		Empleado empleado = buscarDni(dni);
+		Empleado empleado = buscarEmpleado(dni);
 		if (empleado == null) {
 			System.out.println("Empleado no existe.");
 		} else {
@@ -251,7 +251,7 @@ public class Empresa {
 		System.out.println("Ingrese dni del empleado: ");
 		String dni = s.next();
 
-		Empleado e = buscarDni(dni);
+		Empleado e = buscarEmpleado(dni);
 		if (e == null) {
 			System.out.println("El empleado no existe.");
 		} else {
@@ -355,7 +355,37 @@ public class Empresa {
 		}
 	}
 
-	private Empleado buscarDni(String dni) {
+	// CU 13
+	public void informarEmpleadosJerarquicos() {
+		System.out.println(" --- LISTADO EMPLEADOS JERARQUICOS ---");
+
+		for (Empleado e : empleados) {
+			if (e.getClass() == EmpleadoJerarquico.class) {
+				e.mostrarse();
+			}
+		}
+	}
+
+	// CU 14
+	public void informarInscripcionesEmpleado() {
+		System.out.println(" --- LISTADO INSCRIPCIONES POR EMPLEADO ---");
+
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
+		System.out.println("Ingrese DNI del empleado: ");
+		String dni = s.next();
+
+		Empleado e = this.buscarEmpleado(dni);
+
+		if (e != null) {
+			e.mostrarInscripciones();
+		} else {
+			System.out.println("El empleado no existe.");
+		}
+	}
+
+	private Empleado buscarEmpleado(String dni) {
 		int i = 0;
 		while (i < empleados.size() && empleados.get(i).sos(dni))
 			i++;
