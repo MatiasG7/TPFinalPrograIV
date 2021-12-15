@@ -130,9 +130,7 @@ public class Empresa {
 		Convocatoria con = buscarConvocatoria(cod);
 
 		if (con == null) {
-
-			System.out.println("El codigo ingresado ya esta relacionado a una convocatoria");
-
+			System.out.println("El codigo ingresado ya esta relacionado a una convocatoria existente.");
 		} else {
 			System.out.println("Ingrese codigo de puesto para la convocatoria: ");
 			int codPuesto = s.nextInt();
@@ -140,7 +138,7 @@ public class Empresa {
 			Puesto pu = buscarPuesto(cod);
 
 			if (pu == null) {
-				System.out.println("El codigo ingresado no esta relacionado a un puesto");
+				System.out.println("El codigo ingresado no esta relacionado a un puesto.");
 			} else {
 				con = new Convocatoria(codPuesto, pu, this.crearExperiencia());
 
@@ -383,12 +381,13 @@ public class Empresa {
 		} else {
 			System.out.println("El empleado no existe.");
 		}
+
+		s.close();
 	}
 
 	// CU 15
 	public void informarEmpleadoMasInscripciones() {
-
-		System.out.println(" --- INFORMAR EMPLEADO CON MAS INSCRIPCIONES ---");
+		System.out.println(" --- EMPLEADO CON MAS INSCRIPCIONES ---");
 
 		Empleado empMas = empleados.get(0);
 		int sizeEmpMas = empleados.get(0).getSizeInscripciones();
@@ -407,8 +406,26 @@ public class Empresa {
 
 		System.out.println("El empleado con mas inscripciones es: ");
 		empMas.mostrarse();
-		System.out.println("Cuenta con " + sizeEmpMas + " inscripciones.");
+		System.out.println("Con un total de " + sizeEmpMas + " inscripciones.");
+	}
 
+	// CU 16
+	public void informarEmpleadosAprobados() {
+		System.out.println(" --- EMPLEADOS QUE CUMPLEN CON LOS REQUISITOS DE LA CONVOCATORIA ---");
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("Ingrese codigo de convocatoria: ");
+		int cod = s.nextInt();
+
+		Convocatoria c = buscarConvocatoria(cod);
+
+		if (c != null) {
+			c.mostrarEmpleadosAprobados();
+		} else {
+			System.out.println("El codigo ingresado no esta relacionado a una convocatoria existente.");
+		}
+
+		s.close();
 	}
 
 	private Empleado buscarEmpleado(String dni) {

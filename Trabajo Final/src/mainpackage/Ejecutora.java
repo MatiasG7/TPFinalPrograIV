@@ -32,7 +32,7 @@ public class Ejecutora {
 			System.out.println("13- Informar empleados jerarquicos.");
 			System.out.println("14- Informar inscripciones por un empleado.");
 			System.out.println("15- Informar empleado con mas inscripciones.");
-			System.out.println("16- Informar postulantes aprobados.");
+			System.out.println("16- Informar empleados que cumplen los requisitos de la convocatoria.");
 
 			op = s.nextInt();
 			switch (op) {
@@ -81,8 +81,8 @@ public class Ejecutora {
 				e.informarEmpleadoMasInscripciones();
 				break;
 			case 16:
-				// e.informarPostulantesAprobados();
-				// break;
+				e.informarEmpleadosAprobados();
+				break;
 			}
 		} while (op != 0);
 

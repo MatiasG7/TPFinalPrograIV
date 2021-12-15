@@ -80,6 +80,14 @@ public class Convocatoria {
 		}
 	}
 
+	public void mostrarEmpleadosAprobados() {
+		for (Inscripcion ins : inscripciones) {
+			if (ins.isApto()) {
+				ins.mostrarEmpleado();
+			}
+		}
+	}
+
 	public void addInscripcion(Inscripcion ins) {
 		inscripciones.add(ins);
 	}
@@ -125,6 +133,8 @@ public class Convocatoria {
 			this.ganador.mostrarse();
 			this.eliminarInscripcionesDeEmpleados();
 		}
+
+		s.close();
 	}
 
 	public void cerrar() {
@@ -144,6 +154,8 @@ public class Convocatoria {
 		if (op == 1 || op == 2) {
 			this.estado = Estado.CERRADO;
 		}
+
+		s.close();
 	}
 
 	public boolean verificarPostulante(Inscripcion ins) {
