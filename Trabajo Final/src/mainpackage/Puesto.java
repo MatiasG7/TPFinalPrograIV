@@ -26,6 +26,9 @@ public abstract class Puesto {
 	public abstract boolean isCompatible(int op);
 
 	public void mostrarse() {
+		System.out.println();
+		System.out.println("PUESTO");
+
 		System.out.println("Codigo: " + codigo);
 		System.out.println("Nombre: " + nombre);
 		System.out.println("Area: " + area);

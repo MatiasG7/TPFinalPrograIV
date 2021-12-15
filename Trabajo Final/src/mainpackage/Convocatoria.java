@@ -54,6 +54,7 @@ public class Convocatoria {
 
 	public void mostrarse() {
 		this.mostrarCodYPuesto();
+		System.out.println();
 		this.mostrarExpRequerida();
 
 		if (this.isAbierta()) {
@@ -66,8 +67,8 @@ public class Convocatoria {
 	}
 
 	public void mostrarCodYPuesto() {
+		System.out.println("CONVOCATORIA");
 		System.out.println("Codigo: " + codigo);
-		System.out.println("Puesto: ");
 		puesto.mostrarse();
 	}
 

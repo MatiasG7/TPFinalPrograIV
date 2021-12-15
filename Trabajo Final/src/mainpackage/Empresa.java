@@ -329,7 +329,10 @@ public class Empresa {
 
 		for (Convocatoria c : convocatorias) {
 			if (c.isAbierta()) {
+				System.out.println("--------------");
 				c.mostrarse();
+				System.out.println();
+
 				i++;
 			}
 		}
@@ -344,6 +347,7 @@ public class Empresa {
 			System.out.println(" --- LISTADO PUESTOS ---");
 
 			for (Puesto p : puestos) {
+				System.out.println("--------------");
 				p.mostrarse();
 				System.out.println("");
 			}
@@ -359,7 +363,9 @@ public class Empresa {
 			System.out.println(" --- LISTADO EMPLEADOS ---");
 
 			for (Empleado e : empleados) {
+				System.out.println("--------------");
 				e.mostrarse();
+				System.out.println("");
 			}
 		} else {
 			System.out.println("No hay empleados cargados.");
@@ -389,6 +395,7 @@ public class Empresa {
 			for (int i = 0; i < especializaciones.size(); i++) {
 				System.out.println((i + 1) + " - " + especializaciones.get(i));
 			}
+			
 		} else {
 			System.out.println("No hay especializaciones cargadas");
 		}
@@ -476,8 +483,6 @@ public class Empresa {
 		} else {
 			System.out.println("El codigo ingresado no esta relacionado a una convocatoria existente.");
 		}
-
-		s.close();
 	}
 
 	private Empleado buscarEmpleado(String dni) {
@@ -596,37 +601,39 @@ public class Empresa {
 		// Carga de empleados
 		EmpleadoJerarquico ej = new EmpleadoJerarquico("12345678", "Ignacio Perez", new Fecha(1, 1, 1996),
 				"20123456784", pj, new Fecha(1, 1, 2016), new Fecha(1, 1, 2018),
-				this.CDEXPERIENCIA(e1, e2, e3, e4, 2, 2, 2, 2));
-		EmpleadoJerarquico ej2 = new EmpleadoJerarquico("12345679", "Mario Sal", new Fecha(1, 1, 1990), "20123456794",
-				pj2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2015), this.crearExperiencia());
-		EmpleadoComun ec = new EmpleadoComun("12345680", "Gonzalo Puentes", new Fecha(1, 1, 2000), "20123456804", pc,
-				new Fecha(1, 1, 2020), null);
-		EmpleadoComun ec2 = new EmpleadoComun("12345681", "Lautaro Martinez", new Fecha(1, 1, 1980), "20123456814", pc2,
-				new Fecha(1, 1, 2015), this.crearExperiencia());
+				this.CDEXPERIENCIA(e1, e2, e3, e4, 2, 2, 4, 2));
+		EmpleadoComun ec = new EmpleadoComun("12345679", "Mario Sal", new Fecha(1, 1, 1990), "20123456794", pj2,
+				new Fecha(1, 1, 2015), this.CDEXPERIENCIA(e3, e3, e1, e1, 0, 4, 0, 2));
+		EmpleadoComun ec2 = new EmpleadoComun("12345680", "Gonzalo Puentes", new Fecha(1, 1, 2000), "20123456804", pc,
+				new Fecha(1, 1, 2020), this.CDEXPERIENCIA(e2, e2, e4, e4, 0, 2, 0, 2));
+		EmpleadoJerarquico ej2 = new EmpleadoJerarquico("12345681", "Lautaro Martinez", new Fecha(1, 1, 1980),
+				"20123456814", pc2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2015),
+				this.CDEXPERIENCIA(e1, e5, e3, e4, 3, 3, 3, 5));
 		empleados.add(ec);
 		empleados.add(ec2);
 		empleados.add(ej);
 		empleados.add(ej2);
 
 		// Carga de convocatorias
-		Convocatoria c = new Convocatoria(1, pc, null);
-		Convocatoria c2 = new Convocatoria(2, pc, null);
-		Convocatoria c3 = new Convocatoria(3, pc, null);
-		Convocatoria c4 = new Convocatoria(4, pc, null);
+		Convocatoria c = new Convocatoria(1, pc, this.CDEXPERIENCIA(e1, e5, e3, e4, 2, 3, 2, 4));
+		Convocatoria c2 = new Convocatoria(2, pj, this.CDEXPERIENCIA(e1, e1, e3, e3, 0, 2, 0, 4));
 		convocatorias.add(c);
 		convocatorias.add(c2);
-		convocatorias.add(c3);
-		convocatorias.add(c4);
 
 		// Carga de inscripciones
-		Inscripcion ins = new Inscripcion(1, ec2, c);
-		Inscripcion ins2 = new Inscripcion(2, ec2, c);
-		Inscripcion ins3 = new Inscripcion(3, ec2, c);
+		Inscripcion ins = new Inscripcion(1, ej, c2);
+		Inscripcion ins2 = new Inscripcion(2, ec, c2);
+		Inscripcion ins3 = new Inscripcion(3, ej2, c);
 		Inscripcion ins4 = new Inscripcion(4, ec2, c);
 		inscripciones.add(ins);
 		inscripciones.add(ins2);
 		inscripciones.add(ins3);
 		inscripciones.add(ins4);
+
+		c.addInscripcion(ins3);
+		c.addInscripcion(ins4);
+		c2.addInscripcion(ins);
+		c2.addInscripcion(ins2);
 	}
 
 	private Hashtable<String, Integer> CDEXPERIENCIA(String e1, String e2, String e3, String e4, int a1, int a2, int a3,

@@ -24,7 +24,7 @@ public abstract class Empleado extends Persona {
 	}
 
 	private boolean verificarAniosEnEmpresaPostulante() {
-		return !fechaDeIngreso.entre(Fecha.hoy().restarAños(puesto.getMinimoAnios()), Fecha.hoy());
+		return !fechaDeIngreso.entre(Fecha.hoy().restarAï¿½os(puesto.getMinimoAnios()), Fecha.hoy());
 	}
 
 	// sumarExperiencia suma la cantidad de anios que se pasen por parametro a la
@@ -52,16 +52,18 @@ public abstract class Empleado extends Persona {
 	}
 
 	public void mostrarse() {
+		System.out.println();
 		super.mostrarse();
-		System.out.println("Puesto actual: ");
 		puesto.mostrarse();
 		System.out.println("Fecha de ingreso: ");
 		fechaDeIngreso.mostrarse();
+		System.out.println();
 		this.mostrarExperiencia();
 	}
 
 	public void mostrarExperiencia() {
 		if (experiencia.size() > 0) {
+			System.out.println();
 			System.out.println("++ Listado de experiencia ++");
 			Enumeration<String> listaExp = experiencia.keys();
 			while (listaExp.hasMoreElements()) {

@@ -39,5 +39,6 @@ public abstract class Persona {
 		System.out.println("Cuil: " + cuil);
 		System.out.println("Fecha de nacimiento: ");
 		fechaNacimiento.mostrarse();
+		System.out.println();
 	}
 }
