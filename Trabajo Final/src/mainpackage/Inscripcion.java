@@ -43,10 +43,10 @@ public class Inscripcion {
 	public void eliminarInscripcionDentroDeEmpleado() {
 		this.empleado.removerInscripcion(this.codigo);
 	}
-	
+
 	public void mostrarse() {
-		System.out.println("Codigo: " + codigo);
-		System.out.println("Empleado: ");
+		this.mostrarCodigo();
+		this.mostrarEmpleado();
 		this.mostrarEmpleado();
 	}
 
