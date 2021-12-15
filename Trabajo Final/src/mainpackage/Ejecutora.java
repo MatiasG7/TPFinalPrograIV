@@ -78,8 +78,8 @@ public class Ejecutora {
 				e.informarInscripcionesEmpleado();
 				break;
 			case 15:
-				// e.informarEmpleadoConMasInscripciones();
-				// break;
+				e.informarEmpleadoMasInscripciones();
+				break;
 			case 16:
 				// e.informarPostulantesAprobados();
 				// break;
