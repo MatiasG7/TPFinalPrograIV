@@ -349,7 +349,7 @@ public class Empresa {
 			for (Puesto p : puestos) {
 				System.out.println("--------------");
 				p.mostrarse();
-				System.out.println("");
+				System.out.println();
 			}
 		} else {
 			System.out.println("No hay puestos cargados.");
@@ -365,7 +365,7 @@ public class Empresa {
 			for (Empleado e : empleados) {
 				System.out.println("--------------");
 				e.mostrarse();
-				System.out.println("");
+				System.out.println();
 			}
 		} else {
 			System.out.println("No hay empleados cargados.");
