@@ -431,7 +431,7 @@ public class Empresa {
 
 	private Puesto buscarPuesto(int cod) {
 		int i = 0;
-		while (i < puestos.size() && puestos.get(i).sos(cod))
+		while (i < puestos.size() && !puestos.get(i).sos(cod))
 			i++;
 		if (i < puestos.size())
 			return puestos.get(i);
@@ -480,9 +480,7 @@ public class Empresa {
 
 		System.out.println("Agregar especializaciones");
 		System.out.println("1- SI");
-		System.out.println("2- NO");
-		s.useDelimiter(System.getProperty("line.separator"));
-		System.out.println("0- En cualquier momento para salir.");
+		System.out.println("0- SALIR");
 		int op = s.nextInt();
 
 		if (op == 1) {
@@ -499,8 +497,7 @@ public class Empresa {
 
 				System.out.println("Desea gregar mas especializaciones? ");
 				System.out.println("1- SI");
-				System.out.println("2- NO");
-				System.out.println("0- En cualquier momento para salir.");
+				System.out.println("0- SALIR");
 				op = s.nextInt();
 			} while (op != 0);
 		}
