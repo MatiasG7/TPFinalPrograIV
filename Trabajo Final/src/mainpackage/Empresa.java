@@ -40,7 +40,7 @@ public class Empresa {
 			System.out.println("Ingrese nombre: ");
 			String nombre = s.next();
 
-			System.out.println("Ingrese fecha de nacimiento: ");
+			System.out.println("Ingreso de fecha de nacimiento");
 			Fecha fechaNac = Fecha.nuevaFecha();
 
 			System.out.println("Ingrese cuil: ");
@@ -51,7 +51,7 @@ public class Empresa {
 
 			Puesto puesto = buscarPuesto(codPuesto);
 			if (puesto != null) {
-				System.out.println("Ingrese fecha de ingreso a la empresa: ");
+				System.out.println("Ingreso de fecha de ingreso a la empresa");
 				Fecha fechaIngreso = Fecha.nuevaFecha();
 
 				System.out.println("Es un empleado jerarquico?");
@@ -71,10 +71,13 @@ public class Empresa {
 								this.crearExperiencia());
 					}
 
+					nuevoEmpleado.setExperiencia(this.crearExperiencia());
+					empleados.add(nuevoEmpleado);
+				} else {
+					System.out.println(
+							"Empleado no pudo ser creado por que el puesto no es compatible con el tipo de empleado.");
 				}
 
-				nuevoEmpleado.setExperiencia(this.crearExperiencia());
-				empleados.add(nuevoEmpleado);
 			} else {
 				System.out.println("El puesto ingresado no existe.");
 			}
@@ -484,12 +487,13 @@ public class Empresa {
 
 		Hashtable<String, Integer> ht = new Hashtable<String, Integer>();
 
-		System.out.println("Agregar especializaciones");
-		System.out.println("1- SI");
-		System.out.println("0- SALIR");
-		int op = s.nextInt();
-
 		if (especializaciones.size() > 0) {
+
+			System.out.println("Agregar especializaciones");
+			System.out.println("1- SI");
+			System.out.println("0- SALIR");
+			int op = s.nextInt();
+
 			if (op == 1) {
 				this.informarEspecializaciones();
 
