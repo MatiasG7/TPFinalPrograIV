@@ -19,10 +19,6 @@ public class Empresa {
 		this.inscripciones = new ArrayList<Inscripcion>();
 	}
 
-	public void PRUEBAS() {
-
-	}
-
 	// CU 1
 	public void agregarEmpleado() {
 		Scanner s = new Scanner(System.in);
@@ -463,7 +459,7 @@ public class Empresa {
 
 	private Empleado buscarEmpleado(String dni) {
 		int i = 0;
-		while (i < empleados.size() && empleados.get(i).sos(dni))
+		while (i < empleados.size() && !empleados.get(i).sos(dni))
 			i++;
 		if (i < empleados.size())
 			return empleados.get(i);
@@ -505,7 +501,7 @@ public class Empresa {
 
 	private Inscripcion buscarInscripcion(int cod) {
 		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).sos(cod)) {
+		while (i < inscripciones.size() && !inscripciones.get(i).sos(cod)) {
 			i++;
 		}
 		if (i < inscripciones.size())
