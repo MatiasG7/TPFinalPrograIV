@@ -340,9 +340,14 @@ public class Empresa {
 	public void informarEspecializaciones() {
 		System.out.println(" --- LISTADO ESPECIALIZACIONES ---");
 
-		for (int i = 0; i <= especializaciones.size(); i++) {
-			System.out.println("" + i + 1 + " - " + especializaciones.get(i));
+		if (especializaciones.size() > 0) {
+			for (int i = 0; i <= especializaciones.size(); i++) {
+				System.out.println("" + i + 1 + " - " + especializaciones.get(i));
+			}
+		} else {
+			System.out.println("No hay especializaciones cargadas");
 		}
+
 	}
 
 	// CU 13
@@ -483,23 +488,26 @@ public class Empresa {
 		System.out.println("0- SALIR");
 		int op = s.nextInt();
 
-		if (op == 1) {
-			this.informarEspecializaciones();
+		if (especializaciones.size() > 0) {
+			if (op == 1) {
+				this.informarEspecializaciones();
 
-			do {
-				System.out.println("Elija especializacion a agregar: ");
-				int esp = s.nextInt();
+				do {
+					System.out.println("Elija especializacion a agregar: ");
+					int esp = s.nextInt();
 
-				System.out.println("Ingrese anios de experiencia para la especializacion: ");
-				int anios = s.nextInt();
+					System.out.println("Ingrese anios de experiencia para la especializacion: ");
+					int anios = s.nextInt();
 
-				ht.put(especializaciones.get(esp - 1), anios);
+					ht.put(especializaciones.get(esp - 1), anios);
 
-				System.out.println("Desea gregar mas especializaciones? ");
-				System.out.println("1- SI");
-				System.out.println("0- SALIR");
-				op = s.nextInt();
-			} while (op != 0);
+					System.out.println("Desea gregar mas especializaciones? ");
+					System.out.println("1- SI");
+					System.out.println("0- SALIR");
+					op = s.nextInt();
+				} while (op != 0);
+			}
+
 		}
 
 		return ht;
