@@ -16,6 +16,7 @@ public class Ejecutora {
 		//
 
 		do {
+			System.out.println("");
 			System.out.println("TP FINAL");
 			System.out.println("1- Agregar un empleado.");
 			System.out.println("2- Agregar un puesto.");

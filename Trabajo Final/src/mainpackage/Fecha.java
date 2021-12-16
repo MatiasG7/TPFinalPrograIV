@@ -72,7 +72,7 @@ public class Fecha {
 		boolean valida = false;
 		do {
 			do {
-				System.out.print("Ingese Día: ");
+				System.out.print("Ingrese Dia: ");
 				d = entrada.nextInt();
 			} while (d < 1 || d > 31);
 			do {
