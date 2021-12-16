@@ -107,43 +107,65 @@ public abstract class Empleado extends Persona {
 	public boolean verificarExperiencia(Convocatoria convocatoria) {
 		Hashtable<String, Integer> expReq = convocatoria.getExpReq();
 
-		Enumeration<String> enumExpReq = expReq.keys();
+		Enumeration<String> enumExpRequerida = expReq.keys();
 
-		Enumeration<String> enumExpEmp = experiencia.keys();
+		Enumeration<String> enumExpEmpleado = experiencia.keys();
 
-		boolean aux = true;
+		String keyRequerida = null;
+		Integer aniosRequerida = null, aniosEmpleado = null;
 
-		String keyReq = null, keyEmp = null;
-		Integer aniosReq = null, aniosEmp = null;
+		while (enumExpRequerida.hasMoreElements()) {
 
-		while (enumExpReq.hasMoreElements() && aux == true) {
+			keyRequerida = enumExpRequerida.nextElement();
+			aniosRequerida = expReq.get(keyRequerida);
 
-			keyReq = enumExpReq.nextElement();
-			aniosReq = expReq.get(keyReq);
+			if (experiencia.containsKey(keyRequerida)) {
+				aniosEmpleado = experiencia.get(keyRequerida);
 
-			while (enumExpEmp.hasMoreElements() && keyReq.compareToIgnoreCase(keyEmp) != 0) {
-
-				keyEmp = enumExpEmp.nextElement();
-				aniosEmp = experiencia.get(keyEmp);
-
-			}
-
-			if (keyReq.compareToIgnoreCase(keyEmp) != 0) {
-				if (aniosEmp < aniosReq) {
-					aux = false;
+				if (aniosEmpleado < aniosRequerida) {
+					return false;
 				}
 			} else {
-				aux = false;
+				return false;
 			}
 
 		}
 
-		if (!enumExpReq.hasMoreElements() && aux == true) {
-			return true;
-		} else {
-			return false;
-		}
+		return true;
 	}
+
+	/*
+	 * public boolean verificarExperiencia(Convocatoria convocatoria) {
+	 * Hashtable<String, Integer> expReq = convocatoria.getExpReq();
+	 * 
+	 * Enumeration<String> enumExpReq = expReq.keys();
+	 * 
+	 * Enumeration<String> enumExpEmp = experiencia.keys();
+	 * 
+	 * boolean aux = true;
+	 * 
+	 * String keyReq = null, keyEmp = null; Integer aniosReq = null, aniosEmp =
+	 * null;
+	 * 
+	 * while (enumExpReq.hasMoreElements() && aux == true) {
+	 * 
+	 * keyReq = enumExpReq.nextElement(); aniosReq = expReq.get(keyReq);
+	 * 
+	 * while (enumExpEmp.hasMoreElements() && keyReq.compareToIgnoreCase(keyEmp) !=
+	 * 0) {
+	 * 
+	 * keyEmp = enumExpEmp.nextElement(); aniosEmp = experiencia.get(keyEmp);
+	 * 
+	 * }
+	 * 
+	 * if (keyReq.compareToIgnoreCase(keyEmp) != 0) { if (aniosEmp < aniosReq) { aux
+	 * = false; } } else { aux = false; }
+	 * 
+	 * }
+	 * 
+	 * if (!enumExpReq.hasMoreElements() && aux == true) { return true; } else {
+	 * return false; } }
+	 */
 
 	public void actualizarPuesto(Puesto nuevoPuesto) {
 		this.puesto = nuevoPuesto;
@@ -170,6 +192,26 @@ public abstract class Empleado extends Persona {
 
 	public int getSizeInscripciones() {
 		return inscripciones.size();
+	}
+
+	public boolean sosJerarquico() {
+		return false;
+	}
+
+	public Fecha getFechaDeIngreso() {
+		return fechaDeIngreso;
+	}
+
+	public Hashtable<String, Integer> getExperiencia() {
+		return experiencia;
+	}
+
+	public ArrayList<Inscripcion> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(ArrayList<Inscripcion> ins) {
+		inscripciones = ins;
 	}
 
 }

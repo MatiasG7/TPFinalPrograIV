@@ -134,7 +134,27 @@ public class Convocatoria {
 			int gan = s.nextInt();
 
 			this.ganador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
-			this.ganador.actualizarPuesto(puesto);
+
+			if ((ganador.sosJerarquico() && puesto.esJerarquico())
+					|| (!ganador.sosJerarquico() && !puesto.esJerarquico())) {
+
+				this.ganador.actualizarPuesto(puesto);
+
+			} else {
+
+				if (ganador.sosJerarquico()) { // esto me da asco, revisar si hay una mejor manera
+					Empleado ganJerar = new EmpleadoComun(ganador.getDni(), ganador.getNombre(),
+							ganador.getFechaDeNacimiento(), ganador.getCuil(), puesto, ganador.getFechaDeIngreso(),
+							ganador.getExperiencia());
+					ganJerar.setInscripciones(ganador.getInscripciones());
+					this.ganador = ganJerar;
+				} else {
+					Empleado ganComun = new EmpleadoJerarquico(ganador.getDni(), ganador.getNombre(),
+							ganador.getFechaDeNacimiento(), ganador.getCuil(), puesto, ganador.getFechaDeIngreso(),
+							Fecha.hoy(), ganador.getExperiencia());
+				}
+			}
+
 			this.ganador.mostrarse();
 			this.eliminarInscripcionesDeEmpleados();
 		}

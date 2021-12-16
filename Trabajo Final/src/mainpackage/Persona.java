@@ -25,6 +25,14 @@ public abstract class Persona {
 		return nombre;
 	}
 
+	public Fecha getFechaDeNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public String getCuil() {
+		return cuil;
+	}
+
 	public void mostrarse() {
 		System.out.println("Dni: " + dni);
 		System.out.println("Nombre: " + nombre);

@@ -367,7 +367,7 @@ public class Empresa {
 		System.out.println(" --- LISTADO ESPECIALIZACIONES ---");
 
 		if (especializaciones.size() > 0) {
-			for (int i = 0; i <= especializaciones.size(); i++) {
+			for (int i = 0; i < especializaciones.size(); i++) {
 				System.out.println("" + i + 1 + " - " + especializaciones.get(i));
 			}
 		} else {

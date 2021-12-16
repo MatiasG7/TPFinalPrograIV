@@ -45,4 +45,12 @@ public class EmpleadoJerarquico extends Empleado {
 
 		return minimoCambioJerarquico;
 	}
+
+	public boolean sosJerarquico() {
+		return true;
+	}
+
+	public Fecha getfechaIngresoPuesto() {
+		return fechaIngresoPuesto;
+	}
 }
