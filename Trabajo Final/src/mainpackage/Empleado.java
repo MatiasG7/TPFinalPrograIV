@@ -81,10 +81,15 @@ public abstract class Empleado extends Persona {
 	}
 
 	public void mostrarInscripciones() {
-		for (Inscripcion ins : inscripciones) {
-			ins.mostrarCodigo();
-			ins.mostrarConvocatoria();
+		if (inscripciones.size() > 0) {
+			for (Inscripcion ins : inscripciones) {
+				ins.mostrarCodigo();
+				ins.mostrarConvocatoria();
+			}
+		} else {
+			System.out.println(this.getNombre() + " no cuenta con inscripciones");
 		}
+
 	}
 
 	public boolean isAptoPuesto(Convocatoria convocatoria) {

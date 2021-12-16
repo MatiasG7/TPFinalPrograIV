@@ -81,10 +81,15 @@ public class Convocatoria {
 	}
 
 	public void mostrarEmpleadosAprobados() {
+		int i = 0;
 		for (Inscripcion ins : inscripciones) {
 			if (ins.isApto()) {
 				ins.mostrarEmpleado();
+				i++;
 			}
+		}
+		if (i == 0) {
+			System.out.println("No hay empleados aprobados para esta convocatoria.");
 		}
 	}
 

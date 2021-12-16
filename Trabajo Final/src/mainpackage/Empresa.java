@@ -306,38 +306,60 @@ public class Empresa {
 	public void informarConvocatoriasAbiertas() {
 		System.out.println(" --- LISTADO CONVOCATORIAS ABIERTAS ---");
 
+		int i = 0;
+
 		for (Convocatoria c : convocatorias) {
 			if (c.isAbierta()) {
 				c.mostrarse();
+				i++;
 			}
+		}
+		if (i == 0) {
+			System.out.println("No hay convocatorias abiertas.");
 		}
 	}
 
 	// CU 9
 	public void informarPuestos() {
-		System.out.println(" --- LISTADO PUESTOS ---");
+		if (puestos.size() > 0) {
+			System.out.println(" --- LISTADO PUESTOS ---");
 
-		for (Puesto p : puestos) {
-			p.mostrarse();
+			for (Puesto p : puestos) {
+				p.mostrarse();
+				System.out.println("");
+			}
+		} else {
+			System.out.println("No hay puestos cargados.");
 		}
+
 	}
 
 	// CU 10
 	public void informarEmpleados() {
-		System.out.println(" --- LISTADO EMPLEADOS ---");
+		if (empleados.size() > 0) {
+			System.out.println(" --- LISTADO EMPLEADOS ---");
 
-		for (Empleado e : empleados) {
-			e.mostrarse();
+			for (Empleado e : empleados) {
+				e.mostrarse();
+			}
+		} else {
+			System.out.println("No hay empleados cargados.");
 		}
+
 	}
 
 	// CU 11
 	public void informarInscripciones() {
-		System.out.println(" --- LISTADO INSCRIPCIONES ---");
+		if (inscripciones.size() > 0) {
+			System.out.println(" --- LISTADO INSCRIPCIONES ---");
 
-		for (Inscripcion ins : inscripciones) {
-			ins.mostrarse();
+			for (Inscripcion ins : inscripciones) {
+				ins.mostrarse();
+			}
+		} else {
+			System.out.println("No hay inscripciones cargadas.");
 		}
+
 	}
 
 	// CU 12
@@ -358,10 +380,16 @@ public class Empresa {
 	public void informarEmpleadosJerarquicos() {
 		System.out.println(" --- LISTADO EMPLEADOS JERARQUICOS ---");
 
+		int i = 0;
+
 		for (Empleado e : empleados) {
 			if (e.getClass() == EmpleadoJerarquico.class) {
 				e.mostrarse();
+				i++;
 			}
+		}
+		if (i == 0) {
+			System.out.println("No hay empleados jerarquicos cargados.");
 		}
 	}
 
@@ -389,24 +417,29 @@ public class Empresa {
 	public void informarEmpleadoMasInscripciones() {
 		System.out.println(" --- EMPLEADO CON MAS INSCRIPCIONES ---");
 
-		Empleado empMas = empleados.get(0);
-		int sizeEmpMas = empleados.get(0).getSizeInscripciones();
+		if (empleados.size() > 1) {
+			Empleado empMas = empleados.get(0);
+			int sizeEmpMas = empleados.get(0).getSizeInscripciones();
 
-		int i = 1;
-		Empleado empI;
+			int i = 1;
+			Empleado empI;
 
-		while (i < empleados.size()) {
-			empI = empleados.get(i);
-			if (empI.getSizeInscripciones() > sizeEmpMas) {
-				empMas = empI;
-				sizeEmpMas = empI.getSizeInscripciones();
+			while (i < empleados.size()) {
+				empI = empleados.get(i);
+				if (empI.getSizeInscripciones() > sizeEmpMas) {
+					empMas = empI;
+					sizeEmpMas = empI.getSizeInscripciones();
+				}
+				i++;
 			}
-			i++;
+
+			System.out.println("El empleado con mas inscripciones es: ");
+			empMas.mostrarse();
+			System.out.println("Con un total de " + sizeEmpMas + " inscripciones.");
+		} else {
+			System.out.println("No hay suficientes empleados para comparar. ");
 		}
 
-		System.out.println("El empleado con mas inscripciones es: ");
-		empMas.mostrarse();
-		System.out.println("Con un total de " + sizeEmpMas + " inscripciones.");
 	}
 
 	// CU 16
