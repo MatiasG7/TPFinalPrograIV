@@ -70,6 +70,7 @@ public class Empresa {
 						nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
 								this.crearExperiencia());
 					}
+
 				}
 
 				nuevoEmpleado.setExperiencia(this.crearExperiencia());

@@ -67,12 +67,17 @@ public abstract class Empleado extends Persona {
 	}
 
 	public void mostrarExperiencia() {
-		System.out.println("++ Listado de experiencia ++");
-		Enumeration<String> listaExp = experiencia.keys();
-		while (listaExp.hasMoreElements()) {
-			String esp = listaExp.nextElement();
-			System.out.println(esp + " - " + experiencia.get(esp));
+		if (experiencia.size() > 0) {
+			System.out.println("++ Listado de experiencia ++");
+			Enumeration<String> listaExp = experiencia.keys();
+			while (listaExp.hasMoreElements()) {
+				String esp = listaExp.nextElement();
+				System.out.println(esp + " - " + experiencia.get(esp));
+			}
+		} else {
+			System.out.println(this.getNombre() + " no cuenta con experiencia");
 		}
+
 	}
 
 	public void mostrarInscripciones() {

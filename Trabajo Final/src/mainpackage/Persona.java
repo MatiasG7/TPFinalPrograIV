@@ -21,6 +21,10 @@ public abstract class Persona {
 		return dni;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
 	public void mostrarse() {
 		System.out.println("Dni: " + dni);
 		System.out.println("Nombre: " + nombre);

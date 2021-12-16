@@ -35,6 +35,7 @@ public class Fecha {
 
 	public void mostrarse() {
 		System.out.print(this.dia + "/" + this.mes + "/" + this.anios);
+		System.out.println("");
 	}
 
 	public Fecha() {
