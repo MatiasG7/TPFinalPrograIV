@@ -84,6 +84,7 @@ public class Convocatoria {
 		int i = 0;
 		for (Inscripcion ins : inscripciones) {
 			if (ins.isApto()) {
+				System.out.println("");
 				ins.mostrarEmpleado();
 				i++;
 			}

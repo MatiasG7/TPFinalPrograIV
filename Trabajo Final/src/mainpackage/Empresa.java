@@ -368,7 +368,7 @@ public class Empresa {
 
 		if (especializaciones.size() > 0) {
 			for (int i = 0; i < especializaciones.size(); i++) {
-				System.out.println("" + i + 1 + " - " + especializaciones.get(i));
+				System.out.println((i + 1) + " - " + especializaciones.get(i));
 			}
 		} else {
 			System.out.println("No hay especializaciones cargadas");
@@ -494,7 +494,7 @@ public class Empresa {
 
 	private Convocatoria buscarConvocatoria(int cod) {
 		int i = 0;
-		while (i < convocatorias.size() && convocatorias.get(i).sos(cod)) {
+		while (i < convocatorias.size() && !convocatorias.get(i).sos(cod)) {
 			i++;
 		}
 		if (i < convocatorias.size())
