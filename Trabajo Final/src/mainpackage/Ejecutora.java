@@ -86,6 +86,5 @@ public class Ejecutora {
 			}
 		} while (op != 0);
 
-		s.close();
 	}
 }

@@ -134,7 +134,6 @@ public class Convocatoria {
 			this.eliminarInscripcionesDeEmpleados();
 		}
 
-		s.close();
 	}
 
 	public void cerrar() {
@@ -155,7 +154,6 @@ public class Convocatoria {
 			this.estado = Estado.CERRADO;
 		}
 
-		s.close();
 	}
 
 	public boolean verificarPostulante(Inscripcion ins) {

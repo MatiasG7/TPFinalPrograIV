@@ -78,8 +78,6 @@ public class Empresa {
 				System.out.println("El puesto ingresado no existe.");
 			}
 		}
-
-		s.close();
 	}
 
 	// CU 2
@@ -115,7 +113,6 @@ public class Empresa {
 			puestos.add(pu);
 		}
 
-		s.close();
 	}
 
 	// CU 3
@@ -148,7 +145,6 @@ public class Empresa {
 			}
 		}
 
-		s.close();
 	}
 
 	// Cuando agregamos inscripcion no estamos pidiendo un codigo y no buscamos si
@@ -204,7 +200,6 @@ public class Empresa {
 			}
 		}
 
-		s.close();
 	}
 
 	// CU 5
@@ -236,7 +231,6 @@ public class Empresa {
 			op = s.nextInt();
 		}
 
-		s.close();
 	}
 
 	// CU 6
@@ -281,7 +275,6 @@ public class Empresa {
 			} while (op != 0);
 		}
 
-		s.close();
 	}
 
 	// CU 7
@@ -303,7 +296,6 @@ public class Empresa {
 			convocatoria.cerrar();
 		}
 
-		s.close();
 	}
 
 	// CU 8
@@ -382,7 +374,6 @@ public class Empresa {
 			System.out.println("El empleado no existe.");
 		}
 
-		s.close();
 	}
 
 	// CU 15
@@ -513,8 +504,6 @@ public class Empresa {
 				op = s.nextInt();
 			} while (op != 0);
 		}
-
-		s.close();
 
 		return ht;
 	}
