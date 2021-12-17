@@ -29,10 +29,9 @@ public abstract class Puesto {
 		System.out.println();
 		System.out.println("PUESTO");
 
-		System.out.println("Codigo: " + codigo);
-		System.out.println("Nombre: " + nombre);
-		System.out.println("Area: " + area);
-		System.out.println("");
+		System.out.println("-Codigo: " + codigo);
+		System.out.println("-Nombre: " + nombre);
+		System.out.println("-Area: " + area);
 	}
 
 	public boolean esJerarquico() {

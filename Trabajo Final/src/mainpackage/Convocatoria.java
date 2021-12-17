@@ -53,31 +53,38 @@ public class Convocatoria {
 	}
 
 	public void mostrarse() {
-		this.mostrarCodYPuesto();
+		System.out.println("CONVOCATORIA");
+		System.out.println("-Codigo: " + codigo);
+		this.mostrarPuesto();
 		System.out.println();
 		this.mostrarExpRequerida();
+		System.out.println();
 
 		if (this.isAbierta()) {
-			for (Inscripcion i : this.inscripciones) {
-				i.mostrarse();
-			}
+			System.out.println("Convocatoria -abierta");
 		} else {
+			System.out.println("Convocatoria -cerrada");
+			System.out.println("GANADOR");
 			ganador.mostrarse();
 		}
 	}
 
-	public void mostrarCodYPuesto() {
-		System.out.println("CONVOCATORIA");
-		System.out.println("Codigo: " + codigo);
+	public void mostrarInscripciones() {
+		for (Inscripcion i : this.inscripciones) {
+			i.mostrarse();
+		}
+	}
+
+	public void mostrarPuesto() {
 		puesto.mostrarse();
 	}
 
 	public void mostrarExpRequerida() {
-		System.out.println("++ Listado de experiencia requerida ++");
+		System.out.println("Listado de experiencia requerida");
 		Enumeration<String> listaExp = experienciaReq.keys();
 		while (listaExp.hasMoreElements()) {
 			String esp = listaExp.nextElement();
-			System.out.println(esp + experienciaReq.get(esp));
+			System.out.println("-" + esp + " " + experienciaReq.get(esp));
 		}
 	}
 

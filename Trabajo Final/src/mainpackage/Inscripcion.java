@@ -62,6 +62,6 @@ public class Inscripcion {
 	}
 
 	public void mostrarConvocatoria() {
-		this.convocatoria.mostrarCodYPuesto();
+		this.convocatoria.mostrarse();
 	}
 }
