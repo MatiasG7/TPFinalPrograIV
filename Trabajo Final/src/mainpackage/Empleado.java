@@ -184,7 +184,7 @@ public abstract class Empleado extends Persona {
 			return null;
 	}
 
-	public int getSizeInscripciones() {
+	public int getCantInscripciones() {
 		return inscripciones.size();
 	}
 
@@ -210,5 +210,9 @@ public abstract class Empleado extends Persona {
 
 	public void borrarInscripciones() {
 		this.inscripciones = new ArrayList<Inscripcion>();
+	}
+
+	public void agregarInscripcion(Inscripcion ins) {
+		inscripciones.add(ins);
 	}
 }

@@ -145,8 +145,6 @@ public class Empresa {
 
 	}
 
-	// Cuando agregamos inscripcion no estamos pidiendo un codigo y no buscamos si
-	// existe.
 	// CU 4
 	public void agregarInscripcion() {
 		Scanner s = new Scanner(System.in);
@@ -188,6 +186,7 @@ public class Empresa {
 						ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
 						convocatoria.addInscripcion(ins);
 						inscripciones.add(ins);
+						empleado.agregarInscripcion(ins);
 					} else {
 						System.out.println("Este codigo ya existe en una inscripcion.");
 					}
@@ -206,12 +205,9 @@ public class Empresa {
 		s.useDelimiter(System.getProperty("line.separator"));
 
 		System.out.println(" --- INGRESO DE ESPECIALIZACIONES ---");
+		int op = 0;
 
-		System.out.println("Agregar especializacion?");
-		System.out.println("1- Si");
-		System.out.println("2- No");
-		int op = s.nextInt();
-		while (op != 2) {
+		do {
 			System.out.println("Ingrese nombre de especializacion: ");
 			String esp = s.next();
 
@@ -227,7 +223,7 @@ public class Empresa {
 			System.out.println("1- Si");
 			System.out.println("2- No");
 			op = s.nextInt();
-		}
+		} while (op != 2);
 
 	}
 
@@ -246,8 +242,6 @@ public class Empresa {
 			System.out.println("El empleado no existe.");
 		} else {
 			e.mostrarExperiencia();
-
-			s.useDelimiter(System.getProperty("line.separator"));
 
 			this.informarEspecializaciones();
 			System.out.println("0- Para salir.");
@@ -389,9 +383,9 @@ public class Empresa {
 
 	// CU 12
 	public void informarEspecializaciones() {
-		System.out.println(" --- LISTADO ESPECIALIZACIONES ---");
-
 		if (especializaciones.size() > 0) {
+			System.out.println(" --- LISTADO ESPECIALIZACIONES ---");
+
 			for (int i = 0; i < especializaciones.size(); i++) {
 				System.out.println((i + 1) + " - " + especializaciones.get(i));
 			}
@@ -408,7 +402,7 @@ public class Empresa {
 		int i = 0;
 
 		for (Empleado e : empleados) {
-			if (e.getClass() == EmpleadoJerarquico.class) {
+			if (e.getClass() == EmpleadoJerarquico.class) { // +++++++++++++++++++++++++++++++++++++++++++
 				e.mostrarse();
 				i++;
 			}
@@ -444,23 +438,23 @@ public class Empresa {
 
 		if (empleados.size() > 1) {
 			Empleado empMas = empleados.get(0);
-			int sizeEmpMas = empleados.get(0).getSizeInscripciones();
+			int empMax = empleados.get(0).getCantInscripciones();
 
 			int i = 1;
 			Empleado empI;
 
 			while (i < empleados.size()) {
 				empI = empleados.get(i);
-				if (empI.getSizeInscripciones() > sizeEmpMas) {
+				if (empI.getCantInscripciones() > empMax) {
 					empMas = empI;
-					sizeEmpMas = empI.getSizeInscripciones();
+					empMax = empI.getCantInscripciones();
 				}
 				i++;
 			}
 
 			System.out.println("El empleado con mas inscripciones es: ");
 			empMas.mostrarse();
-			System.out.println("Con un total de " + sizeEmpMas + " inscripciones.");
+			System.out.println("Con un total de " + empMax + " inscripciones.");
 		} else {
 			System.out.println("No hay suficientes empleados para comparar. ");
 		}
