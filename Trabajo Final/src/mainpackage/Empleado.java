@@ -10,19 +10,13 @@ public abstract class Empleado extends Persona {
 	private Fecha fechaDeIngreso;
 	private ArrayList<Inscripcion> inscripciones;
 
-	public Empleado(String dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fechaIngreso) {
-		super(dni, nombre, fechaNac, cuil);
-		this.experiencia = new Hashtable<String, Integer>();
-		this.puesto = puesto;
-		this.fechaDeIngreso = fechaIngreso;
-	}
-
 	public Empleado(String dni, String nombre, Fecha fechaNac, String cuil, Puesto puesto, Fecha fechaIngreso,
 			Hashtable<String, Integer> exp) {
 		super(dni, nombre, fechaNac, cuil);
 		this.experiencia = exp;
 		this.puesto = puesto;
 		this.fechaDeIngreso = fechaIngreso;
+		this.inscripciones = new ArrayList<Inscripcion>();
 	}
 
 	public void setExperiencia(Hashtable<String, Integer> exp) {
@@ -67,19 +61,29 @@ public abstract class Empleado extends Persona {
 	}
 
 	public void mostrarExperiencia() {
-		System.out.println("++ Listado de experiencia ++");
-		Enumeration<String> listaExp = experiencia.keys();
-		while (listaExp.hasMoreElements()) {
-			String esp = listaExp.nextElement();
-			System.out.println(esp + " - " + experiencia.get(esp));
+		if (experiencia.size() > 0) {
+			System.out.println("++ Listado de experiencia ++");
+			Enumeration<String> listaExp = experiencia.keys();
+			while (listaExp.hasMoreElements()) {
+				String esp = listaExp.nextElement();
+				System.out.println(esp + " - " + experiencia.get(esp));
+			}
+		} else {
+			System.out.println(this.getNombre() + " no cuenta con experiencia");
 		}
+
 	}
 
 	public void mostrarInscripciones() {
-		for (Inscripcion ins : inscripciones) {
-			ins.mostrarCodigo();
-			ins.mostrarConvocatoria();
+		if (inscripciones.size() > 0) {
+			for (Inscripcion ins : inscripciones) {
+				ins.mostrarCodigo();
+				ins.mostrarConvocatoria();
+			}
+		} else {
+			System.out.println(this.getNombre() + " no cuenta con inscripciones");
 		}
+
 	}
 
 	public boolean isAptoPuesto(Convocatoria convocatoria) {
@@ -97,43 +101,65 @@ public abstract class Empleado extends Persona {
 	public boolean verificarExperiencia(Convocatoria convocatoria) {
 		Hashtable<String, Integer> expReq = convocatoria.getExpReq();
 
-		Enumeration<String> enumExpReq = expReq.keys();
+		Enumeration<String> enumExpRequerida = expReq.keys();
 
-		Enumeration<String> enumExpEmp = experiencia.keys();
+		Enumeration<String> enumExpEmpleado = experiencia.keys();
 
-		boolean aux = true;
+		String keyRequerida = null;
+		Integer aniosRequerida = null, aniosEmpleado = null;
 
-		String keyReq = null, keyEmp = null;
-		Integer aniosReq = null, aniosEmp = null;
+		while (enumExpRequerida.hasMoreElements()) {
 
-		while (enumExpReq.hasMoreElements() && aux == true) {
+			keyRequerida = enumExpRequerida.nextElement();
+			aniosRequerida = expReq.get(keyRequerida);
 
-			keyReq = enumExpReq.nextElement();
-			aniosReq = expReq.get(keyReq);
+			if (experiencia.containsKey(keyRequerida)) {
+				aniosEmpleado = experiencia.get(keyRequerida);
 
-			while (enumExpEmp.hasMoreElements() && keyReq.compareToIgnoreCase(keyEmp) != 0) {
-
-				keyEmp = enumExpEmp.nextElement();
-				aniosEmp = experiencia.get(keyEmp);
-
-			}
-
-			if (keyReq.compareToIgnoreCase(keyEmp) != 0) {
-				if (aniosEmp < aniosReq) {
-					aux = false;
+				if (aniosEmpleado < aniosRequerida) {
+					return false;
 				}
 			} else {
-				aux = false;
+				return false;
 			}
 
 		}
 
-		if (!enumExpReq.hasMoreElements() && aux == true) {
-			return true;
-		} else {
-			return false;
-		}
+		return true;
 	}
+
+	/*
+	 * public boolean verificarExperiencia(Convocatoria convocatoria) {
+	 * Hashtable<String, Integer> expReq = convocatoria.getExpReq();
+	 * 
+	 * Enumeration<String> enumExpReq = expReq.keys();
+	 * 
+	 * Enumeration<String> enumExpEmp = experiencia.keys();
+	 * 
+	 * boolean aux = true;
+	 * 
+	 * String keyReq = null, keyEmp = null; Integer aniosReq = null, aniosEmp =
+	 * null;
+	 * 
+	 * while (enumExpReq.hasMoreElements() && aux == true) {
+	 * 
+	 * keyReq = enumExpReq.nextElement(); aniosReq = expReq.get(keyReq);
+	 * 
+	 * while (enumExpEmp.hasMoreElements() && keyReq.compareToIgnoreCase(keyEmp) !=
+	 * 0) {
+	 * 
+	 * keyEmp = enumExpEmp.nextElement(); aniosEmp = experiencia.get(keyEmp);
+	 * 
+	 * }
+	 * 
+	 * if (keyReq.compareToIgnoreCase(keyEmp) != 0) { if (aniosEmp < aniosReq) { aux
+	 * = false; } } else { aux = false; }
+	 * 
+	 * }
+	 * 
+	 * if (!enumExpReq.hasMoreElements() && aux == true) { return true; } else {
+	 * return false; } }
+	 */
 
 	public void actualizarPuesto(Puesto nuevoPuesto) {
 		this.puesto = nuevoPuesto;
@@ -149,7 +175,7 @@ public abstract class Empleado extends Persona {
 
 	private Inscripcion buscarInscripcion(int cod) {
 		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).sos(cod)) {
+		while (i < inscripciones.size() && !inscripciones.get(i).sos(cod)) {
 			i++;
 		}
 		if (i < inscripciones.size())
@@ -158,8 +184,35 @@ public abstract class Empleado extends Persona {
 			return null;
 	}
 
-	public int getSizeInscripciones() {
+	public int getCantInscripciones() {
 		return inscripciones.size();
 	}
 
+	public boolean sosJerarquico() {
+		return false;
+	}
+
+	public Fecha getFechaDeIngreso() {
+		return fechaDeIngreso;
+	}
+
+	public Hashtable<String, Integer> getExperiencia() {
+		return experiencia;
+	}
+
+	public ArrayList<Inscripcion> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(ArrayList<Inscripcion> ins) {
+		inscripciones = ins;
+	}
+
+	public void borrarInscripciones() {
+		this.inscripciones = new ArrayList<Inscripcion>();
+	}
+
+	public void agregarInscripcion(Inscripcion ins) {
+		inscripciones.add(ins);
+	}
 }

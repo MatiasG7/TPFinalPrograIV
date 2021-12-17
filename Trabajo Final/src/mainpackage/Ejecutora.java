@@ -12,10 +12,11 @@ public class Ejecutora {
 		int op;
 
 		// Bloque de prueba
-		e.PRUEBAS();
+		// e.PRUEBAS();
 		//
 
 		do {
+			System.out.println("");
 			System.out.println("TP FINAL");
 			System.out.println("1- Agregar un empleado.");
 			System.out.println("2- Agregar un puesto.");
@@ -86,6 +87,5 @@ public class Ejecutora {
 			}
 		} while (op != 0);
 
-		s.close();
 	}
 }

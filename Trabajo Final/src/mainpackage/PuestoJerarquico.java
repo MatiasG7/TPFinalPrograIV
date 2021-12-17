@@ -25,7 +25,6 @@ public class PuestoJerarquico extends Puesto {
 			int ae = s.nextInt();
 			PuestoJerarquico.setMinimoAniosEmpresa(ae);
 
-			s.close();
 		}
 
 		return minimoAniosEmpresa;

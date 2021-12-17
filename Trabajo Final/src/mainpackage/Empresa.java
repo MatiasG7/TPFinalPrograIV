@@ -19,10 +19,6 @@ public class Empresa {
 		this.inscripciones = new ArrayList<Inscripcion>();
 	}
 
-	public void PRUEBAS() {
-
-	}
-
 	// CU 1
 	public void agregarEmpleado() {
 		Scanner s = new Scanner(System.in);
@@ -40,7 +36,7 @@ public class Empresa {
 			System.out.println("Ingrese nombre: ");
 			String nombre = s.next();
 
-			System.out.println("Ingrese fecha de nacimiento: ");
+			System.out.println("Ingreso de fecha de nacimiento");
 			Fecha fechaNac = Fecha.nuevaFecha();
 
 			System.out.println("Ingrese cuil: ");
@@ -51,7 +47,7 @@ public class Empresa {
 
 			Puesto puesto = buscarPuesto(codPuesto);
 			if (puesto != null) {
-				System.out.println("Ingrese fecha de ingreso a la empresa: ");
+				System.out.println("Ingreso de fecha de ingreso a la empresa");
 				Fecha fechaIngreso = Fecha.nuevaFecha();
 
 				System.out.println("Es un empleado jerarquico?");
@@ -70,16 +66,16 @@ public class Empresa {
 						nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
 								this.crearExperiencia());
 					}
+					empleados.add(nuevoEmpleado);
+				} else {
+					System.out.println(
+							"Empleado no pudo ser creado por que el puesto no es compatible con el tipo de empleado.");
 				}
 
-				nuevoEmpleado.setExperiencia(this.crearExperiencia());
-				empleados.add(nuevoEmpleado);
 			} else {
 				System.out.println("El puesto ingresado no existe.");
 			}
 		}
-
-		s.close();
 	}
 
 	// CU 2
@@ -115,7 +111,6 @@ public class Empresa {
 			puestos.add(pu);
 		}
 
-		s.close();
 	}
 
 	// CU 3
@@ -148,11 +143,8 @@ public class Empresa {
 			}
 		}
 
-		s.close();
 	}
 
-	// Cuando agregamos inscripcion no estamos pidiendo un codigo y no buscamos si
-	// existe.
 	// CU 4
 	public void agregarInscripcion() {
 		Scanner s = new Scanner(System.in);
@@ -181,7 +173,7 @@ public class Empresa {
 			} else {
 				convocatoria.mostrarse();
 
-				Inscripcion ins = convocatoria.verificarInscripcion(empleado);
+				Inscripcion ins = convocatoria.verificarInscripcion(empleado.getDni());
 
 				if (ins == null) {
 
@@ -194,6 +186,7 @@ public class Empresa {
 						ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
 						convocatoria.addInscripcion(ins);
 						inscripciones.add(ins);
+						empleado.agregarInscripcion(ins);
 					} else {
 						System.out.println("Este codigo ya existe en una inscripcion.");
 					}
@@ -204,7 +197,6 @@ public class Empresa {
 			}
 		}
 
-		s.close();
 	}
 
 	// CU 5
@@ -213,12 +205,9 @@ public class Empresa {
 		s.useDelimiter(System.getProperty("line.separator"));
 
 		System.out.println(" --- INGRESO DE ESPECIALIZACIONES ---");
+		int op = 0;
 
-		System.out.println("Agregar especializacion?");
-		System.out.println("1- Si");
-		System.out.println("2- No");
-		int op = s.nextInt();
-		while (op != 2) {
+		do {
 			System.out.println("Ingrese nombre de especializacion: ");
 			String esp = s.next();
 
@@ -234,9 +223,8 @@ public class Empresa {
 			System.out.println("1- Si");
 			System.out.println("2- No");
 			op = s.nextInt();
-		}
+		} while (op != 2);
 
-		s.close();
 	}
 
 	// CU 6
@@ -254,8 +242,6 @@ public class Empresa {
 			System.out.println("El empleado no existe.");
 		} else {
 			e.mostrarExperiencia();
-
-			s.useDelimiter(System.getProperty("line.separator"));
 
 			this.informarEspecializaciones();
 			System.out.println("0- Para salir.");
@@ -281,7 +267,6 @@ public class Empresa {
 			} while (op != 0);
 		}
 
-		s.close();
 	}
 
 	// CU 7
@@ -300,67 +285,130 @@ public class Empresa {
 			System.out.println("No existe convocatoria con ese codigo.");
 		} else {
 
-			convocatoria.cerrar();
+			Empleado ganador = convocatoria.cerrar();
+			eliminarInscripcionesGanador(convocatoria, ganador);
 		}
 
-		s.close();
+	}
+
+	private void eliminarInscripcionesGanador(Convocatoria c, Empleado gan) {
+		if (!c.isAbierta()) {
+
+			limpiarInscripciones(c.getCodigo(), gan.getDni());
+
+			String dni = gan.getDni();
+			Empleado empleadoBuscado = buscarEmpleado(dni);
+			if (empleadoBuscado != null) {
+				if ((gan.sosJerarquico() && !empleadoBuscado.sosJerarquico())
+						|| (!gan.sosJerarquico() && empleadoBuscado.sosJerarquico())) { // PROBAR
+					empleados.remove(empleadoBuscado);
+					empleados.add(gan);
+				}
+			}
+
+			for (Convocatoria conv : convocatorias) {
+				if (conv.isAbierta())
+					conv.eliminarInscripcionPorDni(dni);
+			}
+		}
+	}
+
+	private void limpiarInscripciones(int codConv, String dni) {
+		for (Inscripcion ins : inscripciones) {
+			if (ins.sosConvocatoria(codConv) || ins.sosInscripto(dni)) {
+				inscripciones.remove(ins);
+			}
+		}
 	}
 
 	// CU 8
 	public void informarConvocatoriasAbiertas() {
 		System.out.println(" --- LISTADO CONVOCATORIAS ABIERTAS ---");
 
+		int i = 0;
+
 		for (Convocatoria c : convocatorias) {
 			if (c.isAbierta()) {
 				c.mostrarse();
+				i++;
 			}
+		}
+		if (i == 0) {
+			System.out.println("No hay convocatorias abiertas.");
 		}
 	}
 
 	// CU 9
 	public void informarPuestos() {
-		System.out.println(" --- LISTADO PUESTOS ---");
+		if (puestos.size() > 0) {
+			System.out.println(" --- LISTADO PUESTOS ---");
 
-		for (Puesto p : puestos) {
-			p.mostrarse();
+			for (Puesto p : puestos) {
+				p.mostrarse();
+				System.out.println("");
+			}
+		} else {
+			System.out.println("No hay puestos cargados.");
 		}
+
 	}
 
 	// CU 10
 	public void informarEmpleados() {
-		System.out.println(" --- LISTADO EMPLEADOS ---");
+		if (empleados.size() > 0) {
+			System.out.println(" --- LISTADO EMPLEADOS ---");
 
-		for (Empleado e : empleados) {
-			e.mostrarse();
+			for (Empleado e : empleados) {
+				e.mostrarse();
+			}
+		} else {
+			System.out.println("No hay empleados cargados.");
 		}
+
 	}
 
 	// CU 11
 	public void informarInscripciones() {
-		System.out.println(" --- LISTADO INSCRIPCIONES ---");
+		if (inscripciones.size() > 0) {
+			System.out.println(" --- LISTADO INSCRIPCIONES ---");
 
-		for (Inscripcion ins : inscripciones) {
-			ins.mostrarse();
+			for (Inscripcion ins : inscripciones) {
+				ins.mostrarse();
+			}
+		} else {
+			System.out.println("No hay inscripciones cargadas.");
 		}
+
 	}
 
 	// CU 12
 	public void informarEspecializaciones() {
-		System.out.println(" --- LISTADO ESPECIALIZACIONES ---");
+		if (especializaciones.size() > 0) {
+			System.out.println(" --- LISTADO ESPECIALIZACIONES ---");
 
-		for (int i = 0; i <= especializaciones.size(); i++) {
-			System.out.println("" + i + 1 + " - " + especializaciones.get(i));
+			for (int i = 0; i < especializaciones.size(); i++) {
+				System.out.println((i + 1) + " - " + especializaciones.get(i));
+			}
+		} else {
+			System.out.println("No hay especializaciones cargadas");
 		}
+
 	}
 
 	// CU 13
 	public void informarEmpleadosJerarquicos() {
 		System.out.println(" --- LISTADO EMPLEADOS JERARQUICOS ---");
 
+		int i = 0;
+
 		for (Empleado e : empleados) {
-			if (e.getClass() == EmpleadoJerarquico.class) {
+			if (e.getClass() == EmpleadoJerarquico.class) { // +++++++++++++++++++++++++++++++++++++++++++
 				e.mostrarse();
+				i++;
 			}
+		}
+		if (i == 0) {
+			System.out.println("No hay empleados jerarquicos cargados.");
 		}
 	}
 
@@ -382,31 +430,35 @@ public class Empresa {
 			System.out.println("El empleado no existe.");
 		}
 
-		s.close();
 	}
 
 	// CU 15
 	public void informarEmpleadoMasInscripciones() {
 		System.out.println(" --- EMPLEADO CON MAS INSCRIPCIONES ---");
 
-		Empleado empMas = empleados.get(0);
-		int sizeEmpMas = empleados.get(0).getSizeInscripciones();
+		if (empleados.size() > 1) {
+			Empleado empMas = empleados.get(0);
+			int empMax = empleados.get(0).getCantInscripciones();
 
-		int i = 1;
-		Empleado empI;
+			int i = 1;
+			Empleado empI;
 
-		while (i < empleados.size()) {
-			empI = empleados.get(i);
-			if (empI.getSizeInscripciones() > sizeEmpMas) {
-				empMas = empI;
-				sizeEmpMas = empI.getSizeInscripciones();
+			while (i < empleados.size()) {
+				empI = empleados.get(i);
+				if (empI.getCantInscripciones() > empMax) {
+					empMas = empI;
+					empMax = empI.getCantInscripciones();
+				}
+				i++;
 			}
-			i++;
+
+			System.out.println("El empleado con mas inscripciones es: ");
+			empMas.mostrarse();
+			System.out.println("Con un total de " + empMax + " inscripciones.");
+		} else {
+			System.out.println("No hay suficientes empleados para comparar. ");
 		}
 
-		System.out.println("El empleado con mas inscripciones es: ");
-		empMas.mostrarse();
-		System.out.println("Con un total de " + sizeEmpMas + " inscripciones.");
 	}
 
 	// CU 16
@@ -430,7 +482,7 @@ public class Empresa {
 
 	private Empleado buscarEmpleado(String dni) {
 		int i = 0;
-		while (i < empleados.size() && empleados.get(i).sos(dni))
+		while (i < empleados.size() && !empleados.get(i).sos(dni))
 			i++;
 		if (i < empleados.size())
 			return empleados.get(i);
@@ -440,7 +492,7 @@ public class Empresa {
 
 	private Puesto buscarPuesto(int cod) {
 		int i = 0;
-		while (i < puestos.size() && puestos.get(i).sos(cod))
+		while (i < puestos.size() && !puestos.get(i).sos(cod))
 			i++;
 		if (i < puestos.size())
 			return puestos.get(i);
@@ -461,7 +513,7 @@ public class Empresa {
 
 	private Convocatoria buscarConvocatoria(int cod) {
 		int i = 0;
-		while (i < convocatorias.size() && convocatorias.get(i).sos(cod)) {
+		while (i < convocatorias.size() && !convocatorias.get(i).sos(cod)) {
 			i++;
 		}
 		if (i < convocatorias.size())
@@ -472,7 +524,7 @@ public class Empresa {
 
 	private Inscripcion buscarInscripcion(int cod) {
 		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).sos(cod)) {
+		while (i < inscripciones.size() && !inscripciones.get(i).sos(cod)) {
 			i++;
 		}
 		if (i < inscripciones.size())
@@ -487,34 +539,33 @@ public class Empresa {
 
 		Hashtable<String, Integer> ht = new Hashtable<String, Integer>();
 
-		System.out.println("Agregar especializaciones");
-		System.out.println("1- SI");
-		System.out.println("2- NO");
-		s.useDelimiter(System.getProperty("line.separator"));
-		System.out.println("0- En cualquier momento para salir.");
-		int op = s.nextInt();
+		if (especializaciones.size() > 0) {
 
-		if (op == 1) {
-			this.informarEspecializaciones();
+			System.out.println("Agregar especializaciones");
+			System.out.println("1- SI");
+			System.out.println("0- SALIR");
+			int op = s.nextInt();
 
-			do {
-				System.out.println("Elija especializacion a agregar: ");
-				int esp = s.nextInt();
+			if (op == 1) {
+				this.informarEspecializaciones();
 
-				System.out.println("Ingrese anios de experiencia para la especializacion: ");
-				int anios = s.nextInt();
+				do {
+					System.out.println("Elija especializacion a agregar: ");
+					int esp = s.nextInt();
 
-				ht.put(especializaciones.get(esp - 1), anios);
+					System.out.println("Ingrese anios de experiencia para la especializacion: ");
+					int anios = s.nextInt();
 
-				System.out.println("Desea gregar mas especializaciones? ");
-				System.out.println("1- SI");
-				System.out.println("2- NO");
-				System.out.println("0- En cualquier momento para salir.");
-				op = s.nextInt();
-			} while (op != 0);
+					ht.put(especializaciones.get(esp - 1), anios);
+
+					System.out.println("Desea gregar mas especializaciones? ");
+					System.out.println("1- SI");
+					System.out.println("0- SALIR");
+					op = s.nextInt();
+				} while (op != 0);
+			}
+
 		}
-
-		s.close();
 
 		return ht;
 	}

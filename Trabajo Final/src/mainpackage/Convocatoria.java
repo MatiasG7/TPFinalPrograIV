@@ -81,10 +81,16 @@ public class Convocatoria {
 	}
 
 	public void mostrarEmpleadosAprobados() {
+		int i = 0;
 		for (Inscripcion ins : inscripciones) {
 			if (ins.isApto()) {
+				System.out.println("");
 				ins.mostrarEmpleado();
+				i++;
 			}
+		}
+		if (i == 0) {
+			System.out.println("No hay empleados aprobados para esta convocatoria.");
 		}
 	}
 
@@ -92,9 +98,9 @@ public class Convocatoria {
 		inscripciones.add(ins);
 	}
 
-	public Inscripcion verificarInscripcion(Empleado emp) {
+	public Inscripcion verificarInscripcion(String dni) {
 		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).sosInscripto(emp.getDni())) {
+		while (i < inscripciones.size() && inscripciones.get(i).sosInscripto(dni)) {
 			i++;
 		}
 		if (i < inscripciones.size()) {
@@ -124,20 +130,43 @@ public class Convocatoria {
 
 		if (i == 0) {
 			System.out.println("Ninguna de los inscripciones tiene la experiencia requerida.");
+
 		} else {
 			System.out.println("Elija ganador: ");
 			int gan = s.nextInt();
 
-			this.ganador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
-			this.ganador.actualizarPuesto(puesto);
-			this.ganador.mostrarse();
+			Empleado auxGanador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
+
+			if ((auxGanador.sosJerarquico() && puesto.esJerarquico())
+					|| (!auxGanador.sosJerarquico() && !puesto.esJerarquico())) {
+
+				auxGanador.actualizarPuesto(puesto);
+				auxGanador.borrarInscripciones();
+				this.ganador = auxGanador;
+
+			} else {
+
+				Empleado ganadorNuevo;
+
+				if (auxGanador.sosJerarquico()) {
+					ganadorNuevo = new EmpleadoComun(auxGanador.getDni(), auxGanador.getNombre(),
+							auxGanador.getFechaDeNacimiento(), auxGanador.getCuil(), puesto,
+							auxGanador.getFechaDeIngreso(), auxGanador.getExperiencia());
+				} else {
+					ganadorNuevo = new EmpleadoJerarquico(auxGanador.getDni(), auxGanador.getNombre(),
+							auxGanador.getFechaDeNacimiento(), auxGanador.getCuil(), puesto,
+							auxGanador.getFechaDeIngreso(), Fecha.hoy(), auxGanador.getExperiencia());
+				}
+				this.ganador = ganadorNuevo;
+			}
+
 			this.eliminarInscripcionesDeEmpleados();
+			this.ganador.mostrarse();
 		}
 
-		s.close();
 	}
 
-	public void cerrar() {
+	public Empleado cerrar() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
@@ -154,8 +183,8 @@ public class Convocatoria {
 		if (op == 1 || op == 2) {
 			this.estado = Estado.CERRADO;
 		}
+		return this.ganador;
 
-		s.close();
 	}
 
 	public boolean verificarPostulante(Inscripcion ins) {
@@ -174,5 +203,16 @@ public class Convocatoria {
 		for (Inscripcion ins : inscripciones) {
 			ins.eliminarInscripcionDentroDeEmpleado();
 		}
+	}
+
+	public void eliminarInscripcionPorDni(String dni) {
+		Inscripcion ins = verificarInscripcion(dni);
+		if (ins != null) {
+			this.inscripciones.remove(ins);
+		}
+	}
+
+	public Empleado getGanadorEmpleado() {
+		return ganador;
 	}
 }
