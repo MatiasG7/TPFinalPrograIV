@@ -25,7 +25,7 @@ public abstract class Persona {
 		return nombre;
 	}
 
-	public Fecha getFechaDeNacimiento() {
+	public Fecha getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
@@ -34,10 +34,12 @@ public abstract class Persona {
 	}
 
 	public void mostrarse() {
-		System.out.println("Dni: " + dni);
-		System.out.println("Nombre: " + nombre);
-		System.out.println("Cuil: " + cuil);
-		System.out.println("Fecha de nacimiento: ");
+		System.out.println("EMPLEADO ");
+		System.out.println("-Dni: " + dni);
+		System.out.println("-Nombre: " + nombre);
+		System.out.println("-Cuil: " + cuil);
+		System.out.println("-Fecha de nacimiento: ");
 		fechaNacimiento.mostrarse();
+		System.out.println();
 	}
 }

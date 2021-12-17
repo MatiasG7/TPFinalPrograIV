@@ -6,7 +6,7 @@ public class PuestoComun extends Puesto {
 		super(codigo, nombre, area);
 	}
 
-	public boolean isCompatible(int op) {
-		return op == 2;
+	public boolean isJerarquico() {
+		return false;
 	}
 }

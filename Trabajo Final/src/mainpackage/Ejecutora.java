@@ -6,17 +6,24 @@ public class Ejecutora {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		Empresa e = new Empresa();
-
-		s.useDelimiter(System.getProperty("line.separator"));
-
 		int op;
 
 		// Bloque de prueba
-		// e.PRUEBAS();
+		System.out.println("¿¿ EJECUTAR PRE CARGA DE DATOS ??");
+		System.out.println("1- SI");
+		op = s.nextInt();
+
+		if (op == 1) {
+			PuestoJerarquico.setMinimoAniosEmpresa(2);
+			EmpleadoJerarquico.setMinimoCambioJerarquico(2);
+
+			e.CARGADATOS();
+		}
 		//
 
 		do {
-			System.out.println("");
+			System.out.println();
+			System.out.println();
 			System.out.println("TP FINAL");
 			System.out.println("1- Agregar un empleado.");
 			System.out.println("2- Agregar un puesto.");
@@ -34,8 +41,11 @@ public class Ejecutora {
 			System.out.println("14- Informar inscripciones por un empleado.");
 			System.out.println("15- Informar empleado con mas inscripciones.");
 			System.out.println("16- Informar empleados que cumplen los requisitos de la convocatoria.");
+			System.out.println();
 
 			op = s.nextInt();
+
+			System.out.println();
 			switch (op) {
 			case 1:
 				e.agregarEmpleado();
@@ -54,6 +64,7 @@ public class Ejecutora {
 				break;
 			case 6:
 				e.agregarExperienciaEmpleado();
+				break;
 			case 7:
 				e.cerrarConvocatoria();
 				break;
