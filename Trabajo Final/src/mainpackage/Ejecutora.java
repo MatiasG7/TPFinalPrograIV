@@ -12,7 +12,7 @@ public class Ejecutora {
 		int op;
 
 		// Bloque de prueba
-		e.PRUEBAS();
+		// e.PRUEBAS();
 		//
 
 		do {

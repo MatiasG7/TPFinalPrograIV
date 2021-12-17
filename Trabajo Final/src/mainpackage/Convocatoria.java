@@ -98,9 +98,9 @@ public class Convocatoria {
 		inscripciones.add(ins);
 	}
 
-	public Inscripcion verificarInscripcion(Empleado emp) {
+	public Inscripcion verificarInscripcion(String dni) {
 		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).sosInscripto(emp.getDni())) {
+		while (i < inscripciones.size() && inscripciones.get(i).sosInscripto(dni)) {
 			i++;
 		}
 		if (i < inscripciones.size()) {
@@ -158,6 +158,7 @@ public class Convocatoria {
 
 			this.ganador.mostrarse();
 			this.eliminarInscripcionesDeEmpleados();
+			this.ganador.borrarInscripciones();
 		}
 
 	}
@@ -198,5 +199,16 @@ public class Convocatoria {
 		for (Inscripcion ins : inscripciones) {
 			ins.eliminarInscripcionDentroDeEmpleado();
 		}
+	}
+
+	public void eliminarInscripcionPorDni(String dni) {
+		Inscripcion ins = verificarInscripcion(dni);
+		if (ins != null) {
+			this.inscripciones.remove(ins);
+		}
+	}
+
+	public Empleado getGanadorEmpleado() {
+		return ganador;
 	}
 }

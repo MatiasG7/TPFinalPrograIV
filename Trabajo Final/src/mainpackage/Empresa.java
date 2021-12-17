@@ -2,6 +2,7 @@ package mainpackage;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Empresa {
@@ -175,7 +176,7 @@ public class Empresa {
 			} else {
 				convocatoria.mostrarse();
 
-				Inscripcion ins = convocatoria.verificarInscripcion(empleado);
+				Inscripcion ins = convocatoria.verificarInscripcion(empleado.getDni());
 
 				if (ins == null) {
 
@@ -292,8 +293,34 @@ public class Empresa {
 		} else {
 
 			convocatoria.cerrar();
+			eliminarInscripcionesGanador(convocatoria);
 		}
 
+	}
+
+	private void eliminarInscripcionesGanador(Convocatoria c) {
+		if (!c.isAbierta()) {
+			Empleado gan = c.getGanadorEmpleado();
+
+			inscripciones.remove(gan.getInscripcionConvocatoria(c));
+
+			gan.borrarInscripcionConvocatoria(c);
+
+			String dni = gan.getDni();
+			Empleado busca = buscarEmpleado(dni);
+			if (busca != null) {
+				if (!Objects.equals(gan, busca)) {
+					empleados.remove(busca);
+					empleados.add(gan);
+				}
+			}
+
+			for (Convocatoria conv : convocatorias) {
+				if (conv.isAbierta())
+					conv.eliminarInscripcionPorDni(dni);
+			}
+
+		}
 	}
 
 	// CU 8

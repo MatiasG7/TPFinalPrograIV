@@ -16,6 +16,7 @@ public abstract class Empleado extends Persona {
 		this.experiencia = exp;
 		this.puesto = puesto;
 		this.fechaDeIngreso = fechaIngreso;
+		this.inscripciones = new ArrayList<Inscripcion>();
 	}
 
 	public void setExperiencia(Hashtable<String, Integer> exp) {
@@ -174,7 +175,7 @@ public abstract class Empleado extends Persona {
 
 	private Inscripcion buscarInscripcion(int cod) {
 		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).sos(cod)) {
+		while (i < inscripciones.size() && !inscripciones.get(i).sos(cod)) {
 			i++;
 		}
 		if (i < inscripciones.size())
@@ -207,4 +208,24 @@ public abstract class Empleado extends Persona {
 		inscripciones = ins;
 	}
 
+	public void borrarInscripcionConvocatoria(Convocatoria c) {
+		inscripciones.remove(getInscripcionConvocatoria(c));
+	}
+
+	public Inscripcion getInscripcionConvocatoria(Convocatoria c) {
+		int i = 0;
+		while (i < inscripciones.size() && inscripciones.get(i).getConvocatoria().getCodigo() != c.getCodigo()) { // VER
+																													// EL
+																													// SOS
+			i++;
+		}
+		if (i < inscripciones.size()) {
+			return inscripciones.get(i);
+		}
+		return null;
+	}
+
+	public void borrarInscripciones() {
+		this.inscripciones = new ArrayList<Inscripcion>();
+	}
 }
