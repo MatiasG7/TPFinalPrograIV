@@ -453,7 +453,9 @@ public class Empresa {
 		Empleado e = this.buscarEmpleado(dni);
 
 		if (e != null) {
+			System.out.println("--------------");
 			e.mostrarInscripciones();
+			System.out.println();
 		} else {
 			System.out.println("El empleado no existe.");
 		}
