@@ -40,6 +40,7 @@ public class PuestoJerarquico extends Puesto {
 
 	public void mostrarse() {
 		super.mostrarse();
-		System.out.println("-Minimo de anios requeridos en la empresa: " + PuestoJerarquico.getMinimoAniosEmpresa());
+		System.out.println("-Anios requeridos en la empresa para tener un puesto jerarquico: "
+				+ PuestoJerarquico.getMinimoAniosEmpresa());
 	}
 }

@@ -208,23 +208,25 @@ public class Empresa {
 		System.out.println(" --- INGRESO DE ESPECIALIZACIONES ---");
 		int op = 0;
 
-		do {
-			System.out.println("Ingrese nombre de especializacion: ");
-			String esp = s.next();
+		if (especializaciones.size() > 0) {
+			do {
+				System.out.println("Ingrese nombre de especializacion: ");
+				String esp = s.next();
 
-			String espe = buscarEspecializacion(esp);
+				String espe = buscarEspecializacion(esp);
 
-			if (espe == null) {
-				especializaciones.add(esp);
-			} else {
-				System.out.println("Ya existe esa especializacion.");
-			}
+				if (espe == null) {
+					especializaciones.add(esp);
+				} else {
+					System.out.println("Ya existe esa especializacion.");
+				}
 
-			System.out.println("Agregar otra especializacion?");
-			System.out.println("1- Si");
-			System.out.println("2- No");
-			op = s.nextInt();
-		} while (op != 2);
+				System.out.println("Agregar otra especializacion?");
+				System.out.println("1- Si");
+				System.out.println("2- No");
+				op = s.nextInt();
+			} while (op != 2);
+		}
 
 	}
 
@@ -244,12 +246,11 @@ public class Empresa {
 		} else {
 			e.mostrarExperiencia();
 
-			this.informarEspecializaciones();
-			System.out.println("0- Para salir.");
-
-			int op = s.nextInt();
+			int op;
 
 			do {
+				this.informarEspecializaciones();
+
 				System.out.println("Elija especializacion a agregar: ");
 				int esp = s.nextInt();
 
@@ -262,12 +263,10 @@ public class Empresa {
 
 				System.out.println("Desea agregar mas experiencia? ");
 				System.out.println("1- SI");
-				System.out.println("2- NO");
-				System.out.println("0- Para salir.");
+				System.out.println("0- Salir.");
 				op = s.nextInt();
 			} while (op != 0);
 		}
-
 	}
 
 	// CU 7

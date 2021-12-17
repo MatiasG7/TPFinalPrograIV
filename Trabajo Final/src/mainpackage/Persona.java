@@ -25,7 +25,7 @@ public abstract class Persona {
 		return nombre;
 	}
 
-	public Fecha getFechaDeNacimiento() {
+	public Fecha getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 

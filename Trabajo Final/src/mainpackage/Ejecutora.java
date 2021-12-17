@@ -64,6 +64,7 @@ public class Ejecutora {
 				break;
 			case 6:
 				e.agregarExperienciaEmpleado();
+				break;
 			case 7:
 				e.cerrarConvocatoria();
 				break;
