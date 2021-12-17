@@ -395,10 +395,14 @@ public class Empresa {
 			System.out.println(" --- LISTADO INSCRIPCIONES ---");
 
 			for (Inscripcion ins : inscripciones) {
+				System.out.println("--------------");
 				ins.mostrarse();
+				System.out.println();
 			}
 		} else {
+
 			System.out.println("No hay inscripciones cargadas.");
+
 		}
 
 	}

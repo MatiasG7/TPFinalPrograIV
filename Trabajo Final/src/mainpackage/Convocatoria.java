@@ -54,7 +54,7 @@ public class Convocatoria {
 
 	public void mostrarse() {
 		System.out.println("CONVOCATORIA");
-		System.out.println("-Codigo: " + codigo);
+		this.mostrarCodigo();
 		System.out.println();
 		this.mostrarPuesto();
 		System.out.println();
@@ -68,6 +68,10 @@ public class Convocatoria {
 			System.out.println("GANADOR");
 			ganador.mostrarse();
 		}
+	}
+
+	public void mostrarCodigo() {
+		System.out.println("-Codigo: " + codigo);
 	}
 
 	public void mostrarInscripciones() {
@@ -138,7 +142,7 @@ public class Convocatoria {
 		System.out.println("Listado de inscripciones aprobadas");
 		System.out.println();
 		for (i = 0; i < inscripcionesAprobadas.size(); i++) {
-			System.out.println("EMPLEADO ++ " + (i + 1) + " ++ ");
+			System.out.println("++ " + (i + 1) + " ++ ");
 			inscripcionesAprobadas.get(i).mostrarEmpleado();
 			System.out.println();
 			System.out.println();

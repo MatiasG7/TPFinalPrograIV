@@ -34,6 +34,7 @@ public abstract class Persona {
 	}
 
 	public void mostrarse() {
+		System.out.println("EMPLEADO ");
 		System.out.println("-Dni: " + dni);
 		System.out.println("-Nombre: " + nombre);
 		System.out.println("-Cuil: " + cuil);
