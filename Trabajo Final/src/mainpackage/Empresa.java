@@ -430,7 +430,9 @@ public class Empresa {
 
 		for (Empleado e : empleados) {
 			if (e.getClass() == EmpleadoJerarquico.class) { // +++++++++++++++++++++++++++++++++++++++++++
+				System.out.println("--------------");
 				e.mostrarse();
+				System.out.println();
 				i++;
 			}
 		}
