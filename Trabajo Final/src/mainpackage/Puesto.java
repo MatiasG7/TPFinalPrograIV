@@ -23,6 +23,8 @@ public abstract class Puesto {
 		return 0;
 	}
 
+	public abstract boolean isJerarquico();
+
 	public void mostrarse() {
 		System.out.println("PUESTO");
 
@@ -30,6 +32,4 @@ public abstract class Puesto {
 		System.out.println("-Nombre: " + nombre);
 		System.out.println("-Area: " + area);
 	}
-
-	public abstract boolean isJerarquico();
 }

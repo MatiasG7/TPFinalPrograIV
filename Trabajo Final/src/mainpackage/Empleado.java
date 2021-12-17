@@ -81,7 +81,7 @@ public abstract class Empleado extends Persona {
 
 	public boolean isAptoPuesto(Convocatoria convocatoria) {
 		if (verificarExperiencia(convocatoria)) {
-			if (convocatoria.esPuestoJerarquico()) {
+			if (convocatoria.isPuestoJerarquico()) {
 				return verificarAniosEnEmpresaPostulante();
 			} else {
 				return true;

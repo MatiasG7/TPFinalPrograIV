@@ -40,16 +40,142 @@ public class Convocatoria {
 		return codigo == cod;
 	}
 
-	public void setExperienciaReq(Hashtable<String, Integer> exp) {
-		this.experienciaReq = exp;
-	}
-
 	public int getCodigo() {
 		return codigo;
 	}
 
+	public Hashtable<String, Integer> getExpReq() {
+		return experienciaReq;
+	}
+
+	public void setExperienciaReq(Hashtable<String, Integer> exp) {
+		this.experienciaReq = exp;
+	}
+
+	public void addInscripcion(Inscripcion ins) {
+		inscripciones.add(ins);
+	}
+
 	public boolean isAbierta() {
 		return this.estado == Estado.ABIERTO;
+	}
+
+	public boolean isPuestoJerarquico() {
+		return puesto.isJerarquico();
+	}
+
+	public void eliminarInscripcionesDeEmpleados() {
+		for (Inscripcion ins : inscripciones) {
+			ins.eliminarInscripcionDentroDeEmpleado();
+		}
+	}
+
+	public void eliminarInscripcionPorDni(String dni) {
+		Inscripcion ins = verificarInscripcion(dni);
+		if (ins != null) {
+			this.inscripciones.remove(ins);
+		}
+	}
+
+	public boolean verificarPostulante(Inscripcion ins) {
+		return ins.isApto();
+	}
+
+	public Inscripcion verificarInscripcion(String dni) {
+		int i = 0;
+		while (i < inscripciones.size() && inscripciones.get(i).sosInscripto(dni)) {
+			i++;
+		}
+		if (i < inscripciones.size()) {
+			return inscripciones.get(i);
+		} else {
+			return null;
+		}
+	}
+
+	public Empleado cerrar() {
+		Scanner s = new Scanner(System.in);
+		s.useDelimiter(System.getProperty("line.separator"));
+
+		System.out.println("Desea elegir un ganador ?");
+		System.out.println("1- SI");
+		System.out.println("2- NO");
+		System.out.println("0- Cancelar");
+		int op = s.nextInt();
+
+		if (op == 1) {
+			this.elegirGanador();
+		}
+
+		if (op == 1 || op == 2) {
+			this.estado = Estado.CERRADO;
+		}
+		return this.ganador;
+	}
+
+	public void elegirGanador() {
+		Scanner s = new Scanner(System.in);
+
+		System.out.println();
+		this.mostrarExpRequerida();
+
+		int i = 0;
+		ArrayList<Inscripcion> inscripcionesAprobadas = new ArrayList<Inscripcion>();
+		for (Inscripcion inscripcion : inscripciones) {
+			if (verificarPostulante(inscripcion)) {
+				inscripcionesAprobadas.add(inscripcion);
+			}
+		}
+
+		System.out.println();
+		System.out.println("Listado de inscripciones aprobadas");
+		System.out.println();
+		for (i = 0; i < inscripcionesAprobadas.size(); i++) {
+			System.out.println("++ " + (i + 1) + " ++ ");
+			inscripcionesAprobadas.get(i).mostrarEmpleado();
+			System.out.println();
+			System.out.println();
+		}
+
+		if (i == 0) {
+			System.out.println("Ninguna de los inscripciones tiene la experiencia requerida.");
+
+		} else {
+
+			int gan;
+			do {
+				System.out.println("Elija ganador: ");
+				gan = s.nextInt();
+			} while (gan < 1 || gan > inscripcionesAprobadas.size());
+
+			Empleado auxGanador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
+
+			if ((auxGanador.sosJerarquico() && puesto.isJerarquico())
+					|| (!auxGanador.sosJerarquico() && !puesto.isJerarquico())) {
+
+				auxGanador.setPuesto(puesto);
+				auxGanador.borrarInscripciones();
+				this.ganador = auxGanador;
+
+			} else {
+				Empleado ganadorNuevo;
+
+				if (auxGanador.sosJerarquico()) {
+					ganadorNuevo = new EmpleadoComun(auxGanador.getDni(), auxGanador.getNombre(),
+							auxGanador.getFechaNacimiento(), auxGanador.getCuil(), puesto, auxGanador.getFechaIngreso(),
+							auxGanador.getExperiencia());
+				} else {
+					ganadorNuevo = new EmpleadoJerarquico(auxGanador.getDni(), auxGanador.getNombre(),
+							auxGanador.getFechaNacimiento(), auxGanador.getCuil(), puesto, auxGanador.getFechaIngreso(),
+							Fecha.hoy(), auxGanador.getExperiencia());
+				}
+				this.ganador = ganadorNuevo;
+			}
+
+			this.eliminarInscripcionesDeEmpleados();
+			this.ganador.mostrarse();
+			System.out.println(this.ganador.getClass().getSimpleName());
+		}
 	}
 
 	public void mostrarse() {
@@ -105,139 +231,5 @@ public class Convocatoria {
 		if (i == 0) {
 			System.out.println("No hay empleados aprobados para esta convocatoria.");
 		}
-	}
-
-	public void addInscripcion(Inscripcion ins) {
-		inscripciones.add(ins);
-	}
-
-	public Inscripcion verificarInscripcion(String dni) {
-		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).sosInscripto(dni)) {
-			i++;
-		}
-		if (i < inscripciones.size()) {
-			return inscripciones.get(i);
-		} else {
-			return null;
-		}
-	}
-
-	public void elegirGanador() {
-		Scanner s = new Scanner(System.in);
-		s.useDelimiter(System.getProperty("line.separator"));
-
-		System.out.println();
-		this.mostrarExpRequerida();
-
-		int i = 0;
-		ArrayList<Inscripcion> inscripcionesAprobadas = new ArrayList<Inscripcion>();
-		for (Inscripcion inscripcion : inscripciones) {
-			if (verificarPostulante(inscripcion)) {
-				inscripcionesAprobadas.add(inscripcion);
-			}
-		}
-
-		System.out.println();
-		System.out.println("Listado de inscripciones aprobadas");
-		System.out.println();
-		for (i = 0; i < inscripcionesAprobadas.size(); i++) {
-			System.out.println("++ " + (i + 1) + " ++ ");
-			inscripcionesAprobadas.get(i).mostrarEmpleado();
-			System.out.println();
-			System.out.println();
-		}
-
-		if (i == 0) {
-			System.out.println("Ninguna de los inscripciones tiene la experiencia requerida.");
-
-		} else {
-
-			int gan;
-			do {
-				System.out.println("Elija ganador: ");
-				gan = s.nextInt();
-			} while (gan < 1 || gan > inscripcionesAprobadas.size());
-
-			Empleado auxGanador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
-
-			if ((auxGanador.sosJerarquico() && puesto.isJerarquico())
-					|| (!auxGanador.sosJerarquico() && !puesto.isJerarquico())) {
-
-				auxGanador.setPuesto(puesto);
-				auxGanador.borrarInscripciones();
-				this.ganador = auxGanador;
-
-			} else {
-
-				Empleado ganadorNuevo;
-
-				if (auxGanador.sosJerarquico()) {
-					ganadorNuevo = new EmpleadoComun(auxGanador.getDni(), auxGanador.getNombre(),
-							auxGanador.getFechaNacimiento(), auxGanador.getCuil(), puesto, auxGanador.getFechaIngreso(),
-							auxGanador.getExperiencia());
-				} else {
-					ganadorNuevo = new EmpleadoJerarquico(auxGanador.getDni(), auxGanador.getNombre(),
-							auxGanador.getFechaNacimiento(), auxGanador.getCuil(), puesto, auxGanador.getFechaIngreso(),
-							Fecha.hoy(), auxGanador.getExperiencia());
-				}
-				this.ganador = ganadorNuevo;
-			}
-
-			this.eliminarInscripcionesDeEmpleados();
-			this.ganador.mostrarse();
-			System.out.println(this.ganador.getClass().getSimpleName());
-		}
-
-	}
-
-	public Empleado cerrar() {
-		Scanner s = new Scanner(System.in);
-		s.useDelimiter(System.getProperty("line.separator"));
-
-		System.out.println("Desea elegir un ganador ?");
-		System.out.println("1- SI");
-		System.out.println("2- NO");
-		System.out.println("0- Cancelar");
-		int op = s.nextInt();
-
-		if (op == 1) {
-			this.elegirGanador();
-		}
-
-		if (op == 1 || op == 2) {
-			this.estado = Estado.CERRADO;
-		}
-		return this.ganador;
-
-	}
-
-	public boolean verificarPostulante(Inscripcion ins) {
-		return ins.isApto();
-	}
-
-	public Hashtable<String, Integer> getExpReq() {
-		return experienciaReq;
-	}
-
-	public boolean esPuestoJerarquico() {
-		return puesto.isJerarquico();
-	}
-
-	public void eliminarInscripcionesDeEmpleados() {
-		for (Inscripcion ins : inscripciones) {
-			ins.eliminarInscripcionDentroDeEmpleado();
-		}
-	}
-
-	public void eliminarInscripcionPorDni(String dni) {
-		Inscripcion ins = verificarInscripcion(dni);
-		if (ins != null) {
-			this.inscripciones.remove(ins);
-		}
-	}
-
-	public Empleado getGanadorEmpleado() {
-		return ganador;
 	}
 }

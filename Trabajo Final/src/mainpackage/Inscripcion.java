@@ -36,12 +36,12 @@ public class Inscripcion {
 		return convocatoria;
 	}
 
-	public boolean isApto() {
-		return empleado.isAptoPuesto(convocatoria);
-	}
-
 	public Empleado getEmpleado() {
 		return empleado;
+	}
+
+	public boolean isApto() {
+		return empleado.isAptoPuesto(convocatoria);
 	}
 
 	public void eliminarInscripcionDentroDeEmpleado() {
