@@ -484,6 +484,8 @@ public class Empresa {
 
 			System.out.println("El empleado con mas inscripciones es: ");
 			empMas.mostrarse();
+
+			System.out.println();
 			System.out.println("Con un total de " + empMax + " inscripciones.");
 		} else {
 			System.out.println("No hay suficientes empleados para comparar. ");
