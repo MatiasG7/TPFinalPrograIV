@@ -288,7 +288,6 @@ public class Empresa {
 			Empleado ganador = convocatoria.cerrar();
 			eliminarInscripcionesGanador(convocatoria, ganador);
 		}
-
 	}
 
 	private void eliminarInscripcionesGanador(Convocatoria c, Empleado gan) {
@@ -395,7 +394,7 @@ public class Empresa {
 			for (int i = 0; i < especializaciones.size(); i++) {
 				System.out.println((i + 1) + " - " + especializaciones.get(i));
 			}
-			
+
 		} else {
 			System.out.println("No hay especializaciones cargadas");
 		}
@@ -424,7 +423,6 @@ public class Empresa {
 		System.out.println(" --- LISTADO INSCRIPCIONES POR EMPLEADO ---");
 
 		Scanner s = new Scanner(System.in);
-		s.useDelimiter(System.getProperty("line.separator"));
 
 		System.out.println("Ingrese DNI del empleado: ");
 		String dni = s.next();
@@ -479,7 +477,11 @@ public class Empresa {
 		Convocatoria c = buscarConvocatoria(cod);
 
 		if (c != null) {
-			c.mostrarEmpleadosAprobados();
+			if (c.isAbierta()) {
+				c.mostrarEmpleadosAprobados();
+			} else {
+				System.out.println("La convocatoria se encuentra cerrada.");
+			}
 		} else {
 			System.out.println("El codigo ingresado no esta relacionado a una convocatoria existente.");
 		}
@@ -602,12 +604,12 @@ public class Empresa {
 		EmpleadoJerarquico ej = new EmpleadoJerarquico("12345678", "Ignacio Perez", new Fecha(1, 1, 1996),
 				"20123456784", pj, new Fecha(1, 1, 2016), new Fecha(1, 1, 2018),
 				this.CDEXPERIENCIA(e1, e2, e3, e4, 2, 2, 4, 2));
-		EmpleadoComun ec = new EmpleadoComun("12345679", "Mario Sal", new Fecha(1, 1, 1990), "20123456794", pj2,
+		EmpleadoComun ec = new EmpleadoComun("12345679", "Mario Sal", new Fecha(1, 1, 1990), "20123456794", pc2,
 				new Fecha(1, 1, 2015), this.CDEXPERIENCIA(e3, e3, e1, e1, 0, 4, 0, 2));
 		EmpleadoComun ec2 = new EmpleadoComun("12345680", "Gonzalo Puentes", new Fecha(1, 1, 2000), "20123456804", pc,
 				new Fecha(1, 1, 2020), this.CDEXPERIENCIA(e2, e2, e4, e4, 0, 2, 0, 2));
 		EmpleadoJerarquico ej2 = new EmpleadoJerarquico("12345681", "Lautaro Martinez", new Fecha(1, 1, 1980),
-				"20123456814", pc2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2015),
+				"20123456814", pj2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2015),
 				this.CDEXPERIENCIA(e1, e5, e3, e4, 3, 3, 3, 5));
 		empleados.add(ec);
 		empleados.add(ec2);
@@ -634,6 +636,11 @@ public class Empresa {
 		c.addInscripcion(ins4);
 		c2.addInscripcion(ins);
 		c2.addInscripcion(ins2);
+
+		ej.agregarInscripcion(ins);
+		ej2.agregarInscripcion(ins3);
+		ec.agregarInscripcion(ins2);
+		ec2.agregarInscripcion(ins4);
 	}
 
 	private Hashtable<String, Integer> CDEXPERIENCIA(String e1, String e2, String e3, String e4, int a1, int a2, int a3,

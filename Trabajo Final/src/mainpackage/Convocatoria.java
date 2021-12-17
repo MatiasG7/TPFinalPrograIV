@@ -123,9 +123,9 @@ public class Convocatoria {
 			}
 		}
 
-		System.out.println("++Listado de inscripciones aprobadas++");
-		for (i = 0; i <= inscripciones.size(); i++) {
-			System.out.println(" - " + i + 1 + " - ");
+		System.out.println("++ Listado de inscripciones aprobadas ++");
+		for (i = 0; i < inscripciones.size(); i++) {
+			System.out.println(" - " + (i + 1) + " - ");
 			inscripciones.get(i).mostrarEmpleado();
 		}
 
@@ -163,6 +163,7 @@ public class Convocatoria {
 
 			this.eliminarInscripcionesDeEmpleados();
 			this.ganador.mostrarse();
+			System.out.println(this.ganador.getClass().getSimpleName());
 		}
 
 	}
