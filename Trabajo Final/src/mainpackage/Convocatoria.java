@@ -133,12 +133,13 @@ public class Convocatoria {
 				inscripcionesAprobadas.add(inscripcion);
 			}
 		}
+
 		System.out.println();
 		System.out.println("Listado de inscripciones aprobadas");
 		System.out.println();
-		for (i = 0; i < inscripciones.size(); i++) {
+		for (i = 0; i < inscripcionesAprobadas.size(); i++) {
 			System.out.println("EMPLEADO ++ " + (i + 1) + " ++ ");
-			inscripciones.get(i).mostrarEmpleado();
+			inscripcionesAprobadas.get(i).mostrarEmpleado();
 			System.out.println();
 			System.out.println();
 		}
@@ -147,8 +148,12 @@ public class Convocatoria {
 			System.out.println("Ninguna de los inscripciones tiene la experiencia requerida.");
 
 		} else {
-			System.out.println("Elija ganador: ");
-			int gan = s.nextInt();
+
+			int gan;
+			do {
+				System.out.println("Elija ganador: ");
+				gan = s.nextInt();
+			} while (gan < 1 || gan > inscripcionesAprobadas.size());
 
 			Empleado auxGanador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
 

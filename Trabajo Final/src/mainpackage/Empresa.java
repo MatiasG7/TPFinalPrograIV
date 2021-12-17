@@ -2,6 +2,7 @@ package mainpackage;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Empresa {
@@ -293,29 +294,45 @@ public class Empresa {
 	private void eliminarInscripcionesGanador(Convocatoria c, Empleado gan) {
 		if (!c.isAbierta()) {
 
-			limpiarInscripciones(c.getCodigo(), gan.getDni());
+			limpiarInscripciones(c.getCodigo());
 
-			String dni = gan.getDni();
-			Empleado empleadoBuscado = buscarEmpleado(dni);
-			if (empleadoBuscado != null) {
-				if ((gan.sosJerarquico() && !empleadoBuscado.sosJerarquico())
-						|| (!gan.sosJerarquico() && empleadoBuscado.sosJerarquico())) { // PROBAR
-					empleados.remove(empleadoBuscado);
-					empleados.add(gan);
+			if (gan != null) {
+
+				String dni = gan.getDni();
+
+				limpiarInscripcionesGanador(dni);
+
+				Empleado empleadoBuscado = buscarEmpleado(dni);
+				if (empleadoBuscado != null) {
+					if ((gan.sosJerarquico() && !empleadoBuscado.sosJerarquico())
+							|| (!gan.sosJerarquico() && empleadoBuscado.sosJerarquico())) { // PROBAR
+						empleados.remove(empleadoBuscado);
+						empleados.add(gan);
+					}
 				}
-			}
 
-			for (Convocatoria conv : convocatorias) {
-				if (conv.isAbierta())
-					conv.eliminarInscripcionPorDni(dni);
+				for (Convocatoria conv : convocatorias) {
+					if (conv.isAbierta())
+						conv.eliminarInscripcionPorDni(dni);
+				}
 			}
 		}
 	}
 
-	private void limpiarInscripciones(int codConv, String dni) {
-		for (Inscripcion ins : inscripciones) {
-			if (ins.sosConvocatoria(codConv) || ins.sosInscripto(dni)) {
-				inscripciones.remove(ins);
+	private void limpiarInscripciones(int codConv) {
+		for (ListIterator<Inscripcion> it = inscripciones.listIterator(); it.hasNext();) {
+			Inscripcion ins = it.next();
+			if (ins.sosConvocatoria(codConv)) {
+				it.remove();
+			}
+		}
+	}
+
+	private void limpiarInscripcionesGanador(String dni) {
+		for (ListIterator<Inscripcion> it = inscripciones.listIterator(); it.hasNext();) {
+			Inscripcion ins = it.next();
+			if (ins.sosInscripto(dni)) {
+				it.remove();
 			}
 		}
 	}
