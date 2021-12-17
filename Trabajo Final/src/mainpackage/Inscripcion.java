@@ -36,12 +36,12 @@ public class Inscripcion {
 		return convocatoria;
 	}
 
-	public boolean isApto() {
-		return empleado.isAptoPuesto(convocatoria);
-	}
-
 	public Empleado getEmpleado() {
 		return empleado;
+	}
+
+	public boolean isApto() {
+		return empleado.isAptoPuesto(convocatoria);
 	}
 
 	public void eliminarInscripcionDentroDeEmpleado() {
@@ -49,12 +49,24 @@ public class Inscripcion {
 	}
 
 	public void mostrarse() {
+
+		System.out.println("INSCRIPCION");
 		this.mostrarCodigo();
+		System.out.println();
+
+		System.out.println("CONVOCATORIA");
+		convocatoria.mostrarCodigo();
+		System.out.println();
+
+		convocatoria.mostrarPuesto();
+		System.out.println();
+		System.out.println();
+
 		this.mostrarEmpleado();
 	}
 
 	public void mostrarCodigo() {
-		System.out.println("Codigo: " + codigo);
+		System.out.println("-Codigo: " + codigo);
 	}
 
 	public void mostrarEmpleado() {
@@ -62,6 +74,6 @@ public class Inscripcion {
 	}
 
 	public void mostrarConvocatoria() {
-		this.convocatoria.mostrarCodYPuesto();
+		this.convocatoria.mostrarse();
 	}
 }

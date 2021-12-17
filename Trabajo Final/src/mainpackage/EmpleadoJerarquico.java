@@ -13,24 +13,12 @@ public class EmpleadoJerarquico extends Empleado {
 		fechaIngresoPuesto = fechaIngresoPues;
 	}
 
-	public boolean isAptoPuesto(Convocatoria convocatoria) {
-		if (verificarAniosPuesto() && super.isAptoPuesto(convocatoria)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean verificarAniosPuesto() {
-		return !fechaIngresoPuesto.entre(Fecha.hoy().restarAnios(getMinimoCambio()), Fecha.hoy());
+	public boolean sosJerarquico() {
+		return true;
 	}
 
 	public int getMinimoCambio() {
 		return EmpleadoJerarquico.getMinimoCambioJerarquico();
-	}
-
-	public static void setMinimoCambioJerarquico(int ae) {
-		minimoCambioJerarquico = ae;
 	}
 
 	private static int getMinimoCambioJerarquico() {
@@ -46,11 +34,23 @@ public class EmpleadoJerarquico extends Empleado {
 		return minimoCambioJerarquico;
 	}
 
-	public boolean sosJerarquico() {
-		return true;
-	}
-
 	public Fecha getfechaIngresoPuesto() {
 		return fechaIngresoPuesto;
+	}
+
+	public static void setMinimoCambioJerarquico(int ae) {
+		minimoCambioJerarquico = ae;
+	}
+
+	public boolean isAptoPuesto(Convocatoria convocatoria) {
+		if (verificarAniosPuesto() && super.isAptoPuesto(convocatoria)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean verificarAniosPuesto() {
+		return !fechaIngresoPuesto.entre(Fecha.hoy().restarAnios(getMinimoCambio()), Fecha.hoy());
 	}
 }

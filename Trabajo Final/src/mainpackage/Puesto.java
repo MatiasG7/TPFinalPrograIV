@@ -23,19 +23,13 @@ public abstract class Puesto {
 		return 0;
 	}
 
-	public abstract boolean isCompatible(int op);
+	public abstract boolean isJerarquico();
 
 	public void mostrarse() {
-		System.out.println();
 		System.out.println("PUESTO");
 
-		System.out.println("Codigo: " + codigo);
-		System.out.println("Nombre: " + nombre);
-		System.out.println("Area: " + area);
-		System.out.println("");
-	}
-
-	public boolean esJerarquico() {
-		return false;
+		System.out.println("-Codigo: " + codigo);
+		System.out.println("-Nombre: " + nombre);
+		System.out.println("-Area: " + area);
 	}
 }
