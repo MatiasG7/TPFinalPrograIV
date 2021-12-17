@@ -56,7 +56,7 @@ public class Empresa {
 				System.out.println("2- NO");
 				int op = s.nextInt();
 
-				if (puesto.isCompatible(op)) {
+				if ((op == 1 && puesto.isJerarquico()) || (op == 0 && !puesto.isJerarquico())) {
 					if (op == 1) {
 						System.out.println("Ingrese fecha de ingreso en puesto");
 						Fecha fechaIngresoPuesto = Fecha.nuevaFecha();

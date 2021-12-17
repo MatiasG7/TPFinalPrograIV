@@ -161,8 +161,8 @@ public class Convocatoria {
 
 			Empleado auxGanador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
 
-			if ((auxGanador.sosJerarquico() && puesto.esJerarquico())
-					|| (!auxGanador.sosJerarquico() && !puesto.esJerarquico())) {
+			if ((auxGanador.sosJerarquico() && puesto.isJerarquico())
+					|| (!auxGanador.sosJerarquico() && !puesto.isJerarquico())) {
 
 				auxGanador.actualizarPuesto(puesto);
 				auxGanador.borrarInscripciones();
@@ -221,7 +221,7 @@ public class Convocatoria {
 	}
 
 	public boolean esPuestoJerarquico() {
-		return puesto.esJerarquico();
+		return puesto.isJerarquico();
 	}
 
 	public void eliminarInscripcionesDeEmpleados() {

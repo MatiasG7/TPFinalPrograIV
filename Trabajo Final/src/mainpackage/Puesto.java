@@ -23,8 +23,6 @@ public abstract class Puesto {
 		return 0;
 	}
 
-	public abstract boolean isCompatible(int op);
-
 	public void mostrarse() {
 		System.out.println("PUESTO");
 
@@ -33,7 +31,5 @@ public abstract class Puesto {
 		System.out.println("-Area: " + area);
 	}
 
-	public boolean esJerarquico() {
-		return false;
-	}
+	public abstract boolean isJerarquico();
 }

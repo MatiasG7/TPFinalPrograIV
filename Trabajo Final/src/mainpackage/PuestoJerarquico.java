@@ -30,11 +30,7 @@ public class PuestoJerarquico extends Puesto {
 		return minimoAniosEmpresa;
 	}
 
-	public boolean isCompatible(int op) {
-		return op == 1;
-	}
-
-	public boolean esJerarquico() {
+	public boolean isJerarquico() {
 		return true;
 	}
 
