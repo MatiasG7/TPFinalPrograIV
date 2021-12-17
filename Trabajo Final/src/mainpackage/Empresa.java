@@ -2,7 +2,6 @@ package mainpackage;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Empresa {
@@ -292,25 +291,23 @@ public class Empresa {
 			System.out.println("No existe convocatoria con ese codigo.");
 		} else {
 
-			convocatoria.cerrar();
-			eliminarInscripcionesGanador(convocatoria);
+			Empleado ganador = convocatoria.cerrar();
+			eliminarInscripcionesGanador(convocatoria, ganador);
 		}
 
 	}
 
-	private void eliminarInscripcionesGanador(Convocatoria c) {
+	private void eliminarInscripcionesGanador(Convocatoria c, Empleado gan) {
 		if (!c.isAbierta()) {
-			Empleado gan = c.getGanadorEmpleado();
 
-			inscripciones.remove(gan.getInscripcionConvocatoria(c));
-
-			gan.borrarInscripcionConvocatoria(c);
+			limpiarInscripciones(c.getCodigo(), gan.getDni());
 
 			String dni = gan.getDni();
-			Empleado busca = buscarEmpleado(dni);
-			if (busca != null) {
-				if (!Objects.equals(gan, busca)) {
-					empleados.remove(busca);
+			Empleado empleadoBuscado = buscarEmpleado(dni);
+			if (empleadoBuscado != null) {
+				if ((gan.sosJerarquico() && !empleadoBuscado.sosJerarquico())
+						|| (!gan.sosJerarquico() && empleadoBuscado.sosJerarquico())) { // PROBAR
+					empleados.remove(empleadoBuscado);
 					empleados.add(gan);
 				}
 			}
@@ -319,7 +316,14 @@ public class Empresa {
 				if (conv.isAbierta())
 					conv.eliminarInscripcionPorDni(dni);
 			}
+		}
+	}
 
+	private void limpiarInscripciones(int codConv, String dni) {
+		for (Inscripcion ins : inscripciones) {
+			if (ins.sosConvocatoria(codConv) || ins.sosInscripto(dni)) {
+				inscripciones.remove(ins);
+			}
 		}
 	}
 

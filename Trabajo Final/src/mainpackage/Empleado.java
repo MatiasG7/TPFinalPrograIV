@@ -208,23 +208,6 @@ public abstract class Empleado extends Persona {
 		inscripciones = ins;
 	}
 
-	public void borrarInscripcionConvocatoria(Convocatoria c) {
-		inscripciones.remove(getInscripcionConvocatoria(c));
-	}
-
-	public Inscripcion getInscripcionConvocatoria(Convocatoria c) {
-		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).getConvocatoria().getCodigo() != c.getCodigo()) { // VER
-																													// EL
-																													// SOS
-			i++;
-		}
-		if (i < inscripciones.size()) {
-			return inscripciones.get(i);
-		}
-		return null;
-	}
-
 	public void borrarInscripciones() {
 		this.inscripciones = new ArrayList<Inscripcion>();
 	}

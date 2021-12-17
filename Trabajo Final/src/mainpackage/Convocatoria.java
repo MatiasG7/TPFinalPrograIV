@@ -130,40 +130,43 @@ public class Convocatoria {
 
 		if (i == 0) {
 			System.out.println("Ninguna de los inscripciones tiene la experiencia requerida.");
+
 		} else {
 			System.out.println("Elija ganador: ");
 			int gan = s.nextInt();
 
-			this.ganador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
+			Empleado auxGanador = inscripcionesAprobadas.get(gan - 1).getEmpleado();
 
-			if ((ganador.sosJerarquico() && puesto.esJerarquico())
-					|| (!ganador.sosJerarquico() && !puesto.esJerarquico())) {
+			if ((auxGanador.sosJerarquico() && puesto.esJerarquico())
+					|| (!auxGanador.sosJerarquico() && !puesto.esJerarquico())) {
 
-				this.ganador.actualizarPuesto(puesto);
+				auxGanador.actualizarPuesto(puesto);
+				auxGanador.borrarInscripciones();
+				this.ganador = auxGanador;
 
 			} else {
 
-				if (ganador.sosJerarquico()) { // esto me da asco, revisar si hay una mejor manera
-					Empleado ganJerar = new EmpleadoComun(ganador.getDni(), ganador.getNombre(),
-							ganador.getFechaDeNacimiento(), ganador.getCuil(), puesto, ganador.getFechaDeIngreso(),
-							ganador.getExperiencia());
-					ganJerar.setInscripciones(ganador.getInscripciones());
-					this.ganador = ganJerar;
+				Empleado ganadorNuevo;
+
+				if (auxGanador.sosJerarquico()) {
+					ganadorNuevo = new EmpleadoComun(auxGanador.getDni(), auxGanador.getNombre(),
+							auxGanador.getFechaDeNacimiento(), auxGanador.getCuil(), puesto,
+							auxGanador.getFechaDeIngreso(), auxGanador.getExperiencia());
 				} else {
-					Empleado ganComun = new EmpleadoJerarquico(ganador.getDni(), ganador.getNombre(),
-							ganador.getFechaDeNacimiento(), ganador.getCuil(), puesto, ganador.getFechaDeIngreso(),
-							Fecha.hoy(), ganador.getExperiencia());
+					ganadorNuevo = new EmpleadoJerarquico(auxGanador.getDni(), auxGanador.getNombre(),
+							auxGanador.getFechaDeNacimiento(), auxGanador.getCuil(), puesto,
+							auxGanador.getFechaDeIngreso(), Fecha.hoy(), auxGanador.getExperiencia());
 				}
+				this.ganador = ganadorNuevo;
 			}
 
-			this.ganador.mostrarse();
 			this.eliminarInscripcionesDeEmpleados();
-			this.ganador.borrarInscripciones();
+			this.ganador.mostrarse();
 		}
 
 	}
 
-	public void cerrar() {
+	public Empleado cerrar() {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
@@ -180,6 +183,7 @@ public class Convocatoria {
 		if (op == 1 || op == 2) {
 			this.estado = Estado.CERRADO;
 		}
+		return this.ganador;
 
 	}
 

@@ -20,6 +20,10 @@ public class Inscripcion {
 		return (empleado.getDni().compareToIgnoreCase(dni) == 0);
 	}
 
+	public boolean sosConvocatoria(int cod) {
+		return (convocatoria.getCodigo() == cod);
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
