@@ -486,7 +486,14 @@ public class Empresa {
 			empMas.mostrarse();
 
 			System.out.println();
-			System.out.println("Con un total de " + empMax + " inscripciones.");
+			if (empMax == 0) {
+				System.out.println("Con CERO inscripciones.");
+			} else if (empMax == 1) {
+				System.out.println("Con una sola inscripcion.");
+			} else {
+				System.out.println("Con un total de " + empMax + " inscripciones.");
+			}
+
 		} else {
 			System.out.println("No hay suficientes empleados para comparar. ");
 		}
