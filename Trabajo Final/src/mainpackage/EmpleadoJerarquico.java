@@ -22,7 +22,7 @@ public class EmpleadoJerarquico extends Empleado {
 	}
 
 	public boolean verificarAniosPuesto() {
-		return !fechaIngresoPuesto.entre(Fecha.hoy().restarAños(getMinimoCambio()), Fecha.hoy());
+		return !fechaIngresoPuesto.entre(Fecha.hoy().restarAnios(getMinimoCambio()), Fecha.hoy());
 	}
 
 	public int getMinimoCambio() {

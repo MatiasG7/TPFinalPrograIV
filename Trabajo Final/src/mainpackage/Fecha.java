@@ -262,7 +262,7 @@ public class Fecha {
 		return f;
 	}
 
-	public Fecha restarAños(int a) {
+	public Fecha restarAnios(int a) {
 		Fecha f = new Fecha();
 		f.setDia(dia);
 		f.setMes(mes);
