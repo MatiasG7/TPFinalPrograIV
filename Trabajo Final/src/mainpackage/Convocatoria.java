@@ -174,12 +174,12 @@ public class Convocatoria {
 
 				if (auxGanador.sosJerarquico()) {
 					ganadorNuevo = new EmpleadoComun(auxGanador.getDni(), auxGanador.getNombre(),
-							auxGanador.getFechaDeNacimiento(), auxGanador.getCuil(), puesto,
-							auxGanador.getFechaIngreso(), auxGanador.getExperiencia());
+							auxGanador.getFechaNacimiento(), auxGanador.getCuil(), puesto, auxGanador.getFechaIngreso(),
+							auxGanador.getExperiencia());
 				} else {
 					ganadorNuevo = new EmpleadoJerarquico(auxGanador.getDni(), auxGanador.getNombre(),
-							auxGanador.getFechaDeNacimiento(), auxGanador.getCuil(), puesto,
-							auxGanador.getFechaIngreso(), Fecha.hoy(), auxGanador.getExperiencia());
+							auxGanador.getFechaNacimiento(), auxGanador.getCuil(), puesto, auxGanador.getFechaIngreso(),
+							Fecha.hoy(), auxGanador.getExperiencia());
 				}
 				this.ganador = ganadorNuevo;
 			}
