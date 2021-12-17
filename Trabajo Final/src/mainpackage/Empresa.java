@@ -290,52 +290,6 @@ public class Empresa {
 		}
 	}
 
-	private void eliminarInscripcionesGanador(Convocatoria c, Empleado gan) {
-		if (!c.isAbierta()) {
-
-			limpiarInscripciones(c.getCodigo());
-
-			if (gan != null) {
-
-				String dni = gan.getDni();
-
-				limpiarInscripcionesGanador(dni);
-
-				Empleado empleadoBuscado = buscarEmpleado(dni);
-				if (empleadoBuscado != null) {
-					if ((gan.sosJerarquico() && !empleadoBuscado.sosJerarquico())
-							|| (!gan.sosJerarquico() && empleadoBuscado.sosJerarquico())) { // PROBAR
-						empleados.remove(empleadoBuscado);
-						empleados.add(gan);
-					}
-				}
-
-				for (Convocatoria conv : convocatorias) {
-					if (conv.isAbierta())
-						conv.eliminarInscripcionPorDni(dni);
-				}
-			}
-		}
-	}
-
-	private void limpiarInscripciones(int codConv) {
-		for (ListIterator<Inscripcion> it = inscripciones.listIterator(); it.hasNext();) {
-			Inscripcion ins = it.next();
-			if (ins.sosConvocatoria(codConv)) {
-				it.remove();
-			}
-		}
-	}
-
-	private void limpiarInscripcionesGanador(String dni) {
-		for (ListIterator<Inscripcion> it = inscripciones.listIterator(); it.hasNext();) {
-			Inscripcion ins = it.next();
-			if (ins.sosInscripto(dni)) {
-				it.remove();
-			}
-		}
-	}
-
 	// CU 8
 	public void informarConvocatoriasAbiertas() {
 		System.out.println(" --- LISTADO CONVOCATORIAS ABIERTAS ---");
@@ -608,6 +562,52 @@ public class Empresa {
 		}
 
 		return ht;
+	}
+
+	private void eliminarInscripcionesGanador(Convocatoria c, Empleado gan) {
+		if (!c.isAbierta()) {
+
+			limpiarInscripciones(c.getCodigo());
+
+			if (gan != null) {
+
+				String dni = gan.getDni();
+
+				limpiarInscripcionesGanador(dni);
+
+				Empleado empleadoBuscado = buscarEmpleado(dni);
+				if (empleadoBuscado != null) {
+					if ((gan.sosJerarquico() && !empleadoBuscado.sosJerarquico())
+							|| (!gan.sosJerarquico() && empleadoBuscado.sosJerarquico())) { // PROBAR
+						empleados.remove(empleadoBuscado);
+						empleados.add(gan);
+					}
+				}
+
+				for (Convocatoria conv : convocatorias) {
+					if (conv.isAbierta())
+						conv.eliminarInscripcionPorDni(dni);
+				}
+			}
+		}
+	}
+
+	private void limpiarInscripciones(int codConv) {
+		for (ListIterator<Inscripcion> it = inscripciones.listIterator(); it.hasNext();) {
+			Inscripcion ins = it.next();
+			if (ins.sosConvocatoria(codConv)) {
+				it.remove();
+			}
+		}
+	}
+
+	private void limpiarInscripcionesGanador(String dni) {
+		for (ListIterator<Inscripcion> it = inscripciones.listIterator(); it.hasNext();) {
+			Inscripcion ins = it.next();
+			if (ins.sosInscripto(dni)) {
+				it.remove();
+			}
+		}
 	}
 
 	public void CARGADATOS() {

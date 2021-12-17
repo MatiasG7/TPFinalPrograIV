@@ -164,7 +164,7 @@ public class Convocatoria {
 			if ((auxGanador.sosJerarquico() && puesto.isJerarquico())
 					|| (!auxGanador.sosJerarquico() && !puesto.isJerarquico())) {
 
-				auxGanador.actualizarPuesto(puesto);
+				auxGanador.setPuesto(puesto);
 				auxGanador.borrarInscripciones();
 				this.ganador = auxGanador;
 
@@ -174,12 +174,12 @@ public class Convocatoria {
 
 				if (auxGanador.sosJerarquico()) {
 					ganadorNuevo = new EmpleadoComun(auxGanador.getDni(), auxGanador.getNombre(),
-							auxGanador.getFechaNacimiento(), auxGanador.getCuil(), puesto,
-							auxGanador.getFechaDeIngreso(), auxGanador.getExperiencia());
+							auxGanador.getFechaDeNacimiento(), auxGanador.getCuil(), puesto,
+							auxGanador.getFechaIngreso(), auxGanador.getExperiencia());
 				} else {
 					ganadorNuevo = new EmpleadoJerarquico(auxGanador.getDni(), auxGanador.getNombre(),
-							auxGanador.getFechaNacimiento(), auxGanador.getCuil(), puesto,
-							auxGanador.getFechaDeIngreso(), Fecha.hoy(), auxGanador.getExperiencia());
+							auxGanador.getFechaDeNacimiento(), auxGanador.getCuil(), puesto,
+							auxGanador.getFechaIngreso(), Fecha.hoy(), auxGanador.getExperiencia());
 				}
 				this.ganador = ganadorNuevo;
 			}
