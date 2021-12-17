@@ -34,6 +34,10 @@ public class EmpleadoJerarquico extends Empleado {
 		return minimoCambioJerarquico;
 	}
 
+	public Fecha getfechaIngresoPuesto() {
+		return fechaIngresoPuesto;
+	}
+
 	public static void setMinimoCambioJerarquico(int ae) {
 		minimoCambioJerarquico = ae;
 	}
@@ -48,9 +52,5 @@ public class EmpleadoJerarquico extends Empleado {
 
 	public boolean verificarAniosPuesto() {
 		return !fechaIngresoPuesto.entre(Fecha.hoy().restarAnios(getMinimoCambio()), Fecha.hoy());
-	}
-
-	public Fecha getfechaIngresoPuesto() {
-		return fechaIngresoPuesto;
 	}
 }
