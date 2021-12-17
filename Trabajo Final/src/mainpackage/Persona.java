@@ -34,10 +34,10 @@ public abstract class Persona {
 	}
 
 	public void mostrarse() {
-		System.out.println("Dni: " + dni);
-		System.out.println("Nombre: " + nombre);
-		System.out.println("Cuil: " + cuil);
-		System.out.println("Fecha de nacimiento: ");
+		System.out.println("-Dni: " + dni);
+		System.out.println("-Nombre: " + nombre);
+		System.out.println("-Cuil: " + cuil);
+		System.out.println("-Fecha de nacimiento: ");
 		fechaNacimiento.mostrarse();
 		System.out.println();
 	}

@@ -52,10 +52,9 @@ public abstract class Empleado extends Persona {
 	}
 
 	public void mostrarse() {
-		System.out.println();
 		super.mostrarse();
 		puesto.mostrarse();
-		System.out.println("Fecha de ingreso: ");
+		System.out.println("-Fecha de ingreso: ");
 		fechaDeIngreso.mostrarse();
 		System.out.println();
 		this.mostrarExperiencia();
@@ -63,12 +62,11 @@ public abstract class Empleado extends Persona {
 
 	public void mostrarExperiencia() {
 		if (experiencia.size() > 0) {
-			System.out.println();
-			System.out.println("++ Listado de experiencia ++");
+			System.out.println("LISTADO DE EXPERIENCIA");
 			Enumeration<String> listaExp = experiencia.keys();
 			while (listaExp.hasMoreElements()) {
 				String esp = listaExp.nextElement();
-				System.out.println(esp + " - " + experiencia.get(esp));
+				System.out.println("-" + esp + " " + experiencia.get(esp));
 			}
 		} else {
 			System.out.println(this.getNombre() + " no cuenta con experiencia");
@@ -129,39 +127,6 @@ public abstract class Empleado extends Persona {
 
 		return true;
 	}
-
-	/*
-	 * public boolean verificarExperiencia(Convocatoria convocatoria) {
-	 * Hashtable<String, Integer> expReq = convocatoria.getExpReq();
-	 * 
-	 * Enumeration<String> enumExpReq = expReq.keys();
-	 * 
-	 * Enumeration<String> enumExpEmp = experiencia.keys();
-	 * 
-	 * boolean aux = true;
-	 * 
-	 * String keyReq = null, keyEmp = null; Integer aniosReq = null, aniosEmp =
-	 * null;
-	 * 
-	 * while (enumExpReq.hasMoreElements() && aux == true) {
-	 * 
-	 * keyReq = enumExpReq.nextElement(); aniosReq = expReq.get(keyReq);
-	 * 
-	 * while (enumExpEmp.hasMoreElements() && keyReq.compareToIgnoreCase(keyEmp) !=
-	 * 0) {
-	 * 
-	 * keyEmp = enumExpEmp.nextElement(); aniosEmp = experiencia.get(keyEmp);
-	 * 
-	 * }
-	 * 
-	 * if (keyReq.compareToIgnoreCase(keyEmp) != 0) { if (aniosEmp < aniosReq) { aux
-	 * = false; } } else { aux = false; }
-	 * 
-	 * }
-	 * 
-	 * if (!enumExpReq.hasMoreElements() && aux == true) { return true; } else {
-	 * return false; } }
-	 */
 
 	public void actualizarPuesto(Puesto nuevoPuesto) {
 		this.puesto = nuevoPuesto;

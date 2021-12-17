@@ -55,6 +55,7 @@ public class Convocatoria {
 	public void mostrarse() {
 		System.out.println("CONVOCATORIA");
 		System.out.println("-Codigo: " + codigo);
+		System.out.println();
 		this.mostrarPuesto();
 		System.out.println();
 		this.mostrarExpRequerida();
@@ -122,6 +123,9 @@ public class Convocatoria {
 		Scanner s = new Scanner(System.in);
 		s.useDelimiter(System.getProperty("line.separator"));
 
+		System.out.println();
+		this.mostrarExpRequerida();
+
 		int i = 0;
 		ArrayList<Inscripcion> inscripcionesAprobadas = new ArrayList<Inscripcion>();
 		for (Inscripcion inscripcion : inscripciones) {
@@ -129,11 +133,14 @@ public class Convocatoria {
 				inscripcionesAprobadas.add(inscripcion);
 			}
 		}
-
-		System.out.println("++ Listado de inscripciones aprobadas ++");
+		System.out.println();
+		System.out.println("Listado de inscripciones aprobadas");
+		System.out.println();
 		for (i = 0; i < inscripciones.size(); i++) {
-			System.out.println(" - " + (i + 1) + " - ");
+			System.out.println("EMPLEADO ++ " + (i + 1) + " ++ ");
 			inscripciones.get(i).mostrarEmpleado();
+			System.out.println();
+			System.out.println();
 		}
 
 		if (i == 0) {
