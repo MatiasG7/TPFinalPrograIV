@@ -9,13 +9,13 @@ public class Ejecutora {
 		int op;
 
 		// Bloque de prueba
-		System.out.println("¿¿ EJECUTAR PRE CARGA DE DATOS ??");
+		System.out.println("EJECUTAR PRE CARGA DE DATOS ??");
 		System.out.println("1- SI");
 		op = s.nextInt();
 
 		if (op == 1) {
 			PuestoJerarquico.setMinimoAniosEmpresa(2);
-			EmpleadoJerarquico.setMinimoCambioJerarquico(2);
+			EmpleadoJerarquico.setMinimoCambioJerarquico(1);
 
 			e.CARGADATOS();
 		}
@@ -41,6 +41,8 @@ public class Ejecutora {
 			System.out.println("14- Informar inscripciones por un empleado.");
 			System.out.println("15- Informar empleado con mas inscripciones.");
 			System.out.println("16- Informar empleados que cumplen los requisitos de la convocatoria.");
+			System.out.println("17- Informar convocatorias cerradas.");
+			System.out.println("18- Informar empleado.");
 			System.out.println();
 
 			op = s.nextInt();
@@ -94,6 +96,12 @@ public class Ejecutora {
 				break;
 			case 16:
 				e.informarEmpleadosAprobados();
+				break;
+			case 17:
+				e.informarConvocatoriasCerradas();
+				break;
+			case 18:
+				e.informarEmpleado();
 				break;
 			}
 		} while (op != 0);

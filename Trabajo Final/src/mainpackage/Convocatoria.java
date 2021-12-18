@@ -191,8 +191,13 @@ public class Convocatoria {
 			System.out.println("Convocatoria -abierta");
 		} else {
 			System.out.println("Convocatoria -cerrada");
-			System.out.println("GANADOR");
-			ganador.mostrarse();
+
+			if (this.ganador != null) {
+				System.out.println("GANADOR");
+				ganador.mostrarse();
+			} else {
+				System.out.println("Esta convocatoria no posee ganador.");
+			}
 		}
 	}
 

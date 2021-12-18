@@ -132,18 +132,18 @@ public class Empresa {
 
 		Convocatoria con = buscarConvocatoria(cod);
 
-		if (con == null) {
+		if (con != null) {
 			System.out.println("El codigo ingresado ya esta relacionado a una convocatoria existente.");
 		} else {
 			System.out.println("Ingrese codigo de puesto para la convocatoria: ");
 			int codPuesto = s.nextInt();
 
-			Puesto pu = buscarPuesto(cod);
+			Puesto pu = buscarPuesto(codPuesto);
 
 			if (pu == null) {
 				System.out.println("El codigo ingresado no esta relacionado a un puesto.");
 			} else {
-				con = new Convocatoria(codPuesto, pu, this.crearExperiencia());
+				con = new Convocatoria(cod, pu, this.crearExperiencia());
 
 				con.mostrarse();
 
@@ -179,7 +179,7 @@ public class Empresa {
 
 			if (convocatoria == null) {
 				System.out.println("No existe convocatoria con ese codigo.");
-			} else {
+			} else if (convocatoria.isAbierta()) {
 				convocatoria.mostrarse();
 
 				Inscripcion ins = convocatoria.verificarInscripcion(empleado.getDni());
@@ -206,6 +206,8 @@ public class Empresa {
 				} else {
 					System.out.println("Este empleado ya esta inscripto en esta convocatoria.");
 				}
+			} else {
+				System.out.println("La convocatoria ingresada se encuentra cerrada.");
 			}
 		}
 
@@ -287,7 +289,7 @@ public class Empresa {
 
 		System.out.println(" --- CERRAR CONVOCATORIA ---");
 
-		System.out.println("Ingrese codigo de convocatoria a asignar: ");
+		System.out.println("Ingrese codigo de convocatoria a cerrar: ");
 		int codConvocatoria = s.nextInt();
 
 		Convocatoria convocatoria = buscarConvocatoria(codConvocatoria);
@@ -299,6 +301,9 @@ public class Empresa {
 			Empleado ganador = convocatoria.cerrar();
 			eliminarInscripcionesGanador(convocatoria, ganador);
 		}
+
+		System.out.println();
+		System.out.println("Convocatoria cerrada exitosamente.");
 	}
 
 	// CU 8
@@ -485,6 +490,44 @@ public class Empresa {
 		}
 	}
 
+	// CU 17
+	public void informarConvocatoriasCerradas() {
+		System.out.println(" --- LISTADO CONVOCATORIAS CERRADAS ---");
+
+		int i = 0;
+
+		for (Convocatoria c : convocatorias) {
+			if (!c.isAbierta()) {
+				System.out.println("--------------");
+				c.mostrarse();
+				System.out.println();
+
+				i++;
+			}
+		}
+		if (i == 0) {
+			System.out.println("No hay convocatorias cerradas.");
+		}
+	}
+
+	// CU 18
+	public void informarEmpleado() {
+		Scanner s = new Scanner(System.in);
+
+		System.out.println("Ingrese DNI del empleado: ");
+		String dni = s.next();
+
+		Empleado e = this.buscarEmpleado(dni);
+
+		if (e != null) {
+			System.out.println("--------------");
+			e.mostrarse();
+			System.out.println();
+		} else {
+			System.out.println("El empleado no existe.");
+		}
+	}
+
 	private Empleado buscarEmpleado(String dni) {
 		int i = 0;
 		while (i < empleados.size() && !empleados.get(i).sos(dni))
@@ -645,46 +688,45 @@ public class Empresa {
 		puestos.add(pj2);
 
 		// Carga de empleados
-		EmpleadoJerarquico ej = new EmpleadoJerarquico("12345678", "Ignacio Perez", new Fecha(1, 1, 1996),
-				"20123456784", pj, new Fecha(1, 1, 2016), new Fecha(1, 1, 2018),
-				this.CDEXPERIENCIA(e1, e2, e3, e4, 2, 2, 4, 2));
-		EmpleadoComun ec = new EmpleadoComun("12345679", "Mario Sal", new Fecha(1, 1, 1990), "20123456794", pc2,
-				new Fecha(1, 1, 2021), this.CDEXPERIENCIA(e3, e3, e1, e1, 0, 4, 0, 2));
-		EmpleadoComun ec2 = new EmpleadoComun("12345680", "Gonzalo Puentes", new Fecha(1, 1, 2000), "20123456804", pc,
-				new Fecha(1, 1, 2020), this.CDEXPERIENCIA(e2, e2, e4, e4, 0, 2, 0, 2));
-		EmpleadoJerarquico ej2 = new EmpleadoJerarquico("12345681", "Lautaro Martinez", new Fecha(1, 1, 1980),
-				"20123456814", pj2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2018),
-				this.CDEXPERIENCIA(e1, e5, e3, e4, 3, 3, 3, 5));
+		EmpleadoComun ec = new EmpleadoComun("1", "Ignacio Perez", new Fecha(1, 1, 1996), "201", pc,
+				new Fecha(1, 1, 2016), this.CDEXPERIENCIA(e1, e3, e4, e5, 2, 2, 4, 4));
+		EmpleadoJerarquico ej = new EmpleadoJerarquico("2", "Mario Sal", new Fecha(1, 1, 1990), "202", pj,
+				new Fecha(10, 12, 2019), new Fecha(10, 12, 2020), this.CDEXPERIENCIA(e3, e3, e1, e1, 0, 4, 0, 2));
+		EmpleadoComun ec2 = new EmpleadoComun("3", "Gonzalo Puentes", new Fecha(1, 1, 2000), "203", pc2,
+				new Fecha(10, 12, 2019), this.CDEXPERIENCIA(e1, e3, e4, e4, 2, 6, 0, 2));
+		EmpleadoJerarquico ej2 = new EmpleadoJerarquico("4", "Lautaro Martinez", new Fecha(1, 1, 1980), "204", pj2,
+				new Fecha(1, 1, 2015), new Fecha(10, 12, 2020), this.CDEXPERIENCIA(e1, e3, e4, e5, 3, 3, 5, 3));
+
 		empleados.add(ec);
 		empleados.add(ec2);
 		empleados.add(ej);
 		empleados.add(ej2);
 
 		// Carga de convocatorias
-		Convocatoria c = new Convocatoria(1, pc, this.CDEXPERIENCIA(e1, e5, e3, e4, 2, 3, 2, 4));
+		Convocatoria c = new Convocatoria(1, pc, this.CDEXPERIENCIA(e1, e3, e4, e5, 2, 2, 4, 3));
 		Convocatoria c2 = new Convocatoria(2, pj, this.CDEXPERIENCIA(e1, e1, e3, e3, 0, 2, 0, 4));
 		convocatorias.add(c);
 		convocatorias.add(c2);
 
 		// Carga de inscripciones
-		Inscripcion ins = new Inscripcion(1, ej, c2);
-		Inscripcion ins2 = new Inscripcion(2, ec, c2);
-		Inscripcion ins3 = new Inscripcion(3, ej2, c);
-		Inscripcion ins4 = new Inscripcion(4, ec2, c);
+		Inscripcion ins = new Inscripcion(1, ec, c);
+		Inscripcion ins2 = new Inscripcion(2, ej, c2);
+		Inscripcion ins3 = new Inscripcion(3, ec2, c2);
+		Inscripcion ins4 = new Inscripcion(4, ej2, c);
 		inscripciones.add(ins);
 		inscripciones.add(ins2);
 		inscripciones.add(ins3);
 		inscripciones.add(ins4);
 
-		c.addInscripcion(ins3);
+		c.addInscripcion(ins);
 		c.addInscripcion(ins4);
-		c2.addInscripcion(ins);
 		c2.addInscripcion(ins2);
+		c2.addInscripcion(ins3);
 
-		ej.agregarInscripcion(ins);
-		ej2.agregarInscripcion(ins3);
-		ec.agregarInscripcion(ins2);
-		ec2.agregarInscripcion(ins4);
+		ec.agregarInscripcion(ins);
+		ej.agregarInscripcion(ins2);
+		ec2.agregarInscripcion(ins3);
+		ej2.agregarInscripcion(ins4);
 	}
 
 	private Hashtable<String, Integer> CDEXPERIENCIA(String e1, String e2, String e3, String e4, int a1, int a2, int a3,
