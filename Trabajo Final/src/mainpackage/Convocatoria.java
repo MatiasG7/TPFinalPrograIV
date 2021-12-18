@@ -109,7 +109,9 @@ public class Convocatoria {
 
 		if (op == 1 || op == 2) {
 			this.estado = Estado.CERRADO;
+			this.eliminarInscripcionesDeEmpleados();
 		}
+
 		return this.ganador;
 	}
 
@@ -122,7 +124,7 @@ public class Convocatoria {
 		int i = 0;
 		ArrayList<Inscripcion> inscripcionesAprobadas = new ArrayList<Inscripcion>();
 		for (Inscripcion inscripcion : inscripciones) {
-			if (verificarPostulante(inscripcion)) {
+			if (this.verificarPostulante(inscripcion)) {
 				inscripcionesAprobadas.add(inscripcion);
 			}
 		}
@@ -172,7 +174,6 @@ public class Convocatoria {
 				this.ganador = ganadorNuevo;
 			}
 
-			this.eliminarInscripcionesDeEmpleados();
 			this.ganador.mostrarse();
 			System.out.println(this.ganador.getClass().getSimpleName());
 		}

@@ -98,8 +98,6 @@ public abstract class Empleado extends Persona {
 
 		Enumeration<String> enumExpRequerida = expReq.keys();
 
-		Enumeration<String> enumExpEmpleado = experiencia.keys();
-
 		String keyRequerida = null;
 		Integer aniosRequerida = null, aniosEmpleado = null;
 

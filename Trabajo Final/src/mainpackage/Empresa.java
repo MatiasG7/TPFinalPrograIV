@@ -645,7 +645,6 @@ public class Empresa {
 					op = s.nextInt();
 				} while (op != 0);
 			}
-
 		}
 
 		return ht;
