@@ -43,6 +43,7 @@ public class Ejecutora {
 			System.out.println("16- Informar empleados que cumplen los requisitos de la convocatoria.");
 			System.out.println("17- Informar convocatorias cerradas.");
 			System.out.println("18- Informar empleado.");
+			System.out.println("19- Eliminar empleado.");
 			System.out.println();
 
 			op = s.nextInt();
@@ -102,6 +103,9 @@ public class Ejecutora {
 				break;
 			case 18:
 				e.informarEmpleado();
+				break;
+			case 19:
+				e.eliminarEmpleado();
 				break;
 			}
 		} while (op != 0);

@@ -528,6 +528,34 @@ public class Empresa {
 		}
 	}
 
+	// CU 19
+	public void eliminarEmpleado() {
+		Scanner s = new Scanner(System.in);
+
+		System.out.println("Ingrese DNI del empleado: ");
+		String dni = s.next();
+
+		Empleado e = this.buscarEmpleado(dni);
+
+		if (e != null) {
+			// Removerlo del arrayList.
+			// Buscar las convocatorias y eliminar las inscripciones de ese empleado.
+			// por cada inscripcion, buscar la convocatoria y eliminar la inscripcion
+
+			for (Inscripcion ins : e.getInscripciones()) {
+				Convocatoria c = ins.getConvocatoria();
+				c.eliminarInscripcionPorDni(e.getDni());
+				inscripciones.remove(ins);
+			}
+
+			empleados.remove(e);
+
+			System.out.println("Empleado eliminado exitosamente.");
+		} else {
+			System.out.println("El empleado no existe.");
+		}
+	}
+
 	private Empleado buscarEmpleado(String dni) {
 		int i = 0;
 		while (i < empleados.size() && !empleados.get(i).sos(dni))
