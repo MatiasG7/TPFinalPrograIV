@@ -34,7 +34,7 @@ public class Empresa {
 			System.out.println("Ya existe un empleado con ese dni. ");
 		} else {
 
-			System.out.println("Ingrese nombre: ");
+			System.out.println("Ingrese nombre completo: ");
 			String nombre = s.next();
 
 			System.out.println("Ingreso de fecha de nacimiento");
@@ -68,6 +68,10 @@ public class Empresa {
 								this.crearExperiencia());
 					}
 					empleados.add(nuevoEmpleado);
+
+					System.out.println();
+					System.out.println("EMPLEADO CREADO EXITOSAMENTE.");
+
 				} else {
 					System.out.println(
 							"Empleado no pudo ser creado por que el puesto no es compatible con el tipo de empleado.");
@@ -110,6 +114,9 @@ public class Empresa {
 				pu = new PuestoComun(cod, nombre, area);
 			}
 			puestos.add(pu);
+
+			System.out.println();
+			System.out.println("PUESTO CREADO EXITOSAMENTE.");
 		}
 
 	}
@@ -141,6 +148,9 @@ public class Empresa {
 				con.mostrarse();
 
 				convocatorias.add(con);
+
+				System.out.println();
+				System.out.println("CONVOCATORIA CREADA EXITOSAMENTE.");
 			}
 		}
 
@@ -160,8 +170,6 @@ public class Empresa {
 		if (empleado == null) {
 			System.out.println("Empleado no existe.");
 		} else {
-			System.out.println("EMPLEADO");
-
 			empleado.mostrarse();
 
 			System.out.println("Ingrese codigo de convocatoria: ");
@@ -188,6 +196,9 @@ public class Empresa {
 						convocatoria.addInscripcion(ins);
 						inscripciones.add(ins);
 						empleado.agregarInscripcion(ins);
+						
+						System.out.println();.
+						System.out.println("INSCRIPCION CREADA EXITOSAMENTE.");
 					} else {
 						System.out.println("Este codigo ya existe en una inscripcion.");
 					}
