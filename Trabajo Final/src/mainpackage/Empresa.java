@@ -196,8 +196,8 @@ public class Empresa {
 						convocatoria.addInscripcion(ins);
 						inscripciones.add(ins);
 						empleado.agregarInscripcion(ins);
-						
-						System.out.println();.
+
+						System.out.println();
 						System.out.println("INSCRIPCION CREADA EXITOSAMENTE.");
 					} else {
 						System.out.println("Este codigo ya existe en una inscripcion.");
