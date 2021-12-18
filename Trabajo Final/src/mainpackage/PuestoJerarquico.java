@@ -17,7 +17,7 @@ public class PuestoJerarquico extends Puesto {
 		minimoAniosEmpresa = ae;
 	}
 
-	private static int getMinimoAniosEmpresa() {
+	public static int getMinimoAniosEmpresa() {
 		if (minimoAniosEmpresa == 0) {
 			Scanner s = new Scanner(System.in);
 

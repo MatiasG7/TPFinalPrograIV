@@ -83,7 +83,7 @@ public class Convocatoria {
 
 	public Inscripcion verificarInscripcion(String dni) {
 		int i = 0;
-		while (i < inscripciones.size() && inscripciones.get(i).sosInscripto(dni)) {
+		while (i < inscripciones.size() && !inscripciones.get(i).sosInscripto(dni)) {
 			i++;
 		}
 		if (i < inscripciones.size()) {

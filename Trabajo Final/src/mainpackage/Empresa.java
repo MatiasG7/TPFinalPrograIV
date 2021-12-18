@@ -56,7 +56,7 @@ public class Empresa {
 				System.out.println("2- NO");
 				int op = s.nextInt();
 
-				if ((op == 1 && puesto.isJerarquico()) || (op == 0 && !puesto.isJerarquico())) {
+				if ((op == 1 && puesto.isJerarquico()) || (op == 2 && !puesto.isJerarquico())) {
 					if (op == 1) {
 						System.out.println("Ingrese fecha de ingreso en puesto");
 						Fecha fechaIngresoPuesto = Fecha.nuevaFecha();
@@ -184,7 +184,7 @@ public class Empresa {
 					ins = buscarInscripcion(codInscricion);
 
 					if (ins == null) {
-						ins = new Inscripcion(codConvocatoria, empleado, convocatoria);
+						ins = new Inscripcion(codInscricion, empleado, convocatoria);
 						convocatoria.addInscripcion(ins);
 						inscripciones.add(ins);
 						empleado.agregarInscripcion(ins);
@@ -638,11 +638,11 @@ public class Empresa {
 				"20123456784", pj, new Fecha(1, 1, 2016), new Fecha(1, 1, 2018),
 				this.CDEXPERIENCIA(e1, e2, e3, e4, 2, 2, 4, 2));
 		EmpleadoComun ec = new EmpleadoComun("12345679", "Mario Sal", new Fecha(1, 1, 1990), "20123456794", pc2,
-				new Fecha(1, 1, 2015), this.CDEXPERIENCIA(e3, e3, e1, e1, 0, 4, 0, 2));
+				new Fecha(1, 1, 2021), this.CDEXPERIENCIA(e3, e3, e1, e1, 0, 4, 0, 2));
 		EmpleadoComun ec2 = new EmpleadoComun("12345680", "Gonzalo Puentes", new Fecha(1, 1, 2000), "20123456804", pc,
 				new Fecha(1, 1, 2020), this.CDEXPERIENCIA(e2, e2, e4, e4, 0, 2, 0, 2));
 		EmpleadoJerarquico ej2 = new EmpleadoJerarquico("12345681", "Lautaro Martinez", new Fecha(1, 1, 1980),
-				"20123456814", pj2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2015),
+				"20123456814", pj2, new Fecha(1, 1, 2015), new Fecha(1, 1, 2018),
 				this.CDEXPERIENCIA(e1, e5, e3, e4, 3, 3, 3, 5));
 		empleados.add(ec);
 		empleados.add(ec2);

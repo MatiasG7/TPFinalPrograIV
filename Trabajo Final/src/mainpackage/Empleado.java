@@ -52,7 +52,9 @@ public abstract class Empleado extends Persona {
 	}
 
 	private boolean verificarAniosEnEmpresaPostulante() {
-		return !fechaIngreso.entre(Fecha.hoy().restarAnios(puesto.getMinimoAnios()), Fecha.hoy());
+		System.out.print(fechaIngreso + " " + Fecha.hoy().restarAnios(PuestoJerarquico.getMinimoAniosEmpresa()) + " "
+				+ Fecha.hoy());
+		return !fechaIngreso.entre(Fecha.hoy().restarAnios(PuestoJerarquico.getMinimoAniosEmpresa()), Fecha.hoy());
 	}
 
 	// agregarExperiencia suma la cantidad de anios que se pasan por parametro a la
