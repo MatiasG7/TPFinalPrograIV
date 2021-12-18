@@ -28,57 +28,62 @@ public class Empresa {
 		System.out.println(" --- INGRESO DE NUEVO EMPLEADO ---");
 		System.out.println("Ingrese dni: ");
 		String dni = s.next();
-		Empleado nuevoEmpleado = buscarEmpleado(dni);
 
-		if (nuevoEmpleado != null) {
-			System.out.println("Ya existe un empleado con ese dni. ");
+		if (dni.isEmpty() || dni == null) {
+			System.out.println("No puede ingresar un dni vacio. ");
 		} else {
+			Empleado nuevoEmpleado = buscarEmpleado(dni);
 
-			System.out.println("Ingrese nombre completo: ");
-			String nombre = s.next();
+			if (nuevoEmpleado != null) {
+				System.out.println("Ya existe un empleado con ese dni. ");
+			} else {
 
-			System.out.println("Ingreso de fecha de nacimiento");
-			Fecha fechaNac = Fecha.nuevaFecha();
+				System.out.println("Ingrese nombre completo: ");
+				String nombre = s.next();
 
-			System.out.println("Ingrese cuil: ");
-			String cuil = s.next();
+				System.out.println("Ingreso de fecha de nacimiento");
+				Fecha fechaNac = Fecha.nuevaFecha();
 
-			System.out.println("Ingrese codigo de puesto: ");
-			int codPuesto = s.nextInt();
+				System.out.println("Ingrese cuil: ");
+				String cuil = s.next();
 
-			Puesto puesto = buscarPuesto(codPuesto);
-			if (puesto != null) {
-				System.out.println("Ingreso de fecha de ingreso a la empresa");
-				Fecha fechaIngreso = Fecha.nuevaFecha();
+				System.out.println("Ingrese codigo de puesto: ");
+				int codPuesto = s.nextInt();
 
-				System.out.println("Es un empleado jerarquico?");
-				System.out.println("1- SI");
-				System.out.println("2- NO");
-				int op = s.nextInt();
+				Puesto puesto = buscarPuesto(codPuesto);
+				if (puesto != null) {
+					System.out.println("Ingreso de fecha de ingreso a la empresa");
+					Fecha fechaIngreso = Fecha.nuevaFecha();
 
-				if ((op == 1 && puesto.isJerarquico()) || (op == 2 && !puesto.isJerarquico())) {
-					if (op == 1) {
-						System.out.println("Ingrese fecha de ingreso en puesto");
-						Fecha fechaIngresoPuesto = Fecha.nuevaFecha();
+					System.out.println("Es un empleado jerarquico?");
+					System.out.println("1- SI");
+					System.out.println("2- NO");
+					int op = s.nextInt();
 
-						nuevoEmpleado = new EmpleadoJerarquico(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
-								fechaIngresoPuesto, this.crearExperiencia());
+					if ((op == 1 && puesto.isJerarquico()) || (op == 2 && !puesto.isJerarquico())) {
+						if (op == 1) {
+							System.out.println("Ingrese fecha de ingreso en puesto");
+							Fecha fechaIngresoPuesto = Fecha.nuevaFecha();
+
+							nuevoEmpleado = new EmpleadoJerarquico(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
+									fechaIngresoPuesto, this.crearExperiencia());
+						} else {
+							nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
+									this.crearExperiencia());
+						}
+						empleados.add(nuevoEmpleado);
+
+						System.out.println();
+						System.out.println("EMPLEADO CREADO EXITOSAMENTE.");
+
 					} else {
-						nuevoEmpleado = new EmpleadoComun(dni, nombre, fechaNac, cuil, puesto, fechaIngreso,
-								this.crearExperiencia());
+						System.out.println(
+								"Empleado no pudo ser creado por que el puesto no es compatible con el tipo de empleado.");
 					}
-					empleados.add(nuevoEmpleado);
-
-					System.out.println();
-					System.out.println("EMPLEADO CREADO EXITOSAMENTE.");
 
 				} else {
-					System.out.println(
-							"Empleado no pudo ser creado por que el puesto no es compatible con el tipo de empleado.");
+					System.out.println("El puesto ingresado no existe.");
 				}
-
-			} else {
-				System.out.println("El puesto ingresado no existe.");
 			}
 		}
 	}
